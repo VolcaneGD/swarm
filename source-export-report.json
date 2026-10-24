@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "bytes": 3716,
-      "sha256": "53d9f1c72138d800dbf28db48bf5183997cc3324a68cc9a72d117e365072112f"
+      "bytes": 4209,
+      "sha256": "08c8a388dc80faa2fcde7290044c661ed8ce46bd3a3f88f3ec83fdf3208c8169"
     },
     {
       "path": "README.md",
-      "bytes": 3985,
-      "sha256": "81cc964ed32730c9dddb1cf78c36cd37e3b8dd439fd554cb5295ea9aa117fe37"
+      "bytes": 4561,
+      "sha256": "7e6d1036c1162076914b5058056f1264e8fe516d181593fa7c9977b066052e59"
     },
     {
       "path": "apps/desktop/index.html",
@@ -2021,6 +2021,16 @@
       "path": "docs/rules-review.example.md",
       "bytes": 812,
       "sha256": "ef0b0650960f7ab3805017e648bf9878d4c99f43f79c48875a6728924a9bc13f"
+    },
+    {
+      "path": "docs/screenshots/swarm-en-dark.png",
+      "bytes": 106587,
+      "sha256": "ac1c0a189becb279faeec4fb0b915614be444068ff98a4ae3c7923f60181f110"
+    },
+    {
+      "path": "docs/screenshots/swarm-ja-light.png",
+      "bytes": 114215,
+      "sha256": "543ae142db0014efbe0aa9ffc9c193a67caa3783760b0f671bdea9fc0b3c7cac"
     },
     {
       "path": "icon.png",

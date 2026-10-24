@@ -725,7 +725,18 @@ pub(crate) fn dispatch(
             return Ok(json!({"items":[]}));
         }
     }
-    let result = service::dispatch(db, request, actor)?;
+    let mut result = service::dispatch(db, request, actor)?;
+    if matches!(
+        op,
+        "thread.get" | "thread.edit" | "post.get" | "post.list" | "response.list" | "post.history"
+    ) {
+        let thread = if op.starts_with("thread.") {
+            service::required_text(&request.args, "id")?
+        } else {
+            service::required_text(&request.args, "thread_id")?
+        };
+        result = crate::thread_rules::attach(db, request, actor, policy, thread, result)?;
+    }
     if op == "board.create" && !result["deleted_at"].is_null() {
         return Err(Fault::new("NOT_FOUND", 5, "Board is unavailable"));
     }
@@ -756,6 +767,7 @@ pub(crate) fn dispatch(
                 thread: Some(id),
             },
         )?;
+        let current = crate::thread_rules::attach(db, request, actor, policy, id, current)?;
         return Ok(redact_parent(policy, request, &parent, current));
     }
     if op == "thread.get" || op == "thread.edit" {

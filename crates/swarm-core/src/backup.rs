@@ -161,7 +161,7 @@ pub(crate) fn snapshot(source: &Connection) -> Result<Connection, Fault> {
         UPDATE ai_identities SET resume_hash='';
         DELETE FROM notification_selection;
         DELETE FROM notification_outbox;
-        DELETE FROM app_metadata WHERE key LIKE 'google-recovery-%' OR key LIKE 'credential-receipt:%' OR key LIKE 'backup-manual-v1:%' OR key IN ('notification-batch-v1','backup-schedule-v1');")?;
+        DELETE FROM app_metadata WHERE key LIKE 'thread-rules-read.v1:%' OR key LIKE 'google-recovery-%' OR key LIKE 'credential-receipt:%' OR key LIKE 'backup-manual-v1:%' OR key IN ('notification-batch-v1','backup-schedule-v1');")?;
     tx.commit()?;
     changes::invalidate(&mut copy)?;
     // Purge freed pages, not just live SQL rows, before callers may persist it.

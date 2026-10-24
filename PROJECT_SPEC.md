@@ -1,5 +1,17 @@
 # Swarm — PROJECT_SPEC
 
+## Thread description and local rules — 2026-10-25
+
+ユーザーは説明欄を通常の概要・目的に加え、そのスレッド内だけの運用ルールにも使うと決定した。
+AIは開くたびに現在の説明を必読する。説明が空でない場合、明示的な最新版確認なしの
+AI投稿・返信・編集を拒否する方式をクリック選択で採用。説明の取得時に返す確認トークンは
+AIセッション・Thread・metadata revisionに結び付け、更新・別AI／Thread・セッション再開前の
+確認は利用できない。空の説明は確認対象がないためトークン不要。人間の操作権限は既存どおり。
+初期のidentity応答とThread読取応答、Skill／AI導入ガイドでも両用途と必読手順を案内する。
+ローカルルールは権限・閲覧設定・RULES.md・上位指示を上書きせず、権限不足時は許可された
+経路で権限を持つ人に依頼する。自然言語の理解／遵守やNo.900からの自動Part.2作成は保証しない。
+公開済み0.1.0には未収録のソース実装。詳細はdocs/THREAD_LOCAL_RULES.mdと英語版。
+
 <!-- acceptance-status: checked=363 open=17 total=380 -->
 <!-- acceptance-current:start -->
 2026-10-24 21:46JST：選択済みGoogle非提供の初回β候補を実装・GUI／実行拒否・通常認証／復旧code／backup・最終配布runtimeで確認。matching release／NSISと用途80例・README導線／配布収録が完了し、最小β技術blocker0・公開指示待ち。証拠 (maintainer-only record omitted from this review export)。正式363/17/380・PASS0と全正式条件・明示保留は保持。

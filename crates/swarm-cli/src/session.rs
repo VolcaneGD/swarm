@@ -259,6 +259,18 @@ fn safe_metadata(data: Value) -> Result<Value, swarm_core::protocol::Fault> {
     if !public.contains_key("id") || !public.contains_key("project_id") {
         return Err(internal_error());
     }
+    if let Some(guidance) = source.get("thread_rules_guidance") {
+        let mut safe = Map::new();
+        for field in ["description_usage", "before_writing", "authority"] {
+            let value = guidance
+                .get(field)
+                .and_then(Value::as_str)
+                .filter(|v| v.len() <= 4096)
+                .ok_or_else(internal_error)?;
+            safe.insert(field.to_owned(), Value::String(value.to_owned()));
+        }
+        public.insert("thread_rules_guidance".into(), Value::Object(safe));
+    }
     Ok(if nested {
         json!({"identity": Value::Object(public)})
     } else {
@@ -459,6 +471,12 @@ mod tests {
         for secret in ["private-session", "private-token", "private-resume"] {
             assert!(!rendered.contains(secret));
         }
+        let guided=safe_metadata(json!({"id":"actor","project_id":"project","thread_rules_guidance":{"description_usage":"Thread-local rules","before_writing":"Read first","authority":"Permissions first","session_token":"private-nested-token"}})).unwrap();
+        assert_eq!(
+            guided["thread_rules_guidance"]["description_usage"],
+            "Thread-local rules"
+        );
+        assert!(!guided.to_string().contains("private-nested-token"));
     }
 
     #[cfg(windows)]

@@ -24,13 +24,13 @@
   "files": [
     {
       "path": ".agents/skills/swarm-cli/SKILL.md",
-      "bytes": 4218,
-      "sha256": "23a28bf6ec4d206c3f09e43dfcfcb55145f7a60f7704f22aeeba81b3d88610b6"
+      "bytes": 5188,
+      "sha256": "f55c2e517ec81915687b24282fbc18ddc69ea3210db9c5fb5ab511f9c311212a"
     },
     {
       "path": ".agents/skills/swarm-cli/agents/openai.yaml",
-      "bytes": 289,
-      "sha256": "7a9a0dabbd6de50b45b6b0d50b03047fe9f18747fcedf8a01707b4a4fd01db58"
+      "bytes": 501,
+      "sha256": "56e2dcd830db3ecb3a178a7a8ea87f5f6667bf9b1c60131b935ab4353adc6726"
     },
     {
       "path": ".gitignore",
@@ -39,8 +39,8 @@
     },
     {
       "path": "AGENT.md",
-      "bytes": 23719,
-      "sha256": "048bce9cca9980ee103c1b8b3b6bfa5b50b9377cd028346c51c935b6124ee7e7"
+      "bytes": 24447,
+      "sha256": "16963386cbd9f88124f1874fc4745288c7a5b16f5e87be04fc93761a10a5c0d1"
     },
     {
       "path": "Cargo.lock",
@@ -59,18 +59,18 @@
     },
     {
       "path": "PROJECT_SPEC.md",
-      "bytes": 205260,
-      "sha256": "a72ab6c5a0b05477470d189f9e7c7a37454d01f7e388c3717e6e2164c55ef8ca"
+      "bytes": 206441,
+      "sha256": "6bc522993b3fb3aa6e4181c52f98628d3d0fd8ec9dbfb000434bb4c1a31b9ca1"
     },
     {
       "path": "README.en.md",
-      "bytes": 5074,
-      "sha256": "975986dbbb4d02c66356be6b52e2c7729fe1b35241e2be7a07a08caa3c302cad"
+      "bytes": 5430,
+      "sha256": "4904337075554c860e53858bc31c643681be60bce4b807fcc83aa1aa9846bc3b"
     },
     {
       "path": "README.md",
-      "bytes": 5596,
-      "sha256": "51d4aba321ae0e12d140e17a1c6262bf7b27deac831e11bdbeb91079ec41e96d"
+      "bytes": 6069,
+      "sha256": "617fba060af7b204831af77bdfed08a1951cd261db3462a7a1921c865647cdeb"
     },
     {
       "path": "apps/desktop/index.html",
@@ -394,8 +394,8 @@
     },
     {
       "path": "apps/desktop/src-tauri/tauri.distribution.conf.json",
-      "bytes": 3510,
-      "sha256": "1c21c0356ca1e682b49aa12db2049faaac22091454c4cc62443cf38d0431c8fd"
+      "bytes": 3666,
+      "sha256": "dc9b7effa862e0d400a1d97b977e1d51eff4399228bdafec2b32b7d8dd46e420"
     },
     {
       "path": "apps/desktop/src/AccountAccess.test.tsx",
@@ -649,8 +649,8 @@
     },
     {
       "path": "apps/desktop/src/Workspace.tsx",
-      "bytes": 218375,
-      "sha256": "822f25b2e771d71d8eb0ef13e33e510ff64dc55040459231d6d128ebb360b226"
+      "bytes": 219285,
+      "sha256": "c45b9f1f13f8d237bc16034f2d07bc5f2ac5d627d253522eb121ad464b1123ce"
     },
     {
       "path": "apps/desktop/src/backupSettings.test.tsx",
@@ -819,8 +819,8 @@
     },
     {
       "path": "apps/desktop/src/styles.css",
-      "bytes": 91256,
-      "sha256": "9e9b669e9719a3b377cd2139c4c4c71271afde82bb5fdc0b965e49a0e068ebb0"
+      "bytes": 91689,
+      "sha256": "7658f30b9ff7454921e16fee8aaf9e8a0747c773be74481ea79f430893196f1a"
     },
     {
       "path": "apps/desktop/src/textLimits.ts",
@@ -964,8 +964,8 @@
     },
     {
       "path": "crates/swarm-cli/src/lib.rs",
-      "bytes": 75127,
-      "sha256": "470b425736295b4fc9ece20dc8dde17f7b61937a709e06a29d2bf7308e08962d"
+      "bytes": 78329,
+      "sha256": "15fa61e7d568a4a7f46fd9921a41cc330d57fa32466be5a6e328e61805cec8e2"
     },
     {
       "path": "crates/swarm-cli/src/main.rs",
@@ -979,8 +979,8 @@
     },
     {
       "path": "crates/swarm-cli/src/session.rs",
-      "bytes": 16408,
-      "sha256": "514284b4d5218c54560314fcbee7da1d2949750cb09e335687ad7d3dfc89241a"
+      "bytes": 17404,
+      "sha256": "f0e0016e85e41962e4eaf6293b4f7aacda3c32325dd54d4ffa9752b7b742bd9d"
     },
     {
       "path": "crates/swarm-cli/tests/bug_reports.rs",
@@ -1053,6 +1053,11 @@
       "sha256": "f553b45d75399103c76725c2d25cb7929165eb847a7e134c388be280feaddfcb"
     },
     {
+      "path": "crates/swarm-cli/tests/thread_rules.rs",
+      "bytes": 5305,
+      "sha256": "ae47b52d81ea301514ccc6239760f2e8179b8bfc78850caced8eedfd2e7afd1d"
+    },
+    {
       "path": "crates/swarm-core/Cargo.toml",
       "bytes": 561,
       "sha256": "8e9802d1a667bb15291273c47e8631930b9cea3c70e17159434345f96a4986bb"
@@ -1064,13 +1069,13 @@
     },
     {
       "path": "crates/swarm-core/src/ai.rs",
-      "bytes": 26694,
-      "sha256": "aa5bb33e4d078972c8510ee6bc58042e080a465a51932e3325b13979f33a9102"
+      "bytes": 27225,
+      "sha256": "b90cdefc1f5c881fe60bd32f6506aab14d46d4ab97c0fad5b50bc8fa67936132"
     },
     {
       "path": "crates/swarm-core/src/backup.rs",
-      "bytes": 7015,
-      "sha256": "9aec2dca8aebf43a70f248c482eae2a8dd8ab745c669377f1c1300967743d9fa"
+      "bytes": 7052,
+      "sha256": "e20cc75f161ac3db135c6ff2602596e457874dc29eda146a7854d3bac6252fbf"
     },
     {
       "path": "crates/swarm-core/src/backup_archive.rs",
@@ -1129,13 +1134,13 @@
     },
     {
       "path": "crates/swarm-core/src/identity.rs",
-      "bytes": 11548,
-      "sha256": "3af8773b6b2707c4cf28359becacbf9b9573b75cd19c828300128fa638cd5c9f"
+      "bytes": 11613,
+      "sha256": "ce07d6e59eaa4125ea62db62633f86414d17dabdd6431dbb40db2e40089273f5"
     },
     {
       "path": "crates/swarm-core/src/lib.rs",
-      "bytes": 1379,
-      "sha256": "44f8d1ec8c74c978be86e2808635a2b33eb560305dd765ecf0f3cb5967279d50"
+      "bytes": 1397,
+      "sha256": "1c4348d95f63f71c301fb6bfe1e1b1f9b900bb4cc785b98e752ed144d61db29f"
     },
     {
       "path": "crates/swarm-core/src/listing.rs",
@@ -1244,13 +1249,18 @@
     },
     {
       "path": "crates/swarm-core/src/service.rs",
-      "bytes": 55153,
-      "sha256": "266e382e8721c3e9c78fa0589449e22b58d19f0235ee29e883c2de7224e03a4e"
+      "bytes": 56008,
+      "sha256": "30a542f84b52d612cf8ef9feae6cf2a2603604dc9c50872c9e26707d57305ca8"
     },
     {
       "path": "crates/swarm-core/src/store.rs",
       "bytes": 6863,
       "sha256": "33eec3a925de02d3593006057e401d376ff25a8bdfe00e86c613717a042940b1"
+    },
+    {
+      "path": "crates/swarm-core/src/thread_rules.rs",
+      "bytes": 5708,
+      "sha256": "45298f41354e7b7ec0fcbe7bd1b5c6a87a39c5dcbb086907bad2196cd8c84114"
     },
     {
       "path": "crates/swarm-core/src/trash.rs",
@@ -1461,6 +1471,11 @@
       "path": "crates/swarm-core/tests/thread_archival.rs",
       "bytes": 4331,
       "sha256": "bc459ec5758930e651d509e4c08dbfad4ddbbb99966c98cb3f25ad3773ec368e"
+    },
+    {
+      "path": "crates/swarm-core/tests/thread_rules.rs",
+      "bytes": 10147,
+      "sha256": "7a62fe5d0c93af23fc128655143938c98f20371a865c6d912fc62e603929e163"
     },
     {
       "path": "crates/swarm-core/tests/trash.rs",
@@ -1909,13 +1924,13 @@
     },
     {
       "path": "docs/AI_SETUP.md",
-      "bytes": 17960,
-      "sha256": "403c043f78a6c9534b764989cb1d3834b4c4b8da6defbe674aae8c5fd4434772"
+      "bytes": 18571,
+      "sha256": "33929ac93598f78cec9f6a44197d4cf0d6c96f68228632b5ea316b90f9f6e758"
     },
     {
       "path": "docs/AI_USAGE.md",
-      "bytes": 11909,
-      "sha256": "7bdecca79409116cf6279d6c7fd71ab2a9877d1fb79786081231e4dd2b47b501"
+      "bytes": 12983,
+      "sha256": "30dc38b73f31aac2cb935c26e11a07cca3237d182b770217bd45ee0e7f8e8fcd"
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -1949,13 +1964,13 @@
     },
     {
       "path": "docs/CHANGELOG.md",
-      "bytes": 1096,
-      "sha256": "1108b27f317b30daf76a69c5fe8f1d8fcf3df31cc37558cc834d1a260d524c3c"
+      "bytes": 1604,
+      "sha256": "9910cd96244cc2d6502dba4d6250aa96c515d35f1b562e526475c4971d62d3b0"
     },
     {
       "path": "docs/CLI_REFERENCE.md",
-      "bytes": 21239,
-      "sha256": "cd5eee80eddf246f47ef7211a7c1757b0700784855e956bbd59c362a567bea7a"
+      "bytes": 21911,
+      "sha256": "58a914554fcfec51188a78aa34c3d0fe5fa0f0d0b9bc9e220ec3e1988f01c9ef"
     },
     {
       "path": "docs/DESIGN.md",
@@ -2029,8 +2044,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 204563,
-      "sha256": "96b1c100770d9f2f61e8f8fc6485919c5c4b16bc7202dc33163590ef832e0be6"
+      "bytes": 205142,
+      "sha256": "bd2818c39d117b7e953f957fe3c885d9f0237e180173c241c245634831fe14c2"
     },
     {
       "path": "docs/RULES_GUIDE.md",
@@ -2046,6 +2061,16 @@
       "path": "docs/STORAGE_LIFECYCLE.md",
       "bytes": 6437,
       "sha256": "1c2cae68960aef81d5f8f67c3cf417c084756011933259532f15ed04e7acbe0f"
+    },
+    {
+      "path": "docs/THREAD_LOCAL_RULES.en.md",
+      "bytes": 4807,
+      "sha256": "20e32617f9ae3fa39401e3db77252ca44c01a4393348baa30584e1d0216c3cee"
+    },
+    {
+      "path": "docs/THREAD_LOCAL_RULES.md",
+      "bytes": 4871,
+      "sha256": "2e0c17491ccfd52691ff072787c69777882406818b516dc26e3b1cbdf82274af"
     },
     {
       "path": "docs/TRASH_IMPLEMENTATION_CONTRACT.md",
@@ -2064,8 +2089,8 @@
     },
     {
       "path": "docs/USER_GUIDE.md",
-      "bytes": 13375,
-      "sha256": "d624f374fa2cf547c9633d5a6a8b3ba1d87f66f154dfdd1a95071a492b267103"
+      "bytes": 14524,
+      "sha256": "3d139c667a7c76855f1ab4c251b0f17948e410398c2566fa4796d6de7c35183b"
     },
     {
       "path": "docs/USE_CASES.en.md",

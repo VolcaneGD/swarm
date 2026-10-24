@@ -162,7 +162,8 @@ pub(crate) fn public(db: &Connection, id: &str) -> Result<Value, Fault> {
     db.query_row("SELECT id,project_id,model_name,model_source,display_id,expires_at,created_at FROM ai_identities WHERE id=?1",[id],|row|Ok(json!({
         "id":row.get::<_,String>(0)?,"project_id":row.get::<_,String>(1)?,"model_name":row.get::<_,String>(2)?,
         "model_source":row.get::<_,String>(3)?,"display_id":row.get::<_,String>(4)?,
-        "expires_at":row.get::<_,String>(5)?,"created_at":row.get::<_,String>(6)?
+        "expires_at":row.get::<_,String>(5)?,"created_at":row.get::<_,String>(6)?,
+        "thread_rules_guidance":crate::thread_rules::guidance()
     }))).optional()?.ok_or_else(Fault::authentication)
 }
 pub(crate) fn authenticate(db: &Connection, auth: Option<&str>) -> Result<Option<String>, Fault> {

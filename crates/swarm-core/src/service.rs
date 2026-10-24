@@ -242,12 +242,18 @@ fn validate_arguments(request: &Request) -> Result<(), Fault> {
         "ui.preferences.set" => &["expected_account_id", "scope", "key", "value"],
         "changes.get" => &["thread_id", "board_id", "after", "limit"],
         "changes.wait" => &["thread_id", "board_id", "after", "limit", "timeout"],
-        "post.create" => &["thread_id", "body"],
-        "response.create" => &["thread_id", "body", "to"],
+        "post.create" => &["thread_id", "body", "thread_rules_token"],
+        "response.create" => &["thread_id", "body", "to", "thread_rules_token"],
         "post.get" | "post.history" | "post.delete" | "post.restore" | "post.deleted_body" => {
             &["thread_id", "no"]
         }
-        "post.edit" => &["thread_id", "no", "body", "if_revision"],
+        "post.edit" => &[
+            "thread_id",
+            "no",
+            "body",
+            "if_revision",
+            "thread_rules_token",
+        ],
         "post.list" => &["thread_id", "limit", "before_no"],
         "post.page" => &["thread_id", "page", "page_size", "anchor_no"],
         "response.list" => &["thread_id", "to", "limit", "before_no"],
@@ -489,7 +495,8 @@ impl Service {
         let tx = self
             .db
             .transaction_with_behavior(TransactionBehavior::Immediate)?;
-        let removed = crate::cursor_metadata::prune(&tx, now_epoch_seconds)?;
+        let removed = crate::cursor_metadata::prune(&tx, now_epoch_seconds)?
+            + crate::thread_rules::prune(&tx)?;
         tx.commit()?;
         Ok(removed)
     }
@@ -723,7 +730,12 @@ impl Service {
                 | "role.list"
                 | "permission.list"
         );
-        let behavior = if read_only {
+        // These reads can issue a session-bound Thread-rule acknowledgement.
+        let rule_read = matches!(
+            request.operation.as_str(),
+            "thread.get" | "post.get" | "post.list" | "response.list" | "post.history"
+        );
+        let behavior = if read_only && !rule_read {
             TransactionBehavior::Deferred
         } else {
             TransactionBehavior::Immediate
@@ -915,8 +927,14 @@ pub(crate) fn dispatch(db: &Connection, r: &Request, actor: &str) -> Result<Valu
         r.operation.as_str(),
         "board.create" | "thread.create" | "post.create" | "response.create"
     );
+    let mut fingerprint_args = args.clone();
+    if matches!(r.operation.as_str(), "post.create" | "response.create")
+        && let Some(object) = fingerprint_args.as_object_mut()
+    {
+        object.remove("thread_rules_token");
+    }
     let fingerprint = accounts::digest(
-        &serde_json::to_string(&json!({"operation":r.operation,"args":args}))
+        &serde_json::to_string(&json!({"operation":r.operation,"args":fingerprint_args}))
             .map_err(|_| Fault::internal())?,
     );
     if let Some(key) = &r.request_id {
@@ -1072,6 +1090,7 @@ pub(crate) fn dispatch(db: &Connection, r: &Request, actor: &str) -> Result<Valu
         "post.create" | "response.create" => {
             let thread = required_text(args, "thread_id")?;
             live_thread(db, thread)?;
+            crate::thread_rules::require(db, r, actor, thread)?;
             let next_no: i64 =
                 db.query_row("SELECT next_no FROM threads WHERE id=?1", [thread], |row| {
                     row.get(0)
@@ -1222,6 +1241,7 @@ pub(crate) fn dispatch(db: &Connection, r: &Request, actor: &str) -> Result<Valu
             json!({"items":items,"next_before_no":next})
         }
         "post.edit" => {
+            crate::thread_rules::require(db, r, actor, required_text(args, "thread_id")?)?;
             let thread = required_text(args, "thread_id")?;
             let no = integer(args, "no")?;
             let body = body(args)?;

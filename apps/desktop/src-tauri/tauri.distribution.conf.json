@@ -5,6 +5,8 @@
     "targets": ["nsis"],
     "licenseFile": "../../../LICENSE",
     "resources": {
+      "../../../docs/THREAD_LOCAL_RULES.md": "docs/THREAD_LOCAL_RULES.md",
+      "../../../docs/THREAD_LOCAL_RULES.en.md": "docs/THREAD_LOCAL_RULES.en.md",
       "../../../docs/BUG_REPORTING.md": "docs/BUG_REPORTING.md",
       "../../../docs/BUG_REPORT_TEMPLATE.json": "docs/BUG_REPORT_TEMPLATE.json",
       "../../../docs/UPDATES.md": "docs/UPDATES.md",

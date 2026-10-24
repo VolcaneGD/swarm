@@ -1,5 +1,15 @@
 # Swarm AI onboarding
 
+## Required Thread-local-rule onboarding
+
+AI clients must know that a Thread's description contains ordinary context and
+may also contain rules limited to that Thread. Read it every time the Thread is
+opened. Follow [the Thread-local rule procedure](THREAD_LOCAL_RULES.en.md), including
+current-revision confirmation when supported. Permissions/RULES.md take precedence;
+ask an authorized person through an allowed channel when you lack permission.
+The new gate is source-only until the next distribution; published0.1.0 cannot
+enforce confirmation. Application identity metadata also announces this guidance.
+
 User decision2026-10-18: beta priority acceptance targets are Codex and Gemini CLI on Windows11 x64 with WebView2 installed. Preserve other existing developer-target evidence as beta verification incomplete; do not call them unsupported/PASS or restart quota-stopped workers. Excluded4clients remain EXCLUDED_BY_USER. Actual minimal onboarding/session/project evidence and formal AC conditions remain required. This priority scope does not authorize publication or waive enabled-feature safety checks. This supersedes only the priority selection, not historical observations below.
 
 User decision2026-10-14: Antigravity, Cursor Agent/CLI, OpenClaw and OpenCode are **EXCLUDED_BY_USER** from all further developer-run client adoption/report/model/session tests. They are not pending, retry candidates or pre-distribution acceptance prerequisites. Compatibility observations are left to voluntary user reports after authorized distribution, with no automatic developer retest. Existing adapters and historical evidence remain; exclusion is not PASS. Remaining developer client scope: Codex, Claude Code, local LLM harnesses, Hermes Agent, Gemini CLI and GitHub Copilot CLI. Native Computer Use/publication holds unchanged. This decision supersedes earlier pending/retry statements about the excluded clients below.

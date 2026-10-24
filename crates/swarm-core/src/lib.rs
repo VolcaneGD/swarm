@@ -27,6 +27,7 @@ mod rules_editor;
 mod search;
 mod service;
 mod store;
+mod thread_rules;
 mod trash;
 mod ui_preferences;
 

@@ -113,6 +113,7 @@ fn option_key(name: &str) -> Option<&'static str> {
         "--actor-id" => Some("actor_id"),
         "--id" => Some("id"),
         "--if-revision" => Some("if_revision"),
+        "--thread-rules-token" => Some("thread_rules_token"),
         "--context-json" => Some("context-json"),
         "--context-file" => Some("context-file"),
         "--operation" => Some("operation"),
@@ -184,11 +185,17 @@ fn request_fields(operation: &str) -> &'static [&'static str] {
         "thread.get" => &["id"],
         "thread.edit" => &["id", "name", "description", "if_revision"],
         "post.list" => &["thread_id", "limit", "before_no"],
-        "post.create" => &["thread_id", "body"],
+        "post.create" => &["thread_id", "body", "thread_rules_token"],
         "post.get" | "post.history" => &["thread_id", "no"],
-        "post.edit" => &["thread_id", "no", "body", "if_revision"],
+        "post.edit" => &[
+            "thread_id",
+            "no",
+            "body",
+            "if_revision",
+            "thread_rules_token",
+        ],
         "response.list" => &["thread_id", "to", "limit", "before_no"],
-        "response.create" => &["thread_id", "body", "to"],
+        "response.create" => &["thread_id", "body", "to", "thread_rules_token"],
         "identity.model" => &["model_name", "model_report", "model_local", "model_client"],
         "identity.start" => &[
             "project_id",
@@ -732,6 +739,9 @@ pub fn help_text() -> String {
         "{}\nBug reporting (no runtime/session needed): swarm --data-dir PATH --format json bug-report submit --report-file REPORT.json; bug-report status; bug-report retry. AI clients must report discovered Swarm bugs; see docs/BUG_REPORTING.md. Only the human Admin can change consent in the GUI.\n\nIdentity --local-model explicitly identifies local execution: an unknown model displays as ローカルモデル with unknown provenance. A reported/declared name takes precedence. OpenAI compatibility alone does not prove local execution.\n",
         usage()
     );
+    let base = format!(
+        "{base}\nThread descriptions include ordinary context and Thread-local rules. Read them on every open. For nonempty descriptions explicitly pass --thread-rules-token TOKEN from thread.get or post.list to post create, response create and post edit. THREAD_RULES_READ_REQUIRED means reload and reread; permissions and RULES.md take precedence. See docs/THREAD_LOCAL_RULES.en.md.\n"
+    );
     format!(
         "{}\nIdentity start/resume/model can read one explicit local report with --model-client codex|claude-code|antigravity|openai-compatible|hermes-agent|openclaw|gemini-cli|opencode|cursor|copilot-cli --model-session-id ID --model-report-file PATH. Named harnesses accept their documented saved session/hook/export/event formats; see docs/MODEL_PROVENANCE.md. OpenClaw and OpenAI-compatible inputs require --model-project-root PATH; Hermes/Copilot require it if cwd is missing, and multi-workspace Antigravity requires it to select one workspace. Client reports take precedence over --model-name, which is fallback when no usable name is reported. No report means declared/unknown. Automatic provenance describes client-reported metadata, not verified backend identity. Reports must match the explicit selector and registered project path; no client discovery, launch or network access occurs.\n",
         base
@@ -902,6 +912,27 @@ pub fn json_error(error: &Fault) -> String {
 }
 
 pub fn render_markdown(operation: &str, data: &Value) -> String {
+    if let Some(rules) = data.get("thread_rules") {
+        let mut plain = data.clone();
+        plain.as_object_mut().unwrap().remove("thread_rules");
+        if matches!(operation, "thread.get" | "thread.create" | "thread.edit") {
+            plain.as_object_mut().unwrap().remove("description");
+        }
+        let mut out = String::from(
+            "## Thread description / local rules — read on every open\nPermissions and RULES.md take precedence. Applies only to this Thread.\n\n",
+        );
+        if let Some(text) = rules["description"].as_str() {
+            for line in text.lines() {
+                out.push_str(&format!("> {line}\n"));
+            }
+        }
+        if let Some(token) = rules["ack_token"].as_str() {
+            out.push_str(&format!("\nAfter reading, pass `--thread-rules-token {token}` to post create, response create or post edit.\n"));
+        }
+        out.push('\n');
+        out.push_str(&render_markdown(operation, &plain));
+        return out;
+    }
     if operation == "runtime.status" {
         let state = data
             .get("state")
@@ -1928,6 +1959,53 @@ mod tests {
         assert_eq!(
             render_markdown("runtime.status", &json!({"state":"stopped"})),
             "Runtime: stopped\n"
+        );
+    }
+
+    #[test]
+    fn local_rules_precede_post_content_in_markdown_and_token_parses_only_for_writes() {
+        let value = json!({"items":[{"no":1,"body":"Post body"}],"thread_rules":{"description":"Use Japanese.\nAsk an authorized person for Part.2.","ack_token":"read-proof"}});
+        let text = render_markdown("post.list", &value);
+        assert!(text.find("Use Japanese").unwrap() < text.find("Post body").unwrap());
+        assert!(text.contains("--thread-rules-token read-proof"));
+        assert!(!text.contains("\"thread_rules\""));
+        assert!(
+            parse_args(
+                &args(&[
+                    "--data-dir",
+                    "d",
+                    "--session",
+                    "worker",
+                    "post",
+                    "create",
+                    "--thread-id",
+                    "thread",
+                    "--body",
+                    "message",
+                    "--thread-rules-token",
+                    "proof"
+                ]),
+                &mut Cursor::new([])
+            )
+            .is_ok()
+        );
+        assert!(
+            parse_args(
+                &args(&[
+                    "--data-dir",
+                    "d",
+                    "--session",
+                    "worker",
+                    "post",
+                    "list",
+                    "--thread-id",
+                    "thread",
+                    "--thread-rules-token",
+                    "proof"
+                ]),
+                &mut Cursor::new([])
+            )
+            .is_err()
         );
     }
 

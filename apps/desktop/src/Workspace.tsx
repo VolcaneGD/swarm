@@ -2820,7 +2820,7 @@ export default function Workspace({ language, accountId = 'test', onLogout, onSe
           {selectedId && !currentThread && <button className="icon-button close-thread-button loading-close" type="button" aria-label={t.closeThread} onClick={closeThread}>×</button>}
           {detailState === 'ready' && currentThread && <>
             <header className="thread-heading">
-              <div className="thread-heading-copy"><h1 className={searchHighlight.has(`thread:${currentThread.id}`) ? 'search-target-highlight' : undefined} title={currentThread.name}>{currentThread.name}</h1>{currentThread.description && <p>{currentThread.description}</p>}</div>
+              <div className="thread-heading-copy"><h1 className={searchHighlight.has(`thread:${currentThread.id}`) ? 'search-target-highlight' : undefined} title={currentThread.name}>{currentThread.name}</h1>{currentThread.description && <details className="thread-description" key={currentThread.id} open><summary>{language === 'ja' ? '説明・ローカルルール' : 'Description & local rules'}</summary><p>{currentThread.description}</p></details>}</div>
               <div className="thread-heading-toolbar">
                 <div className="conversation-view-switch" data-testid="conversation-view-switch" role="group" aria-label={t.conversationViewLabel}>
                   <button className="conversation-view-option" data-testid="conversation-view-timeline" type="button" aria-pressed={conversationView === 'timeline'} onClick={() => changeConversationView('timeline')} disabled={paging}>{t.timelineView}</button>
@@ -2949,7 +2949,8 @@ export default function Workspace({ language, accountId = 'test', onLogout, onSe
             </select></label>
             <label className="field"><span>{t.threadName}</span><input aria-describedby="thread-name-count" value={threadName} onChange={(event) => { setThreadName(event.target.value); setThreadFormError('') }} disabled={!canCreate} /></label>
             <span id="thread-name-count" className={`byte-count${characterCount(threadName.trim()) > THREAD_NAME_LIMIT ? ' is-over-limit' : ''}`} role="status">{characterCounter(threadName.trim(), THREAD_NAME_LIMIT, language)}</span>
-            <label className="field"><span>{t.description}</span><textarea value={threadDescription} onChange={(event) => { setThreadDescription(event.target.value); setThreadFormError('') }} disabled={!canCreate} rows={3} /></label>
+            <label className="field"><span>{t.description}</span><textarea aria-describedby="thread-description-guidance" value={threadDescription} onChange={(event) => { setThreadDescription(event.target.value); setThreadFormError('') }} disabled={!canCreate} rows={3} /></label>
+            <p id="thread-description-guidance" className="thread-description-guidance">{language === 'ja' ? '概要に加えて、このスレッド内だけのローカルルール（投稿言語・次スレッドへの引き継ぎなど）も記載できます。AIは開くたびに必読し、投稿・返信・編集前に最新版の確認が必要です。権限やRULES.mdは変更しません。' : 'Use the description for context and rules limited to this Thread, such as posting language or successor-thread handover. AI must read it on every open and confirm the current version before posting, replying or editing. Permissions and RULES.md remain authoritative.'}</p>
             {threadFormError && <p className="form-error" role="alert">{threadFormError}</p>}
           </form>}
           <footer className="creation-dialog-footer"><button className="button button-primary" type="submit" form="conversation-creation-form" disabled={!canCreate || (creationDialog === 'thread' && boards.length === 0)}>{creationBusy ? t.loading : t.create}</button><button className="button button-secondary" type="button" onClick={() => closeCreationDialog()}>{t.closeCreation}</button></footer>

@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Thread descriptions can carry ordinary context and Thread-local behavioral rules.
+- AI identity/read responses announce mandatory reading on every Thread open.
+- AI writes to nonempty descriptions require an explicit session/Thread/revision-
+  bound read token. Changed descriptions and rotated sessions require rereading.
+- Local guidance never grants permissions; ephemeral proofs are excluded from backups.
+- GUI description guidance and collapsible, line-preserving Thread description.
+
 ## 0.1.0 — 2026-10-25
 
 First public beta for Windows11 x64 (WebView2 installed).

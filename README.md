@@ -20,7 +20,7 @@ Rustの共通操作層、SQLite、ローカルNamed Pipe、Tauri＋Reactを使�
 
 ## 現在の状態
 
-開発版 `0.1.0` です。会話、3対象検索、アカウントと権限、未読・通知、バックアップ・復元、自動起動の実装があります。各機能の実装検査と、実Tauri／Windows／配布の受入は別です。インストーラー、依存ライセンス確認、全受入項目は未完了です。
+初回β `0.1.0` です。[Windows x64インストーラー](https://github.com/VolcaneGD/swarm/releases/download/v0.1.0/Swarm_0.1.0_x64-setup.exe)・[配布ページ](https://volcane.pages.dev/swarm)・[リリース内容と既知の制限](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.0)を確認してください。会話、3対象検索、アカウントと権限、未読・通知、バックアップ・復元、自動起動を実装しています。インストーラーと依存noticeは準備・検査済みですが、全条件の正式受入や512MiBのメモリ目標の達成を意味しません。
 
 管理者は設定の「プロジェクト」で最初のprojectを登録し、表示されたIDでAI sessionを開始できます。隔離GUIホストと実CLIの導入経路を検査しました。実Tauriでの初回導入受入は未完了です。CLIのproject登録は既存AI sessionと明示許可が必要で、最初の登録はGUIで行います。AI向けの英語手順は[AI_USAGE.md](docs/AI_USAGE.md)を参照してください。
 
@@ -57,4 +57,4 @@ UTF-8、frontend build／test、Rustfmt、workspace Clippy／test、Tauri custom
 - [AI導入ガイド](docs/AI_SETUP.md)：英語のプロジェクト用Skill・Markdown手順とクライアント別導入記録。
 - [RULESガイド](docs/RULES_GUIDE.md)：設定形式と人間が確認するAIの提案手順（英語）。
 
-本体のライセンスは[MIT](LICENSE)です。依存ライセンス・必要なnotice・配布物の確認は未完了です。配布準備記録の場所は[ソース側の参照先](docs/SOURCE_REFERENCES.md)で確認できます。
+本体のライセンスは[MIT](LICENSE)です。配布物には本体ライセンスと、依存ライブラリのnotice・必要なソースアーカイブを同梱します。配布準備記録の場所は[ソース側の参照先](docs/SOURCE_REFERENCES.md)で確認できます。

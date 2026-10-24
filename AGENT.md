@@ -12,6 +12,12 @@ Recover the original objective, acceptance gates, scope, approvals and precise n
 
 ## Authorized scope
 
+User decision2026-10-25: make VolcaneGD/swarm public, distribute the current first
+beta and add its download page to https://volcane.pages.dev/ using publish-windows-app.
+This supersedes historical publication holds for this source/release/site workflow.
+Keep local-only Zenn drafts and all signing/auth secrets excluded. Other explicit
+holds, including512MiB, excluded clients and hazardous tests, remain unchanged.
+
 User decision2026-10-25: implement structured AI/human defect reports with category
 and severity. First obtain human consent, then upload automatically to a dedicated
 Cloudflare Worker/D1. Before consent or on failure preserve reports locally. Only

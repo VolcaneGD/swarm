@@ -39,8 +39,8 @@
     },
     {
       "path": "AGENT.md",
-      "bytes": 23301,
-      "sha256": "48fa9f46c0c2fc3ecc4c9960f6b6be7b1ba5d5a4aa8287a6cd87fdca58f79189"
+      "bytes": 23719,
+      "sha256": "048bce9cca9980ee103c1b8b3b6bfa5b50b9377cd028346c51c935b6124ee7e7"
     },
     {
       "path": "Cargo.lock",
@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "bytes": 4869,
-      "sha256": "ff3038297315e72d230b63ca94ef41b11f7af4a124d2d7fb581f1da71d8f34cf"
+      "bytes": 5074,
+      "sha256": "975986dbbb4d02c66356be6b52e2c7729fe1b35241e2be7a07a08caa3c302cad"
     },
     {
       "path": "README.md",
-      "bytes": 5263,
-      "sha256": "a9ac39c2cdac9a0bbaebd7436a5de63b3d42f1518264a240302fb7b725f32974"
+      "bytes": 5596,
+      "sha256": "51d4aba321ae0e12d140e17a1c6262bf7b27deac831e11bdbeb91079ec41e96d"
     },
     {
       "path": "apps/desktop/index.html",
@@ -1948,6 +1948,11 @@
       "sha256": "84e8041b32cc8fe8cd408f07fa553f3e3cc6d9c120448849204de167def932d2"
     },
     {
+      "path": "docs/CHANGELOG.md",
+      "bytes": 1096,
+      "sha256": "1108b27f317b30daf76a69c5fe8f1d8fcf3df31cc37558cc834d1a260d524c3c"
+    },
+    {
       "path": "docs/CLI_REFERENCE.md",
       "bytes": 21239,
       "sha256": "cd5eee80eddf246f47ef7211a7c1757b0700784855e956bbd59c362a567bea7a"
@@ -1994,13 +1999,13 @@
     },
     {
       "path": "docs/PRIVACY.en.md",
-      "bytes": 4626,
-      "sha256": "223aea54f8d284c6266d5b4dff409e84e0f2cbdb88ed31f061f8545cfeb83021"
+      "bytes": 4807,
+      "sha256": "21d9ce2d3882f3d9a5fdc5d4d8f060ef395b504f85c76e95b02a761d663764b4"
     },
     {
       "path": "docs/PRIVACY.md",
-      "bytes": 5224,
-      "sha256": "351f3e632dc800f42a5e787ff0985763de9e608140ce07f30397fcd47813bfac"
+      "bytes": 5437,
+      "sha256": "fc01332c972f659a3915f44bacd128966e72364dca4c446fcc638a72d5e9cd0c"
     },
     {
       "path": "docs/PUBLICATION_READINESS.md",

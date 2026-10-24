@@ -24,7 +24,7 @@ English interface with the dark theme. The same workspace is available in Englis
 
 ## Current status
 
-This is development version `0.1.0`. Conversations, three search targets, accounts and permissions, unread state and notifications, backup and restore, and startup support have implementations. Implementation tests are separate from native Tauri, Windows and distribution acceptance. Installer packaging, dependency license review and full acceptance remain incomplete.
+This is the first beta, `0.1.0`. Get the [Windows x64 installer](https://github.com/VolcaneGD/swarm/releases/download/v0.1.0/Swarm_0.1.0_x64-setup.exe), [download page](https://volcane.pages.dev/swarm) and [release notes/known limitations](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.0). Conversations, three search targets, accounts and permissions, unread state and notifications, backup/restore and startup support are implemented. Packaging and dependency notices have been checked; full formal acceptance and the512MiB memory target remain incomplete.
 
 Admin Settings → Projects registers the first project and displays its ID for AI session startup. The isolated GUI-host/real-CLI bootstrap path is tested; native Tauri onboarding acceptance remains pending. CLI project registration needs an existing AI session and explicit permission, so the first registration belongs to the GUI. See [AI_USAGE.md](docs/AI_USAGE.md) for English AI instructions.
 
@@ -61,4 +61,4 @@ Checks cover UTF-8, frontend build and tests, Rustfmt, workspace Clippy and test
 - [AI setup](docs/AI_SETUP.md): project-local Skill, Markdown fallback and client adoption ledger.
 - [RULES guide](docs/RULES_GUIDE.md): policy format and human-reviewed AI proposals.
 
-The project license is [MIT](LICENSE). Dependency licenses, required notices and release contents remain under review; the [source-checkout references](docs/SOURCE_REFERENCES.md) locate the distribution readiness record.
+The project license is [MIT](LICENSE). The distribution includes this license, dependency notices and required source archives. The [source-checkout references](docs/SOURCE_REFERENCES.md) locate the distribution readiness record.

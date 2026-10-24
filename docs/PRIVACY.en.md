@@ -1,6 +1,6 @@
 # Swarm privacy notice — local release preparation
 
-Updated2026-10-25. This notice describes the first-beta offering. No public release or public privacy-policy URL has been established.
+Updated2026-10-25. This notice describes the first beta published by VOLCANE through the [public repository](https://github.com/VolcaneGD/swarm) and [download page](https://volcane.pages.dev/swarm). Its public policy URL is [this document on GitHub](https://github.com/VolcaneGD/swarm/blob/main/docs/PRIVACY.en.md).
 
 Optional structured bug reporting requires first-time human Admin consent in Settings.
 Reports are encrypted locally with Windows DPAPI and upload to Cloudflare only after

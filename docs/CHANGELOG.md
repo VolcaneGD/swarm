@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 — 2026-10-25
+
+- Fix Windows installer falsely reporting a different installation's64-bit runtime
+  as blocking when its32-bit PowerShell cannot read MainModule. Resolve the exact
+  process ID through CIM, retaining refusal when executable identity is unknown.
+- Preserve matching-install running-process protection; never terminate processes.
+
 ## 0.1.1 — 2026-10-25
 
 - Thread descriptions can carry ordinary context and Thread-local behavioral rules.

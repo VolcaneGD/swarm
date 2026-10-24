@@ -1,5 +1,19 @@
 # Public beta published — 2026-10-25
 
+## Latest distribution0.1.1
+
+Bug reports and Thread-local rule confirmation ship together in0.1.1, published
+from30bd967e66961dc9420a08b92a923f5ba319f870. Four Release assets and the Latest
+update feed verified by anonymous download; native verifier accepts the exact
+installer and rejects mutation. SHA256:
+9099d9815ea089028fb3f328ee6941f904870146b4a5b6018f5af1cc05298b9d.
+Portfolio b7f49395f9d94626edc6b23b626d1446b225ffdd / deployment5b2f4101 updates
+the page and homepage announcement. HTTP and browser1280/390checks passed.
+No installation/OS/full-formal acceptance inferred. Details in HANDOVER.
+The first-publication receipt below remains historical;0.1.0 assets were retained.
+
+## First beta0.1.0 receipt
+
 The user explicitly authorized publication. Repository VolcaneGD/swarm is public;
 v0.1.0 is published from072ce1cfa055844ab5ef57d1caf7cf89b46197a8 with the installer,
 version-bound signature, latest.json and SHA256SUMS.txt. Anonymous downloads match

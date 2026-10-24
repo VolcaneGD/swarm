@@ -45,12 +45,12 @@
     {
       "path": "Cargo.lock",
       "bytes": 142679,
-      "sha256": "86aa30636745023ecc0857f5e12def76a29bd7ddf7dd1680130c430f2d48f0d1"
+      "sha256": "b0ef9648d10c3b442a5b555403ef4300ccce0689fa164b3e9ab8ab9862faea3a"
     },
     {
       "path": "Cargo.toml",
       "bytes": 830,
-      "sha256": "c3e30704376503ae8cc70241da6eac1b558b696124b5b53c4100b72371f61ce3"
+      "sha256": "9d6c1efb9dc32be1649b5f70cd08b911034062fc558ac6326d78f28f2ee0a680"
     },
     {
       "path": "LICENSE",
@@ -65,12 +65,12 @@
     {
       "path": "README.en.md",
       "bytes": 5393,
-      "sha256": "679267558649f5fbad14b44e9db760232ed8e6059e898b8a93ead76221127c61"
+      "sha256": "a4a0971751ecbe36d630da2a34ef78ecc4560cd2baee8f833f6f05fe0bd30284"
     },
     {
       "path": "README.md",
       "bytes": 6034,
-      "sha256": "2c320211992f7b8a92da50043defd2800d36e60465db0e6e2e1166f57b3d3818"
+      "sha256": "453114eac5ae1b16c1c784ed79bca287d9f14e9e6cb45f57dfcda3e52ff4ad80"
     },
     {
       "path": "apps/desktop/index.html",
@@ -80,12 +80,12 @@
     {
       "path": "apps/desktop/package-lock.json",
       "bytes": 153367,
-      "sha256": "d133c3f0f8d6f96ce22bdb592336aca82834e93383f4bddd4dd9cfbd25894704"
+      "sha256": "43d6495e46881cc93ff9e7ffff3486054ebae452881945b8648e9089fe00bc11"
     },
     {
       "path": "apps/desktop/package.json",
       "bytes": 705,
-      "sha256": "f9d8658f31ef21fd38d1803d072a674afdf03cb89e8cf75a986f56d2b457d6ab"
+      "sha256": "5935f6e42be7ce50ed5533c4a8e6e33896940fdb9adb02ece7d669e2684d9524"
     },
     {
       "path": "apps/desktop/preview.html",
@@ -390,7 +390,7 @@
     {
       "path": "apps/desktop/src-tauri/tauri.conf.json",
       "bytes": 1205,
-      "sha256": "7fc05182248f7404cf78bcf88f5fcc34c5b6de2b0ec4f8e30784c095dc4a6f7f"
+      "sha256": "86dcd34d9ad6cab9e3de485add16ca42a73fb40796603bf66fa31885d4f78eb6"
     },
     {
       "path": "apps/desktop/src-tauri/tauri.distribution.conf.json",
@@ -1889,8 +1889,8 @@
     },
     {
       "path": "distribution/third-party/bundle-manifest.json",
-      "bytes": 178571,
-      "sha256": "04ddb7b3bb0389a4c8cd7265894b1c6d417cca97d3037faf7463ef71792a602e"
+      "bytes": 178708,
+      "sha256": "7505a27b3a8f10217465165f4965e533277e4dff58b79adc46c1821d03ea36c2"
     },
     {
       "path": "distribution/third-party/cssparser-0.37.0.crate",
@@ -1930,7 +1930,7 @@
     {
       "path": "docs/AI_USAGE.md",
       "bytes": 12943,
-      "sha256": "0f7ad0eb11222207f62acc3368ca3907d9b41c2fc51cef4c0ea6610238d46386"
+      "sha256": "fa6bb0eb5e98ef65db0248ef2f38b6124813448832f489deff61942e8ca374a9"
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -1964,13 +1964,13 @@
     },
     {
       "path": "docs/CHANGELOG.md",
-      "bytes": 1768,
-      "sha256": "c02e4674cf19328ccb107e46e1aea4bc7f3c0a9504074b2b14080e5c7b704f3d"
+      "bytes": 2123,
+      "sha256": "53de60f7ffedb0468eb3e13e16aa93a0832c15e887c5e0b42a9c4e9cddc6aa26"
     },
     {
       "path": "docs/CLI_REFERENCE.md",
       "bytes": 21889,
-      "sha256": "153c0aea8ac2fff97a203b4405d2d090f8d60589778443dd70b1cca052fa56a7"
+      "sha256": "e39547e1c34245483617dd697a96f907d217b932ae87f561e012c1bcc8f14989"
     },
     {
       "path": "docs/DESIGN.md",
@@ -2024,8 +2024,8 @@
     },
     {
       "path": "docs/PUBLICATION_READINESS.md",
-      "bytes": 17440,
-      "sha256": "c212331358eecc4e3186411843770f98c1cfb287f338fc9528eab13bdf9cea9b"
+      "bytes": 18154,
+      "sha256": "16fe3484181e2b67fbd9d510df3b5ee3d8662b6c36f7062b5854c958c93f0a63"
     },
     {
       "path": "docs/QUICKSTART.en.md",
@@ -2044,8 +2044,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 205142,
-      "sha256": "bd2818c39d117b7e953f957fe3c885d9f0237e180173c241c245634831fe14c2"
+      "bytes": 205725,
+      "sha256": "ef600df731bb8351cfe23751453ca0e52fb37ceb4eb0363a604a0540d48cb4a6"
     },
     {
       "path": "docs/RULES_GUIDE.md",
@@ -2649,8 +2649,8 @@
     },
     {
       "path": "scripts/installer_path.ps1",
-      "bytes": 16523,
-      "sha256": "8c48ac5552e19a1ba77aa054ab16fcff43cc8e9322c219ff3e0a475b9eb7692e"
+      "bytes": 16992,
+      "sha256": "455732e1c60f52b08475214ee6cbf1fd1fdcfb9e46f99f4b1e61c0ed29b0206c"
     },
     {
       "path": "scripts/measure_display_memory.ps1",

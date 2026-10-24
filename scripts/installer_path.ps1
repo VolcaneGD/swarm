@@ -315,9 +315,16 @@ function Test-SwarmProcessMatchesInstall {
         $actualPath = $Process.MainModule.FileName
         return (ConvertTo-SwarmComparablePath $actualPath) -eq (ConvertTo-SwarmComparablePath $ExpectedPath)
     } catch {
-        # If a same-named process cannot be inspected, fail closed rather than risk
-        # replacing an executable that may belong to this current-user install.
-        return $true
+        # NSIS runs 32-bit PowerShell, whose MainModule cannot inspect a 64-bit
+        # runtime. CIM can resolve that exact PID across architectures. Still
+        # fail closed when neither API supplies a verified executable path.
+        try {
+            $record = Get-CimInstance -ClassName Win32_Process -Filter ("ProcessId = " + $Process.Id) -ErrorAction Stop
+            if ($null -eq $record -or [string]::IsNullOrWhiteSpace($record.ExecutablePath)) { return $true }
+            return (ConvertTo-SwarmComparablePath $record.ExecutablePath) -eq (ConvertTo-SwarmComparablePath $ExpectedPath)
+        } catch {
+            return $true
+        }
     }
 }
 

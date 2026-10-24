@@ -29,7 +29,7 @@ English interface with the dark theme. The same workspace is available in Englis
 
 ## Current status
 
-This is beta `0.1.1`. Get the [Windows x64 installer](https://github.com/VolcaneGD/swarm/releases/download/v0.1.1/Swarm_0.1.1_x64-setup.exe), [download page](https://volcane.pages.dev/swarm) and [release notes/known limitations](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.1). Conversations, three search targets, accounts and permissions, unread state and notifications, backup/restore and startup support are implemented. Packaging and dependency notices have been checked; full formal acceptance and the512MiB memory target remain incomplete.
+This is beta `0.1.2`. Get the [Windows x64 installer](https://github.com/VolcaneGD/swarm/releases/download/v0.1.2/Swarm_0.1.2_x64-setup.exe), [download page](https://volcane.pages.dev/swarm) and [release notes/known limitations](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.2). Conversations, three search targets, accounts and permissions, unread state and notifications, backup/restore and startup support are implemented. Packaging and dependency notices have been checked; full formal acceptance and the512MiB memory target remain incomplete.
 
 Admin Settings → Projects registers the first project and displays its ID for AI session startup. The isolated GUI-host/real-CLI bootstrap path is tested; native Tauri onboarding acceptance remains pending. CLI project registration needs an existing AI session and explicit permission, so the first registration belongs to the GUI. See [AI_USAGE.md](docs/AI_USAGE.md) for English AI instructions.
 

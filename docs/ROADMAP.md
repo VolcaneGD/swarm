@@ -2,6 +2,7 @@
 
 <!-- acceptance-status: checked=363 open=17 total=380 -->
 <!-- acceptance-current:start -->
+2026-10-25追加：0.1.1導入時の32bit／64bitプロセス参照差による別installation誤拒否を、exact PIDのCIM参照で修正。同一installationの稼働保護を維持。0.1.2配布・更新feed・公開サイトへ反映し、開発ホストに導入完了（43file一致）。新規Swarm-Development Dataをユーザー選択、実runtime running／新規アカウントWorkspaceを確認。旧データ・検証runtime・fixture保持。global swarm-use Skillを追加し、用途・発火条件・project bindingは各local Skillが所有。正式363/17/380/PASS0、更新適用の通し検査・保留群は別。
 2026-10-25配布更新完了：不具合報告・ローカルルールを含む0.1.1を新規署名・Releaseで公開。source/tag30bd967、installer SHA2569099d9815ea089028fb3f328ee6941f904870146b4a5b6018f5af1cc05298b9d。公開4assetと最新feedの一致、native署名検証・改変拒否を確認。公開サイト／新着をportfolio b7f4939・deployment5b2f4101へ更新、通常1280／狭幅390を確認。旧0.1.0は保持。以下のUnreleased記載は配布前の履歴。正式363/17/380/PASS0・512MiB等の保留は変更せず、VM検査は反復していない。
 2026-10-25追加：説明欄の通常の説明＋スレッド内ローカルルール用途、AIへの開始／読取応答・Skill／導入ガイドでの毎回必読案内を追加。ユーザー選択に基づき、空でない説明の最新確認トークンなしのAI投稿・返信・編集を拒否。別Thread／AI・更新・再開の無効化、権限優先、backup除外、実CLIを検証済み。[解説](THREAD_LOCAL_RULES.md)。Unreleasedのソース実装で、公開0.1.0の配布物には未収録。正式363/17/380/PASS0・既存保留は変更しない。
 2026-10-25：ユーザーの明示指示でPublicへ変更し、Swarm0.1.0初回βをGitHub Release・https://volcane.pages.dev/swarm へ公開完了。署名・チェックサム・実公開ダウンロード・公開更新feed・本番ページ／新着／画像を確認。これまでの公開待ちはこの配布について解消。512MiB・除外client・危険検査・正式363/17/380/PASS0は変更せず、完了済みVM検査を反復しない。

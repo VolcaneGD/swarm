@@ -1,5 +1,17 @@
 # Public beta published — 2026-10-25
 
+## Latest distribution0.1.2
+
+Source/tagcde755b publishes the cross-bitness installer-guard correction shared
+by manual installation and in-app updates. Exact-PID CIM resolution distinguishes
+foreign64-bit runtimes without relaxing matching-install or unknown-path refusal.
+Native new-asset signature/mutation checks and public4asset/feed equality passed.
+Installer SHA256bf64ac6bae2e4631628f9928a5b50364b992a2c48d02bae24b62421ecad09e4e.
+Portfolio8d22ea5 / deploymentb3e2dcea updates page/new announcement;1280/390checked.
+Normal host installation exit0/43file hashes and fresh development Data startup
+were verified. This is not full in-app apply/restart or formal/VM acceptance.
+Earlier version receipts remain historical; no old published assets overwritten.
+
 ## Latest distribution0.1.1
 
 Bug reports and Thread-local rule confirmation ship together in0.1.1, published

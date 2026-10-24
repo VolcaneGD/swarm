@@ -1,0 +1,10 @@
+[package]
+name = "swarm-deleted-bulk-fixture"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[dependencies]
+swarm-core = { path = "../../../crates/swarm-core" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-platform = { path = "../../../crates/swarm-platform" }
+serde_json = "1"

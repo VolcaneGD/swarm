@@ -1,0 +1,8 @@
+.storage-cleanup { display: grid; gap: 12px; margin-block: 24px; padding-block: 20px; border-block: 1px solid var(--border-color, #8993a4); min-width: 0; }
+.storage-cleanup h3, .storage-cleanup p { margin: 0; }
+.storage-copy-list { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.storage-copy-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; border: 1px solid var(--border-color, #8993a4); border-radius: 8px; min-width: 0; }
+.storage-copy-list li > div { flex: 1 1 220px; min-width: 0; overflow-wrap: anywhere; }
+.storage-delete-review { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--border-color, #8993a4); border-radius: 8px; min-width: 0; overflow-wrap: anywhere; }
+.storage-delete-review h4 { margin: 0; }
+.storage-copy-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }

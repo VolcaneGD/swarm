@@ -1,0 +1,43 @@
+[package]
+name = "swarm-vm-startup-observer"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[[bin]]
+name = "swarm-vm-run-path"
+path = "run_path.rs"
+[[bin]]
+name = "swarm-vm-autorun-canary"
+path = "autorun_canary.rs"
+[[bin]]
+name = "swarm-vm-shell-path-probe"
+path = "shell_path_probe.rs"
+[[bin]]
+name = "swarm-vm-startup-diagnostic"
+path = "startup_diagnostic.rs"
+[[bin]]
+name = "swarm-vm-fixed-diagnostic"
+path = "fixed_diagnostic.rs"
+[[bin]]
+name = "swarm-vm-token-transition"
+path = "token_transition.rs"
+[[bin]]
+name = "swarm-vm-fixed-native"
+path = "fixed_native.rs"
+[[bin]]
+name = "swarm-vm-fixed-observer"
+path = "fixed.rs"
+[[bin]]
+name = "swarm-vm-native-phase"
+path = "native_phase.rs"
+[[bin]]
+name = "swarm-vm-native-access"
+path = "gui_access_diagnostic.rs"
+[dependencies]
+swarm-platform = { path = "../../../crates/swarm-platform" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+serde_json = "1"
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Security", "Win32_Security_Authorization", "Win32_Storage_FileSystem", "Win32_System_Threading", "Win32_UI_Shell"] }

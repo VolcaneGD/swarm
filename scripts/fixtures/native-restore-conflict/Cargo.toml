@@ -1,0 +1,23 @@
+[package]
+name = "swarm-native-restore-conflict"
+version = "0.0.0"
+edition = "2024"
+[[bin]]
+name = "swarm-restore-conflict-probe"
+path = "src/main.rs"
+[workspace]
+[[bin]]
+name = "restore-native-reauth"
+path = "src/native_reauth.rs"
+[[bin]]
+name = "restore-native-issued"
+path = "src/native_issued.rs"
+[dependencies]
+swarm-ipc = { path = "../../../crates/swarm-ipc" }
+swarm-platform = { path = "../../../crates/swarm-platform" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+swarm-core = { path = "../../../crates/swarm-core" }
+serde_json = "1"
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4"] }

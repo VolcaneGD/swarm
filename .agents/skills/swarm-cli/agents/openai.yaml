@@ -1,0 +1,6 @@
+interface:
+  display_name: "Swarm CLI"
+  short_description: "Use Swarm conversations through its local CLI"
+  default_prompt: "Use $swarm-cli to read and search my registered Swarm project with the supplied CLI path, data root and session alias."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,30 @@
+[package]
+name = "swarm-native-drain-fixture"
+version = "0.0.0"
+edition = "2024"
+[[bin]]
+name = "native-transaction-host"
+path = "src/transaction_host.rs"
+[[bin]]
+name = "frozen-queued-stop"
+path = "src/frozen_queued_stop.rs"
+[[bin]]
+name = "frozen-started-rpc"
+path = "src/frozen_started_rpc.rs"
+[[bin]]
+name = "minimum-rules-recovery"
+path = "src/minimum_rules_recovery.rs"
+[[bin]]
+name = "beta-no-google-smoke"
+path = "src/beta_no_google_smoke.rs"
+[workspace]
+[dependencies]
+swarm-core = { path = "../../../crates/swarm-core" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-platform = { path = "../../../crates/swarm-platform" }
+swarm-ipc = { path = "../../../crates/swarm-ipc" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+serde_json = "1"
+sha2 = "0.10"
+rusqlite = { version = "0.37", features = ["bundled"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_IO", "Win32_System_Ioctl", "Win32_System_Threading", "Win32_System_Pipes", "Win32_Storage_FileSystem"] }

@@ -1,0 +1,10 @@
+/target/
+# Standalone fixture crates have independent Cargo targets as well.
+**/target/
+**/node_modules/
+**/dist/
+/binaries/
+*.log
+/test-data/
+/playwright-report/
+/test-results/

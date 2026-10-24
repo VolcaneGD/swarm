@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f6f3" />
+    <title>Swarm · GUI preview</title>
+    <style>
+      .history-backdrop { top: var(--preview-banner-height, 48px); }
+      .history-drawer { height: calc(100dvh - var(--preview-banner-height, 48px)); }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <aside id="preview-banner" style="position: sticky; top: 0; z-index: 1000; padding: 12px 20px; background: #fff0c2; color: #573b00; border-bottom: 1px solid #d9b653; font: 600 14px/1.5 system-ui, sans-serif; text-align: center">
+      サンプルデータのGUIプレビュー。実データ・認証・保存には接続しません。
+    </aside>
+    <div id="root"></div>
+    <script type="module" src="/src/preview.tsx"></script>
+  </body>
+</html>

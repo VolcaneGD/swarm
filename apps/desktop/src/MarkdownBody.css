@@ -1,0 +1,5 @@
+.markdown-code-disclosure { max-width: 100%; margin: .8em 0; }
+.markdown-code-summary { padding: 4px 0; color: var(--muted); cursor: pointer; }
+.markdown-code-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.markdown-code-language, .markdown-code-line-count { margin-left: 8px; }
+.markdown-code-disclosure > pre.markdown-code-block { margin: 0; }

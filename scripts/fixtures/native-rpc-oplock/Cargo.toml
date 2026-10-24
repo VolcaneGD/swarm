@@ -1,0 +1,17 @@
+[package]
+name = "swarm-native-rpc-oplock"
+version = "0.0.0"
+edition = "2024"
+[features]
+rollback-fixture = []
+[workspace]
+[dependencies]
+swarm-platform = { path = "../../../crates/swarm-platform" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+swarm-core = { path = "../../../crates/swarm-core" }
+serde_json = "1"
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4"] }
+rusqlite = { version = "0.37", features = ["bundled"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_IO", "Win32_System_Ioctl", "Win32_System_Threading", "Win32_Storage_FileSystem"] }

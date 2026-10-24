@@ -1,0 +1,12 @@
+{
+  "scope": "elapsed-product-followup-once",
+  "user_answer": "既存baselineの保持期間観測を1回許可する",
+  "approved_at_unix_seconds": 0,
+  "observer_sha256": "REQUIRES_ACTUAL_STAGED_SHA256",
+  "attempts": 1,
+  "automatic_retries": 0,
+  "native_gui_observed": false,
+  "reseed": false,
+  "publication": false,
+  "vm": false
+}

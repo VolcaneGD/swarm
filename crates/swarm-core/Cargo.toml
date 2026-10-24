@@ -1,0 +1,25 @@
+[package]
+name = "swarm-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[features]
+# Deliberate opt-in for future Google acceptance. First-beta builds omit it.
+google-recovery = []
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+serde-saphyr.workspace = true
+rusqlite.workspace = true
+uuid.workspace = true
+chrono.workspace = true
+argon2.workspace = true
+sha2.workspace = true
+reqwest.workspace = true
+jsonwebtoken.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

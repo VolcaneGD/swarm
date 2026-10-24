@@ -1,0 +1,49 @@
+[package]
+name = "swarm-native-notification-authority"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[[bin]]
+name = "notification-disable"
+path = "src/disable.rs"
+[[bin]]
+name = "notification-switch"
+path = "src/switch.rs"
+[[bin]]
+name = "notification-logout"
+path = "src/logout.rs"
+[[bin]]
+name = "notification-unsubscribe"
+path = "src/unsubscribe.rs"
+[[bin]]
+name = "notification-deletion"
+path = "src/deletion.rs"
+[[bin]]
+name = "notification-read-mark"
+path = "src/read_mark.rs"
+[[bin]]
+name = "notification-authority"
+path = "src/authority.rs"
+[[bin]]
+name = "notification-post-delete"
+path = "src/post_delete.rs"
+[[bin]]
+name = "notification-direct-target"
+path = "src/direct_target.rs"
+[[bin]]
+name = "notification-reset"
+path = "src/reset.rs"
+[[bin]]
+name = "notification-midnight"
+path = "src/midnight.rs"
+[dependencies]
+chrono = "0.4"
+swarm-core = { path = "../../../crates/swarm-core" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-platform = { path = "../../../crates/swarm-platform" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+serde_json = "1"
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4"] }
+rusqlite = { version = "0.37", features = ["bundled"] }
+windows = { version = "0.62", features = ["UI_Notifications", "Data_Xml_Dom", "Win32_System_WinRT"] }

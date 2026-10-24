@@ -1,0 +1,24 @@
+[package]
+name = "swarm-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "swarm"
+path = "src/main.rs"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+swarm-core = { path = "../swarm-core" }
+swarm-ipc = { path = "../swarm-ipc" }
+swarm-platform = { path = "../swarm-platform" }
+swarm-runtime = { path = "../swarm-runtime" }
+uuid.workspace = true
+
+[dev-dependencies]
+rusqlite.workspace = true
+tempfile.workspace = true
+swarm-gui-host = { path = "../swarm-gui-host" }

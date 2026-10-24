@@ -1,0 +1,9 @@
+[package]
+name = "swarm-client-context-fixture"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[dependencies]
+swarm-core = { path = "../../../crates/swarm-core" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+serde_json = "1"

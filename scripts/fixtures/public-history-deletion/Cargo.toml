@@ -1,0 +1,16 @@
+[package]
+name = "swarm-public-history-deletion"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[dependencies]
+swarm-platform = { path = "../../../crates/swarm-platform" }
+swarm-runtime = { path = "../../../crates/swarm-runtime" }
+swarm-gui-host = { path = "../../../crates/swarm-gui-host" }
+swarm-core = { path = "../../../crates/swarm-core" }
+serde_json = "1"
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4"] }
+[dev-dependencies]
+tempfile = "3"
+swarm-cli = { path = "../../../crates/swarm-cli" }

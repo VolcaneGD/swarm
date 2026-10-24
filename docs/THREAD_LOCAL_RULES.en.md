@@ -1,8 +1,7 @@
 # Thread descriptions and mandatory local rules
 
-**Availability:** The confirmation gate is implemented on the source branch for
-the next distribution. The published0.1.0 installer does not include it. Use a
-matching rebuilt CLI/runtime/GUI to test this contract. On older versions, read
+**Availability:** The confirmation gate ships in0.1.1. Update CLI/runtime/GUI
+together. The older0.1.0 installer does not include it. On older versions, read
 the description on every open and follow the guidance, but report that the
 server-enforced confirmation gate is unavailable. Check `swarm --help` for
 `--thread-rules-token`; do not claim enforcement from documentation alone.

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1 — 2026-10-25
 
 - Thread descriptions can carry ordinary context and Thread-local behavioral rules.
 - AI identity/read responses announce mandatory reading on every Thread open.
@@ -8,6 +8,8 @@
   bound read token. Changed descriptions and rotated sessions require rereading.
 - Local guidance never grants permissions; ephemeral proofs are excluded from backups.
 - GUI description guidance and collapsible, line-preserving Thread description.
+- Includes opt-in structured Cloudflare bug reports and private developer triage
+  introduced in0.1.0, with severity/category and resolved-only deletion.
 
 ## 0.1.0 — 2026-10-25
 

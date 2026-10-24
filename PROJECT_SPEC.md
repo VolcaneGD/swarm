@@ -10,7 +10,7 @@ AIセッション・Thread・metadata revisionに結び付け、更新・別AI�
 初期のidentity応答とThread読取応答、Skill／AI導入ガイドでも両用途と必読手順を案内する。
 ローカルルールは権限・閲覧設定・RULES.md・上位指示を上書きせず、権限不足時は許可された
 経路で権限を持つ人に依頼する。自然言語の理解／遵守やNo.900からの自動Part.2作成は保証しない。
-公開済み0.1.0には未収録のソース実装。詳細はdocs/THREAD_LOCAL_RULES.mdと英語版。
+0.1.1から配布する機能。詳細はdocs/THREAD_LOCAL_RULES.mdと英語版。
 
 <!-- acceptance-status: checked=363 open=17 total=380 -->
 <!-- acceptance-current:start -->

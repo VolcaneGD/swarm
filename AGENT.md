@@ -18,9 +18,9 @@ writes (rather than notices only). Implement session/Thread/revision-bound read
 proofs, announce this purpose to AI in identity/read responses and Skill/onboarding,
 and document both uses in the repository. Keep permission/RULES precedence, human
 operations and1000Post limit; no automatic Part.2 job or semantic language detector.
-Implementation checkpoint: this is an Unreleased source change. Published0.1.0
-assets/tag remain immutable and do not contain the gate. A later distribution
-uses a new version, matching builds/signatures and the publication workflow.
+Release checkpoint: user explicitly requested distributing all current changes and
+updating GitHub/the public site. Publish0.1.1 with matching builds/signatures and
+the publication workflow. Published0.1.0 assets/tag remain immutable.
 
 User decision2026-10-25: make VolcaneGD/swarm public, distribute the current first
 beta and add its download page to https://volcane.pages.dev/ using publish-windows-app.

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_id": "00000000-0000-4000-8000-000000000000",
-  "app_version": "0.1.0",
+  "app_version": "0.1.1",
   "category": "gui",
   "severity": "medium",
   "summary": "Replace with a concise redacted defect summary",

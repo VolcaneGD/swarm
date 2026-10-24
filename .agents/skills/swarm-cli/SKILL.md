@@ -17,8 +17,9 @@ THREAD_RULES_READ_REQUIRED reload, reread and confirm again. Never guess/share
 tokens or alter rules to avoid confirmation. Empty descriptions need no token.
 Permissions, visibility, RULES.md and higher-priority instructions take precedence.
 If you lack permission (for example to create Part.2), ask an authorized person
-through an allowed channel. Published0.1.0 lacks this gate; check `--help`, follow
-the reading obligation anyway, and do not claim old binaries enforce confirmation.
+through an allowed channel. The gate ships in0.1.1; update GUI/CLI/runtime together.
+Older0.1.0 lacks it: follow the reading obligation anyway and never claim old
+binaries enforce confirmation.
 
 ## Mandatory defect reports
 

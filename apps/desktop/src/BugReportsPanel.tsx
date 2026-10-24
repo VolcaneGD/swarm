@@ -19,7 +19,7 @@ export default function BugReportsPanel({language,accountId,isAdmin}:{language:'
   async function submit(event:React.FormEvent){event.preventDefault();await action(async()=>{
     const signature=JSON.stringify({category,severity,form,redacted})
     if(attempt.current?.signature!==signature)attempt.current={signature,id:crypto.randomUUID()}
-    const report={schema_version:1,report_id:attempt.current.id,app_version:'0.1.0',category,severity,...form,steps:form.steps.split('\n').map(s=>s.trim()).filter(Boolean),reporter:'human',redacted,consent_version:1}
+    const report={schema_version:1,report_id:attempt.current.id,app_version:'0.1.1',category,severity,...form,steps:form.steps.split('\n').map(s=>s.trim()).filter(Boolean),reporter:'human',redacted,consent_version:1}
     const value=await invoke<{report_id:string;delivery:string}>('gui_bug_report_submit',{report})
     attempt.current=null
     if(active.current){setResult(`${value.report_id} — ${value.delivery==='sent'?(ja?'送信済み':'Sent'):(ja?'ローカル保存・送信待ち':'Saved locally; queued')}`);setForm(empty);setRedacted(false);setStatus(await invoke<Status>('gui_bug_report_status'))}

@@ -92,3 +92,9 @@ Updated2026-10-13: the saved-report adapter implementations now cover all named 
 No client-specific automatic installation command is asserted here. Use the client's installed documentation when selecting its configuration mechanism. Native Tauri onboarding, Windows startup and distribution remain separate acceptance gates.
 
 Optional [explicit model-report adapters](MODEL_PROVENANCE.md) cover the listed saved report formats and Antigravity official hook inputs. Actual adoption is scoped to the latest observations above; untested clients and full acceptance remain unverified. An unknown name with known local execution displays `ローカルモデル` using `--local-model`; compatible response syntax alone never proves locality or a specific harness. Unknown metadata retains declared/unknown fallback rather than an inferred backend model.
+## Required defect-report onboarding
+
+Every AI client must follow the mandatory reporting contract in
+[BUG_REPORTING.md](BUG_REPORTING.md). The human Admin controls first-time upload
+consent in Settings → Bug reports. AI clients can record locally before consent
+and must distinguish local queuing from confirmed cloud delivery.

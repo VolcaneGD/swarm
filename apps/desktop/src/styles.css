@@ -877,6 +877,12 @@ button { color: inherit; }
 .update-settings { display: grid; justify-items: start; gap: 12px; }
 .update-settings > h3, .update-settings > p { margin: 0; overflow-wrap: anywhere; }
 .update-settings .update-notice { margin-top: 4px; }
+.bug-report-panel, .bug-report-form { display: grid; gap: 16px; }
+.bug-report-form label { display: grid; gap: 8px; }
+.bug-report-classification { display: flex; gap: 16px; flex-wrap: wrap; }
+.bug-report-classification > label { flex: 1; min-width: 180px; }
+.bug-report-form textarea, .bug-report-form select { width: 100%; box-sizing: border-box; }
+.bug-report-panel .checkbox-label { display: flex; gap: 8px; align-items: start; }
 .update-progress progress { width: 100%; height: 12px; accent-color: var(--danger); }
 .conversation-empty.has-update-notes { width: 100%; padding: 24px 0; align-content: start; }
 .thread-detail.has-update-notes { padding: 0; }

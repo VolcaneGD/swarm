@@ -8,18 +8,18 @@ from pathlib import Path
 
 ROOT_FILES = {"Cargo.toml", "Cargo.lock", "LICENSE", "icon.png", ".gitignore",
               "README.md", "README.en.md", "PROJECT_SPEC.md", "仕様書.md", "AGENT.md"}
-SOURCE_ROOTS = {"crates", "apps", "scripts"}
+SOURCE_ROOTS = {"crates", "apps", "scripts", "services"}
 THIRD_PARTY_FILES = {"THIRD_PARTY_NOTICES.txt", "SOURCE_AVAILABILITY.txt", "MPL-2.0.txt", "bundle-manifest.json",
                      "cssparser-0.37.0.crate", "cssparser-macros-0.7.1.crate", "dtoa-short-0.3.5.crate",
                      "option-ext-0.2.0.crate", "selectors-0.38.0.crate"}
 SOURCE_SUFFIXES = {".rs", ".toml", ".lock", ".json", ".tsx", ".ts", ".js",
-                   ".html", ".css", ".svg", ".png", ".ico", ".py", ".ps1", ".nsh", ".sql"}
+                   ".html", ".css", ".svg", ".png", ".ico", ".py", ".ps1", ".nsh", ".sql", ".mjs"}
 SKIP_DIRS = {"target", "node_modules", "dist", "build", "gen", "__pycache__",
              ".git", ".codegraph", ".ai-memory", "evidence"}
 PRIVATE_DOCS = {"HANDOVER.md", "Development_Log.md"}
 BUILD_SUPPORT = {".agents/skills/swarm-cli/SKILL.md",
                  ".agents/skills/swarm-cli/agents/openai.yaml", ".cargo/config.toml",
-                 "docs/cli-context.example.json"}
+                 "docs/cli-context.example.json", "docs/BUG_REPORT_TEMPLATE.json"}
 PUBLIC_TEST_FIXTURES = {"crates/swarm-core/tests/fixtures/google-test-private.pem"}
 
 

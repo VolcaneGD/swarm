@@ -12,6 +12,7 @@ import AccountManagement from './AccountManagement'
 import Workspace from './Workspace'
 import { useStartupUpdate, useUpdateNotes } from './updates'
 import UpdateSettings from './UpdateSettings'
+import BugReportsPanel from './BugReportsPanel'
 import RulesEditor from './RulesEditor'
 import NotificationSettingsPanel from './NotificationSettingsPanel'
 import BackupSettingsPanel from './BackupSettingsPanel'
@@ -263,7 +264,7 @@ export default function App() {
   const [pendingDiscardOpen, setPendingDiscardOpen] = useState(false)
   const [pendingDiscardError, setPendingDiscardError] = useState('')
   const [settingsOpen, setSettingsOpen] = useState(false)
-  const [settingsTab, setSettingsTab] = useState<'basic' | 'account' | 'projects' | 'permissions' | 'notifications' | 'backup' | 'retention' | 'runtime'>('basic')
+  const [settingsTab, setSettingsTab] = useState<'basic' | 'account' | 'projects' | 'permissions' | 'notifications' | 'backup' | 'retention' | 'runtime' | 'bug-reports'>('basic')
   const settingsPanels = useRef<HTMLDivElement | null>(null)
   const [runtimeStatus, setRuntimeStatus] = useState<RuntimeStatus | null>(null)
   const [runtimeStatusLoading, setRuntimeStatusLoading] = useState(false)
@@ -852,6 +853,7 @@ export default function App() {
           <Tabs id="settings" label={language === 'ja' ? '設定カテゴリ' : 'Settings categories'} value={settingsTab} disabled={busy || accountManagementBusy || display.saving}
             items={[
               { value: 'basic', label: language === 'ja' ? '基本設定' : 'Basic settings' },
+              { value: 'bug-reports', label: language === 'ja' ? '不具合報告' : 'Bug reports' },
               { value: 'account', label: language === 'ja' ? 'アカウント' : 'Account' },
               ...(snapshot.account.is_admin ? [{ value: 'projects' as const, label: language === 'ja' ? 'プロジェクト' : 'Projects' }] : []),
               { value: 'permissions', label: language === 'ja' ? '権限・ルール' : 'Permissions & rules' },
@@ -870,6 +872,9 @@ export default function App() {
           <UpdateSettings language={language} />
           {display.failed && <p className="workspace-error" role="alert">{language === 'ja' ? '表示設定を確認できませんでした。現在の設定を確認してから変更してください。' : 'Could not confirm display settings. Check current settings before changing them.'}<button className="text-button" type="button" onClick={() => void display.refresh()} disabled={display.saving}>{language === 'ja' ? '表示設定を確認' : 'Check display settings'}</button></p>}
           {nativeTheme.failed && <p className="workspace-error" role="alert">{language === 'ja' ? 'タイトルバーの表示を変更できませんでした。' : 'Could not update the title bar appearance.'}<button className="text-button" type="button" onClick={nativeTheme.retry}>{language === 'ja' ? '再試行' : 'Retry'}</button></p>}
+          </section>
+          <section className="settings-panel" role="tabpanel" id="settings-panel-bug-reports" aria-labelledby="settings-tab-bug-reports" hidden={settingsTab !== 'bug-reports'}>
+            <BugReportsPanel language={language} accountId={snapshot.account.id} isAdmin={snapshot.account.is_admin}/>
           </section>
           <section className="settings-panel" role="tabpanel" id="settings-panel-account" aria-labelledby="settings-tab-account" hidden={settingsTab !== 'account'}>
           <section className="settings-account" aria-labelledby="settings-account-title">

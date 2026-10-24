@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/swarm-core", "crates/swarm-platform", "crates/swarm-ipc", "crates/swarm-adapter", "crates/swarm-runtime", "crates/swarm-cli", "crates/swarm-gui-host", "apps/desktop/src-tauri"]
+members = ["crates/swarm-core", "crates/swarm-platform", "crates/swarm-ipc", "crates/swarm-adapter", "crates/swarm-runtime", "crates/swarm-cli", "crates/swarm-gui-host", "crates/swarm-reports", "apps/desktop/src-tauri"]
 resolver = "2"
 
 [workspace.package]

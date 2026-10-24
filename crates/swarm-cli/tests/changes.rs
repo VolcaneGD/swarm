@@ -620,5 +620,5 @@ fn separate_runtime_process_serves_changes_wait_and_stops_cleanly_with_marker() 
         .get("full-stop")
         .unwrap()
         .expect("GUI stop marker remains after child exit");
-    assert!(marker.starts_with(b"1:"));
+    assert!(marker.starts_with(b"2:"));
 }

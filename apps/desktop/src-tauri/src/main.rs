@@ -28,6 +28,73 @@ struct AvailableUpdate {
 }
 
 struct InstallGuard<'a>(&'a AtomicBool);
+
+#[tauri::command]
+async fn gui_bug_report_status(
+    window: tauri::WebviewWindow,
+    host: State<'_, SharedHost>,
+) -> Result<Value, String> {
+    if window.label() != "main" {
+        return Err("Main window required".into());
+    }
+    let root = with_host(host.inner().clone(), |host| Ok(host.bug_report_root()))
+        .await
+        .map_err(|_| "Report host unavailable")?;
+    tauri::async_runtime::spawn_blocking(move || swarm_reports::status(&root))
+        .await
+        .map_err(|_| "Report storage unavailable")?
+        .map_err(str::to_owned)
+}
+#[tauri::command]
+async fn gui_bug_report_consent(
+    window: tauri::WebviewWindow,
+    host: State<'_, SharedHost>,
+    expected_account_id: String,
+    enabled: bool,
+) -> Result<Value, Fault> {
+    if window.label() != "main" {
+        return Err(host_unavailable());
+    }
+    with_host(host.inner().clone(), move |host| {
+        host.bug_report_consent(&expected_account_id, enabled)
+    })
+    .await
+}
+#[tauri::command]
+async fn gui_bug_report_submit(
+    window: tauri::WebviewWindow,
+    host: State<'_, SharedHost>,
+    mut report: swarm_reports::Report,
+) -> Result<Value, String> {
+    if window.label() != "main" {
+        return Err("Main window required".into());
+    }
+    let root = with_host(host.inner().clone(), |host| Ok(host.bug_report_root()))
+        .await
+        .map_err(|_| "Report host unavailable")?;
+    report.app_version = window.package_info().version.to_string();
+    report.reporter = "human".to_owned();
+    tauri::async_runtime::spawn_blocking(move || swarm_reports::submit(&root, report))
+        .await
+        .map_err(|_| "Report storage unavailable")?
+        .map_err(str::to_owned)
+}
+#[tauri::command]
+async fn gui_bug_report_retry(
+    window: tauri::WebviewWindow,
+    host: State<'_, SharedHost>,
+) -> Result<Value, String> {
+    if window.label() != "main" {
+        return Err("Main window required".into());
+    }
+    let root = with_host(host.inner().clone(), |host| Ok(host.bug_report_root()))
+        .await
+        .map_err(|_| "Report host unavailable")?;
+    tauri::async_runtime::spawn_blocking(move || swarm_reports::flush(&root))
+        .await
+        .map_err(|_| "Report storage unavailable")?
+        .map_err(str::to_owned)
+}
 impl Drop for InstallGuard<'_> {
     fn drop(&mut self) {
         self.0.store(false, Ordering::SeqCst);
@@ -748,6 +815,13 @@ fn default_data_root() -> Result<PathBuf, &'static str> {
 fn run() -> Result<(), &'static str> {
     let launch = launch::parse(std::env::args_os().skip(1), default_data_root()?)?;
     let state_root = launch.root;
+    let report_root = state_root.clone();
+    std::thread::spawn(move || {
+        loop {
+            let _ = swarm_reports::flush(&report_root);
+            std::thread::sleep(std::time::Duration::from_secs(60));
+        }
+    });
     if let Some(uri) = &launch.activation {
         let executable =
             std::env::current_exe().map_err(|_| "Swarm could not locate its GUI executable")?;
@@ -1007,6 +1081,10 @@ fn run() -> Result<(), &'static str> {
             gui_logout,
             gui_open_link,
             gui_check_update,
+            gui_bug_report_status,
+            gui_bug_report_consent,
+            gui_bug_report_submit,
+            gui_bug_report_retry,
             gui_install_update,
             gui_update_notes,
             gui_read,

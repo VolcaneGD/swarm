@@ -27,6 +27,12 @@ pub enum Command {
         data_dir: PathBuf,
         format: OutputFormat,
     },
+    BugReport {
+        data_dir: PathBuf,
+        format: OutputFormat,
+        action: String,
+        report_file: Option<PathBuf>,
+    },
     Request(RequestSpec),
 }
 
@@ -85,6 +91,7 @@ fn option_key(name: &str) -> Option<&'static str> {
         "--description" => Some("description"),
         "--body" => Some("body"),
         "--body-file" => Some("body-file"),
+        "--report-file" => Some("report-file"),
         "--stdin" => Some("stdin"),
         "--to" => Some("to"),
         "--limit" => Some("limit"),
@@ -456,6 +463,31 @@ fn parse_args_with_env<R: Read>(
         };
         return Ok(Command::RuntimeStatus { data_dir, format });
     }
+    if positionals[0] == "bug-report" {
+        let action = positionals[1];
+        let report_file = values
+            .remove("report-file")
+            .and_then(|v| v.as_str().map(PathBuf::from));
+        if !["submit", "status", "retry"].contains(&action)
+            || alias.is_some()
+            || !values.is_empty()
+            || body_source.is_some()
+            || context_seen
+            || request_id.is_some()
+            || (action == "submit") != report_file.is_some()
+        {
+            return Err(invalid_input());
+        }
+        return Ok(Command::BugReport {
+            data_dir: match data_dir {
+                Some(path) => path,
+                None => default_data_dir()?,
+            },
+            format,
+            action: action.into(),
+            report_file,
+        });
+    }
     let op = operation(positionals[0], positionals[1]).ok_or_else(invalid_input)?;
     if [
         "model-client",
@@ -697,13 +729,49 @@ fn parse_args_with_env<R: Read>(
 
 pub fn help_text() -> String {
     let base = format!(
-        "{}\nIdentity --local-model explicitly identifies local execution: an unknown model displays as ローカルモデル with unknown provenance. A reported/declared name takes precedence. OpenAI compatibility alone does not prove local execution.\n",
+        "{}\nBug reporting (no runtime/session needed): swarm --data-dir PATH --format json bug-report submit --report-file REPORT.json; bug-report status; bug-report retry. AI clients must report discovered Swarm bugs; see docs/BUG_REPORTING.md. Only the human Admin can change consent in the GUI.\n\nIdentity --local-model explicitly identifies local execution: an unknown model displays as ローカルモデル with unknown provenance. A reported/declared name takes precedence. OpenAI compatibility alone does not prove local execution.\n",
         usage()
     );
     format!(
         "{}\nIdentity start/resume/model can read one explicit local report with --model-client codex|claude-code|antigravity|openai-compatible|hermes-agent|openclaw|gemini-cli|opencode|cursor|copilot-cli --model-session-id ID --model-report-file PATH. Named harnesses accept their documented saved session/hook/export/event formats; see docs/MODEL_PROVENANCE.md. OpenClaw and OpenAI-compatible inputs require --model-project-root PATH; Hermes/Copilot require it if cwd is missing, and multi-workspace Antigravity requires it to select one workspace. Client reports take precedence over --model-name, which is fallback when no usable name is reported. No report means declared/unknown. Automatic provenance describes client-reported metadata, not verified backend identity. Reports must match the explicit selector and registered project path; no client discovery, launch or network access occurs.\n",
         base
     )
+}
+
+pub fn execute_bug_report(
+    root: &std::path::Path,
+    action: &str,
+    file: Option<&std::path::Path>,
+) -> Result<(String, Value), Fault> {
+    let error = |code: &'static str| {
+        fault(
+            code,
+            2,
+            "Bug report could not be processed; review schema, redaction, consent and local status",
+        )
+    };
+    let result = match action {
+        "submit" => {
+            let mut bytes = Vec::new();
+            std::fs::File::open(file.ok_or_else(invalid_input)?)
+                .map_err(|_| invalid_input())?
+                .take(16385)
+                .read_to_end(&mut bytes)
+                .map_err(|_| invalid_input())?;
+            if bytes.len() > 16384 {
+                return Err(error("REPORT_TOO_LARGE"));
+            }
+            let mut report: swarm_reports::Report =
+                serde_json::from_slice(&bytes).map_err(|_| invalid_input())?;
+            report.app_version = env!("CARGO_PKG_VERSION").to_owned();
+            swarm_reports::submit(root, report)
+        }
+        "status" => swarm_reports::status(root),
+        "retry" => swarm_reports::flush(root),
+        _ => return Err(invalid_input()),
+    }
+    .map_err(error)?;
+    Ok((format!("bug-report.{action}"), result))
 }
 
 pub fn execute(spec: RequestSpec) -> Result<(String, Value), Fault> {
@@ -1149,6 +1217,30 @@ mod tests {
             ],
             vec!["--data-dir", "d", "--name", "ignored", "runtime", "status"],
             vec!["--data-dir", "d", "runtime", "start"],
+        ] {
+            assert!(parse_args(&args(&invalid), &mut Cursor::new([])).is_err());
+        }
+    }
+
+    #[test]
+    fn bug_report_diagnostics_need_no_identity_and_reject_consent_changes() {
+        for action in ["status", "retry"] {
+            assert!(matches!(
+                parse_args_with_env(
+                    &args(&["--data-dir", "d", "--format", "json", "bug-report", action]),
+                    &mut Cursor::new([]),
+                    Some("unused-project"),
+                    Some("unused-session")
+                )
+                .unwrap(),
+                Command::BugReport { .. }
+            ));
+        }
+        for invalid in [
+            vec!["bug-report", "consent"],
+            vec!["bug-report", "submit"],
+            vec!["bug-report", "status", "--report-file", "x"],
+            vec!["bug-report", "retry", "--session", "other"],
         ] {
             assert!(parse_args(&args(&invalid), &mut Cursor::new([])).is_err());
         }

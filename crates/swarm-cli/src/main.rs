@@ -28,6 +28,29 @@ fn main() {
                 }
             }
         }
+        Ok(Command::BugReport {
+            data_dir,
+            format,
+            action,
+            report_file,
+        }) => match swarm_cli::execute_bug_report(&data_dir, &action, report_file.as_deref()) {
+            Ok((operation, data)) => {
+                if swarm_cli::emit_result(format, &operation, &data, &mut io::stdout().lock())
+                    .is_err()
+                {
+                    std::process::exit(8);
+                }
+            }
+            Err(error) => {
+                let _ = swarm_cli::emit_error(
+                    format,
+                    &error,
+                    &mut io::stdout().lock(),
+                    &mut io::stderr().lock(),
+                );
+                std::process::exit(error.exit_code);
+            }
+        },
         Ok(Command::Request(spec)) => {
             let format = spec.format;
             let result = swarm_cli::execute(spec);

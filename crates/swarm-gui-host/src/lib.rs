@@ -13,6 +13,7 @@ use swarm_platform::CredentialStore;
 use swarm_runtime::{gui::GuiClient, lifecycle};
 
 mod account_names;
+mod bug_reports;
 mod google;
 mod updates;
 pub use updates::{fetch_update_manifest, normalize_update_url};

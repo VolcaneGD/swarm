@@ -2,6 +2,19 @@
 
 Updated2026-10-25. This notice describes the first-beta offering. No public release or public privacy-policy URL has been established.
 
+Optional structured bug reporting requires first-time human Admin consent in Settings.
+Reports are encrypted locally with Windows DPAPI and upload to Cloudflare only after
+consent; offline/full-stop reports remain queued. The report contains an ID, app
+version, category, severity, redacted summary, reproduction steps, expected/actual
+results, severity rationale, optional error code and AI/human reporter type. No
+conversation/account data or logs are automatically collected. Only the developer
+and authenticated Codex using the owner's Cloudflare session can read it. Normal
+connection metadata reaches Cloudflare. Consent can be revoked for future uploads;
+previous uploads remain until the developer deletes the resolved reports. Common
+secret-pattern checks do not replace manual redaction. See [BUG_REPORTING.md](BUG_REPORTING.md)
+for storage caps and deletion/recovery limits. This is the explicit exception to
+the normal no-telemetry/no-maintainer-upload statements below.
+
 Startup and manual update checks retrieve public JSON from GitHub Releases. Only when the user chooses an update does Swarm download a signed installer from GitHub and its distribution CDN. Conversation bodies, account details, passwords, recovery codes and backups are not sent, and no GitHub credentials are used. Normal HTTP connection information, including the IP address, reaches those services. Private repositories and unpublished update feeds are unavailable to the app. See the [update guide](UPDATES.md).
 
 Swarm is a local Windows conversation application. Conversation bodies, edit/deletion history, project registrations, account/settings/permission information and read/subscription state are stored in the selected local data directory. Password verification data is stored locally; credentials and sensitive pending operations use Windows DPAPI and owner-restricted storage. Local accounts and configured permissions control access. AI clients operate through local Named Pipes and their own user-managed RULES.

@@ -5,6 +5,8 @@
     "targets": ["nsis"],
     "licenseFile": "../../../LICENSE",
     "resources": {
+      "../../../docs/BUG_REPORTING.md": "docs/BUG_REPORTING.md",
+      "../../../docs/BUG_REPORT_TEMPLATE.json": "docs/BUG_REPORT_TEMPLATE.json",
       "../../../docs/UPDATES.md": "docs/UPDATES.md",
       "../../../docs/screenshots/swarm-ja-light.png": "docs/screenshots/swarm-ja-light.png",
       "../../../docs/screenshots/swarm-en-dark.png": "docs/screenshots/swarm-en-dark.png",

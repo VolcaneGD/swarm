@@ -1058,3 +1058,12 @@ Distribution preparation update (2026-10-11): matching release x64 GUI/CLI/runti
 - Windows Named Pipe：[Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipes)、[アクセス制御](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipe-security-and-access-rights)。
 
 参照は技術構成の根拠。Swarm自身の実装・動作・性能の検証証拠ではない。
+# Optional structured defect reporting — 2026-10-25
+
+User-approved addition: AI clients must report discovered Swarm defects using the
+structured category/severity contract in docs/BUG_REPORTING.md. First-time human
+Admin consent enables automatic Cloudflare upload; before consent/offline/full-stop
+reports stay locally protected. Owner-authenticated developer tools provide private
+severity/category/status triage and revision-guarded deletion of resolved reports.
+No raw conversation/credential collection or automatic execution of report text.
+This opt-in exception supersedes no-external-service wording only for this feature.

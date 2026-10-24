@@ -17,6 +17,7 @@ swarm-ipc = { path = "../swarm-ipc" }
 swarm-platform = { path = "../swarm-platform" }
 swarm-runtime = { path = "../swarm-runtime" }
 uuid.workspace = true
+swarm-reports = { path = "../swarm-reports" }
 
 [dev-dependencies]
 rusqlite.workspace = true

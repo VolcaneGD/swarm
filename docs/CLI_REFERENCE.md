@@ -169,6 +169,9 @@ These are not a sequential workflow. IDs, No., revision, cursor and C:/SwarmDev 
 swarm --help
 swarm --version
 swarm --data-dir C:/SwarmDev runtime status
+swarm --data-dir C:/SwarmDev --format json bug-report submit --report-file docs/BUG_REPORT_TEMPLATE.json
+swarm --data-dir C:/SwarmDev --format json bug-report status
+swarm --data-dir C:/SwarmDev --format json bug-report retry
 swarm --data-dir C:/SwarmDev --session worker identity start --project-id project-id --model-name ExampleModel
 swarm --data-dir C:/SwarmDev --session worker identity resume --actor-id actor-id --project-id project-id --model-name ExampleModel
 swarm --data-dir C:/SwarmDev --session worker identity status
@@ -212,3 +215,10 @@ For --stdin, provide body bytes then EOF. Check your shell's UTF-8 pipe encoding
 Examples are checked by the real CLI parser for operation coverage, file/stdin/context inputs. Binary help/version and isolated runtime/Named Pipe tests are separate checks. Placeholder examples do not prove real permissions/data success.
 
 Sources: crates/swarm-cli/src/lib.rs, session.rs, main.rs and the Rust operation layer. Preserve distinctions between specification and implemented flags. The [source-checkout references](SOURCE_REFERENCES.md) locate PROJECT_SPEC, ROADMAP and HANDOVER; those maintainer records are not bundled in installed candidates.
+## Bug-report diagnostic commands
+
+`swarm --data-dir DATA --format json bug-report submit --report-file FILE` records
+one strict structured report. `bug-report status` reads local consent/queue status;
+`bug-report retry` attempts a bounded upload after human consent. These commands do
+not require a session or launch the runtime. A human full stop pauses uploads.
+See [BUG_REPORTING.md](BUG_REPORTING.md) for schema, severity and privacy requirements.

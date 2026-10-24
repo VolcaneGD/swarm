@@ -20,6 +20,7 @@ url.workspace = true
 swarm-core = { path = "../swarm-core" }
 swarm-platform = { path = "../swarm-platform" }
 swarm-runtime = { path = "../swarm-runtime" }
+swarm-reports = { path = "../swarm-reports" }
 
 [dev-dependencies]
 tempfile.workspace = true

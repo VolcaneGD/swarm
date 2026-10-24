@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "report_id": "00000000-0000-4000-8000-000000000000",
+  "app_version": "0.1.0",
+  "category": "gui",
+  "severity": "medium",
+  "summary": "Replace with a concise redacted defect summary",
+  "steps": ["Replace with a synthetic reproducible step"],
+  "expected": "Describe the documented expected result",
+  "actual": "Describe only the observed result, using synthetic examples",
+  "severity_reason": "Explain impact and any available workaround",
+  "error_code": "",
+  "reporter": "ai",
+  "redacted": true,
+  "consent_version": 1
+}

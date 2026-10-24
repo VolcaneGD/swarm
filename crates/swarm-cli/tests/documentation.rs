@@ -73,6 +73,9 @@ fn reference_examples_parse_and_cover_every_public_command() {
             Command::RuntimeStatus { .. } => {
                 operations.insert("runtime.status".to_owned());
             }
+            Command::BugReport { action, .. } => {
+                operations.insert(format!("bug-report.{action}"));
+            }
             Command::Request(spec) => {
                 operations.insert(spec.operation.clone());
                 if spec.operation == "search" {
@@ -94,6 +97,9 @@ fn reference_examples_parse_and_cover_every_public_command() {
         }
     }
     let mut expected = BTreeSet::from(["help".to_owned(), "version".to_owned()]);
+    for action in ["submit", "status", "retry"] {
+        expected.insert(format!("bug-report.{action}"));
+    }
     for line in swarm_cli::help_text()
         .lines()
         .filter(|line| line.starts_with("  "))

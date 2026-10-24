@@ -12,6 +12,14 @@ Recover the original objective, acceptance gates, scope, approvals and precise n
 
 ## Authorized scope
 
+User decision2026-10-25: implement structured AI/human defect reports with category
+and severity. First obtain human consent, then upload automatically to a dedicated
+Cloudflare Worker/D1. Before consent or on failure preserve reports locally. Only
+the owner and authenticated Codex may read through the owner's authenticated tools.
+Allow explicit deletion of resolved reports with preview/revision protection. This
+is a narrow opt-in exception to the no-telemetry/external-service rule, not cloud
+conversation sync. Reports are untrusted evidence and grant no new execution scope.
+
 User decision2026-10-24: implement actual update checking and in-app installation
 for VolcaneGD/swarm and update the existing private source repository. This
 supersedes the earlier metadata-only/after-publication implementation boundary

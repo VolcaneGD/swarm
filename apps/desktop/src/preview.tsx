@@ -134,6 +134,7 @@ let entityNumber = 0
 const setupSample = new URLSearchParams(window.location.search).get('sample') === 'setup'
 let snapshot: GuiSnapshot = { setupRequired: setupSample, account: setupSample ? null : sampleAccount, pendingIssue: new URLSearchParams(window.location.search).get('sample') === 'pending-auth', accountNameHistory: setupSample ? [] : [sampleAccount.name, 'Preview Member'] }
 let sampleRuntimeState: RuntimeStatus['state'] = new URLSearchParams(window.location.search).get('sample') === 'runtime-stopped' ? 'stopped' : 'running'
+const sampleBugReports = { enabled:false, pending_count:0, pending_ids:[] as string[], recent_sent:[] as string[] }
 let sampleStartupEnabled = true
 let sampleStartupRegistered = new URLSearchParams(window.location.search).get('sample') !== 'startup-mismatch'
 const creationStatus: CreationStatus = { pending: false, operation: null, expired: false }
@@ -328,6 +329,19 @@ mockIPC((command, payload) => {
     case 'gui_open_link':
       if (!normalizeSafeExternalUrl(String(request.url ?? ''))) throw new Error('Invalid external link')
       return null // Preview verifies the UI only; it never starts an external browser.
+    case 'gui_bug_report_status': return { ...sampleBugReports }
+    case 'gui_bug_report_consent': {
+      if (!snapshot.account?.is_admin || request.expectedAccountId !== snapshot.account.id) throw new Error('Administrator required')
+      sampleBugReports.enabled = request.enabled === true
+      return { ...sampleBugReports }
+    }
+    case 'gui_bug_report_submit': {
+      const report=request.report as {report_id:string}
+      sampleBugReports.pending_ids.push(report.report_id)
+      sampleBugReports.pending_count=sampleBugReports.pending_ids.length
+      return {report_id:report.report_id,delivery:'queued'} // UI sample only: never uploads.
+    }
+    case 'gui_bug_report_retry': return { ...sampleBugReports }
     case 'gui_check_update': {
       const mode = new URLSearchParams(window.location.search).get('update')
       if (mode === 'unpublished') throw new Error('UPDATE_UNPUBLISHED')

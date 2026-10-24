@@ -2009,8 +2009,8 @@
     },
     {
       "path": "docs/PUBLICATION_READINESS.md",
-      "bytes": 16489,
-      "sha256": "71c0d380782681f667564d77cc6433e3ac3775d37567044b468febb845c78189"
+      "bytes": 17440,
+      "sha256": "c212331358eecc4e3186411843770f98c1cfb287f338fc9528eab13bdf9cea9b"
     },
     {
       "path": "docs/QUICKSTART.en.md",
@@ -2029,8 +2029,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 204103,
-      "sha256": "d25cf1215cf87a5c73fcd837a615bad21f6c4cb627f9e4dadad1e6f8245e4389"
+      "bytes": 204563,
+      "sha256": "96b1c100770d9f2f61e8f8fc6485919c5c4b16bc7202dc33163590ef832e0be6"
     },
     {
       "path": "docs/RULES_GUIDE.md",

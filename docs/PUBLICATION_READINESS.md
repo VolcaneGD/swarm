@@ -1,4 +1,19 @@
-# Current minimum-beta publication decision — 2026-10-24 21:46 JST
+# Public beta published — 2026-10-25
+
+The user explicitly authorized publication. Repository VolcaneGD/swarm is public;
+v0.1.0 is published from072ce1cfa055844ab5ef57d1caf7cf89b46197a8 with the installer,
+version-bound signature, latest.json and SHA256SUMS.txt. Anonymous downloads match
+local bytes and the updater verifier accepts this exact package/rejects mutation.
+Installer SHA256c7d2c4f522827b10a04e9549be1a1a56988b27e69dd51160658088e437d40a71.
+
+The [live distribution page](https://volcane.pages.dev/swarm) and homepage
+announcement are deployed from portfolio commit8c60d2733bcd836ce01b223901d937c1ff4f92fd.
+HTTP/content/assets and browser1280/390width checks passed. Product limitations are
+disclosed in the Release/page. This does not close full formal363/17/380/PASS0,
+512MiB, excluded-client, native installation/update/OS or other held acceptance.
+Earlier publication-wait wording below is historical for this completed first beta.
+
+## Previous minimum-beta publication decision — 2026-10-24 21:46 JST
 
 **READY_FOR_BETA_PUBLICATION_APPROVAL: technical beta blockers0.** The user selected
 Google unavailable for the first beta. M3 GUI/execution refusal and M5 matching

@@ -2,6 +2,7 @@
 
 <!-- acceptance-status: checked=363 open=17 total=380 -->
 <!-- acceptance-current:start -->
+2026-10-25：ユーザーの明示指示でPublicへ変更し、Swarm0.1.0初回βをGitHub Release・https://volcane.pages.dev/swarm へ公開完了。署名・チェックサム・実公開ダウンロード・公開更新feed・本番ページ／新着／画像を確認。これまでの公開待ちはこの配布について解消。512MiB・除外client・危険検査・正式363/17/380/PASS0は変更せず、完了済みVM検査を反復しない。
 2026-10-25追加機能：初回Admin同意後のCloudflare不具合報告、AIの報告義務・構造化書式、種類／深刻度選択、認証済み開発者用の絞り込みと対応済み削除を実装。実Cloudflareの架空報告で受信・非公開閲覧・深刻度変更・revision保護・削除まで確認。端末内DPAPI待ち行列と完全停止時の送信抑止を検査。正式363/17/380・PASS0は変更せず、旧VM・保留検査を反復しない。詳細は[不具合報告ガイド](BUG_REPORTING.md)。
 2026-10-24 21:46JST：初回βのGoogle非提供をGUI・core／host実行経路で実装し、通常password／復旧code／backup維持、日英・狭幅preview、実配布runtime smokeとmatching release／NSIS生成を確認。M3／M5完了、β技術blocker0・公開指示待ち。最終証拠 (maintainer-only record omitted from this review export)。用途集は現機能80例／11分類＋実践3例・明示future16案、README導線・配布収録まで完了。正式363/17/380・PASS0は全体／保留／公開後として保持し、公開前残数と混ぜない。公開・512MiB等の保留は維持。
 2026-10-24追加依頼：ユーザーは初回βのGoogle連携／復旧をGUI・実行経路とも無効化し、通常password／復旧code／backupを維持する案を選択した。M3の選択待ちは解消し、実装・拒否／通常認証回帰・画面確認・matching最終候補作成までを現在の実行範囲とする。さらにGitHub公開時の用途紹介を充実する依頼を受領。docs/USE_CASES.en.mdを現機能の具体例中心に拡充し、README導線と配布資料への収録を確認する。公開そのものは未承認。

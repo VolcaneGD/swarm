@@ -2,7 +2,11 @@ Var SwarmUninstallHelperTemp
 Var SwarmUninstallHelperDirectory
 !define SWARM_INSTALLER_HELPER "${__FILEDIR__}\..\..\..\scripts\installer_path.ps1"
 !macro SWARM_RUN_GUARD helperPath
-  ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${helperPath}" -Action GuardRunning -InstallDirectory "$INSTDIR"' $0
+  ${If} $UpdateMode = 1
+    ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${helperPath}" -Action GuardRunning -InstallDirectory "$INSTDIR" -WaitSeconds 30' $0
+  ${Else}
+    ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${helperPath}" -Action GuardRunning -InstallDirectory "$INSTDIR"' $0
+  ${EndIf}
   ${If} $0 != 0
     MessageBox MB_ICONEXCLAMATION|MB_OK "Close Swarm and its background runtime before continuing, then run the installer again. $\r$\n$\r$\nSwarm本体とバックグラウンドRuntimeを終了してから、インストーラーを再実行してください。プロセスは停止していません。"
     Abort

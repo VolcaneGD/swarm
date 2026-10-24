@@ -1,7 +1,8 @@
 param(
     [ValidateSet('PlanOnly', 'AddPath', 'RemovePath', 'GuardRunning')]
     [string] $Action = 'PlanOnly',
-    [string] $InstallDirectory
+    [string] $InstallDirectory,
+    [ValidateRange(0, 60)][int] $WaitSeconds = 0
 )
 
 Set-StrictMode -Version Latest
@@ -353,6 +354,12 @@ function Invoke-SwarmInstallerAction {
         }
         'GuardRunning' {
             if ([string]::IsNullOrWhiteSpace($SelectedInstallDirectory)) { throw 'InstallDirectory is required.' }
+            # The native updater launches NSIS immediately before its own exit.
+            # Wait for a normal exit/drain; never kill the GUI, CLI or runtime.
+            $deadline = [DateTime]::UtcNow.AddSeconds($WaitSeconds)
+            while ($WaitSeconds -gt 0 -and @(Get-SwarmBlockingProcesses $SelectedInstallDirectory).Count -gt 0 -and [DateTime]::UtcNow -lt $deadline) {
+                Start-Sleep -Milliseconds 200
+            }
             if (@(Get-SwarmBlockingProcesses $SelectedInstallDirectory).Count -gt 0) { return 23 }
             return 0
         }

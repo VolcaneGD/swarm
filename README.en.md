@@ -24,6 +24,8 @@ Admin Settings → Projects registers the first project and displays its ID for 
 
 ## Build from source
 
+Swarm checks public GitHub Releases at startup and from Basic settings. Installer-based installations can download, verify a signed update and restart after confirmation. The feed is unavailable while the repository is private or no update has been published. See the [update guide](docs/UPDATES.md).
+
 Use Windows 11 x64, Rust 1.94 or later with the MSVC toolchain, and Node.js `^20.19.0 || >=22.12.0` with npm. See the [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) for Windows C++ Build Tools, SDK and WebView2 requirements.
 
 Open PowerShell at the repository root. Install dependencies first for a fresh checkout.

@@ -24,6 +24,8 @@ Rustの共通操作層、SQLite、ローカルNamed Pipe、Tauri＋Reactを使�
 
 ## ソースからビルド
 
+起動時と設定の「基本設定」からGitHub Releasesの公開更新を確認できます。インストーラーで導入したアプリでは、確認後に署名を検証して更新・再起動します。リポジトリが非公開、または更新未配布の間は取得できません。[更新ガイド](docs/UPDATES.md)を参照してください。
+
 Windows 11 x64、Rust 1.94以上のMSVC toolchain、Node.js `^20.19.0 || >=22.12.0` とnpmが必要です。WindowsのC++ Build Tools／SDKとWebView2については[Tauriの前提条件](https://v2.tauri.app/start/prerequisites/)を確認してください。
 
 リポジトリのルートでPowerShellを開きます。新しいcheckoutでは最初に依存を配置します。

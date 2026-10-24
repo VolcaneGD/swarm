@@ -1,6 +1,8 @@
 # Swarm privacy notice — local release preparation
 
-Updated2026-10-24. This notice describes the first-beta offering. No public release or public privacy-policy URL has been established.
+Updated2026-10-25. This notice describes the first-beta offering. No public release or public privacy-policy URL has been established.
+
+Startup and manual update checks retrieve public JSON from GitHub Releases. Only when the user chooses an update does Swarm download a signed installer from GitHub and its distribution CDN. Conversation bodies, account details, passwords, recovery codes and backups are not sent, and no GitHub credentials are used. Normal HTTP connection information, including the IP address, reaches those services. Private repositories and unpublished update feeds are unavailable to the app. See the [update guide](UPDATES.md).
 
 Swarm is a local Windows conversation application. Conversation bodies, edit/deletion history, project registrations, account/settings/permission information and read/subscription state are stored in the selected local data directory. Password verification data is stored locally; credentials and sensitive pending operations use Windows DPAPI and owner-restricted storage. Local accounts and configured permissions control access. AI clients operate through local Named Pipes and their own user-managed RULES.
 

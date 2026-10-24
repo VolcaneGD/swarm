@@ -2,11 +2,11 @@
   "schema_version": 1,
   "release_approved": false,
   "lock_hashes": {
-    "cargo": "be694767028dd8382e192b22c2bd5eec2373cd2bf3167d1f12ad6a95c0fa276c",
+    "cargo": "0448ec157d873e35e0e874bd477574a267d1e74ae5da3bae0e7a3650b6cbe8c5",
     "npm": "3ac3be3ea8252774a5f9869b27346ff840caff8e036958ac4309d93b37df3edf"
   },
   "notice_index_sha256": "df17b7c52cd23063d42e1fc60e333a0bf8ce85706c2b380972f7adedc632df3a",
-  "notice_files": 813,
+  "notice_files": 824,
   "license_policy": "Retain all collected license/NOTICE/copyright texts, including OR/slash alternatives; no branch text removed.",
   "packages": [
     {
@@ -6406,6 +6406,76 @@
         "MIT"
       ],
       "scope": "conservative normal/build or installed npm superset"
+    },
+    {
+      "ecosystem": "cargo",
+      "name": "minisign-verify",
+      "version": "0.3.0",
+      "declared_license": "MIT",
+      "license_terms_retained": [
+        "MIT"
+      ],
+      "scope": "conservative normal/build notice addition",
+      "notice_files": 1
+    },
+    {
+      "ecosystem": "cargo",
+      "name": "reqwest",
+      "version": "0.13.5",
+      "declared_license": "MIT OR Apache-2.0",
+      "license_terms_retained": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "scope": "conservative normal/build notice addition",
+      "notice_files": 2
+    },
+    {
+      "ecosystem": "cargo",
+      "name": "rustls-platform-verifier",
+      "version": "0.7.1",
+      "declared_license": "MIT OR Apache-2.0",
+      "license_terms_retained": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "scope": "conservative normal/build notice addition",
+      "notice_files": 2
+    },
+    {
+      "ecosystem": "cargo",
+      "name": "tauri-plugin-updater",
+      "version": "2.14.0",
+      "declared_license": "Apache-2.0 OR MIT",
+      "license_terms_retained": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "scope": "conservative normal/build notice addition",
+      "notice_files": 3
+    },
+    {
+      "ecosystem": "cargo",
+      "name": "tempfile",
+      "version": "3.27.0",
+      "declared_license": "MIT OR Apache-2.0",
+      "license_terms_retained": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "scope": "conservative normal/build notice addition",
+      "notice_files": 2
+    },
+    {
+      "ecosystem": "cargo",
+      "name": "tokio-util",
+      "version": "0.7.19",
+      "declared_license": "MIT",
+      "license_terms_retained": [
+        "MIT"
+      ],
+      "scope": "conservative normal/build notice addition",
+      "notice_files": 1
     }
   ],
   "covered_sources": [
@@ -6564,8 +6634,8 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.txt",
-      "bytes": 3560656,
-      "sha256": "c61da7084590f36db047b213374d8e6d78862d3429328e1929f48febe2375051"
+      "bytes": 3613008,
+      "sha256": "2531784b74e2d55e320ba48064b6e9b52d7cd5e6f90ff1b424fc90931386d548"
     },
     {
       "path": "cssparser-0.37.0.crate",
@@ -6591,6 +6661,83 @@
       "path": "selectors-0.38.0.crate",
       "bytes": 69601,
       "sha256": "8adfa1c298912827b8a28b223b3b874357397ae706e6190acd9bf28cee99114d"
+    }
+  ],
+  "supplemental_reviews": [
+    {
+      "previous_manifest_sha256": "b8b6e6c9af4576e4003544558e94a13fcbb3923611a121b72a6f71ef50494349",
+      "additions": [
+        {
+          "ecosystem": "cargo",
+          "name": "minisign-verify",
+          "version": "0.3.0",
+          "declared_license": "MIT",
+          "license_terms_retained": [
+            "MIT"
+          ],
+          "scope": "conservative normal/build notice addition",
+          "notice_files": 1
+        },
+        {
+          "ecosystem": "cargo",
+          "name": "reqwest",
+          "version": "0.13.5",
+          "declared_license": "MIT OR Apache-2.0",
+          "license_terms_retained": [
+            "Apache-2.0",
+            "MIT"
+          ],
+          "scope": "conservative normal/build notice addition",
+          "notice_files": 2
+        },
+        {
+          "ecosystem": "cargo",
+          "name": "rustls-platform-verifier",
+          "version": "0.7.1",
+          "declared_license": "MIT OR Apache-2.0",
+          "license_terms_retained": [
+            "Apache-2.0",
+            "MIT"
+          ],
+          "scope": "conservative normal/build notice addition",
+          "notice_files": 2
+        },
+        {
+          "ecosystem": "cargo",
+          "name": "tauri-plugin-updater",
+          "version": "2.14.0",
+          "declared_license": "Apache-2.0 OR MIT",
+          "license_terms_retained": [
+            "Apache-2.0",
+            "MIT"
+          ],
+          "scope": "conservative normal/build notice addition",
+          "notice_files": 3
+        },
+        {
+          "ecosystem": "cargo",
+          "name": "tempfile",
+          "version": "3.27.0",
+          "declared_license": "MIT OR Apache-2.0",
+          "license_terms_retained": [
+            "Apache-2.0",
+            "MIT"
+          ],
+          "scope": "conservative normal/build notice addition",
+          "notice_files": 2
+        },
+        {
+          "ecosystem": "cargo",
+          "name": "tokio-util",
+          "version": "0.7.19",
+          "declared_license": "MIT",
+          "license_terms_retained": [
+            "MIT"
+          ],
+          "scope": "conservative normal/build notice addition",
+          "notice_files": 1
+        }
+      ]
     }
   ]
 }

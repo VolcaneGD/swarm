@@ -1,5 +1,6 @@
+// @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { flushRegisteredPreferences, installNativeClosePreferenceListener, registerPreferenceFlush } from './nativeClosePreferences'
+import { flushRegisteredPreferences, installNativeClosePreferenceListener, registerPreferenceFlush, registerUpdateBlocker, releaseUpdateInputLock } from './nativeClosePreferences'
 
 const { invokeMock, listenMock } = vi.hoisted(() => ({ invokeMock: vi.fn(), listenMock: vi.fn() }))
 vi.mock('@tauri-apps/api/core', () => ({ invoke: invokeMock }))
@@ -10,9 +11,35 @@ afterEach(() => {
   unregister.forEach((remove) => remove())
   unregister = []
   vi.clearAllMocks()
+  releaseUpdateInputLock()
 })
 
 describe('native close preference handshake', () => {
+  it('rechecks drafts after downloading and refuses update preparation without freezing input', async () => {
+    unregister.push(registerUpdateBlocker(() => true))
+    let handler!: (event: { payload: { request_id: number; reason?: 'update' } }) => Promise<void>
+    listenMock.mockImplementation(async (_event: string, callback: typeof handler) => { handler = callback; return vi.fn() })
+    const stop = await installNativeClosePreferenceListener(true)
+    await handler({ payload: { request_id: 45, reason: 'update' } })
+    expect(invokeMock).toHaveBeenCalledWith('gui_close_ready', { requestId: 45, success: false })
+    expect(document.body.inert).toBe(false)
+    stop()
+  })
+
+  it('freezes further input only after saves and releases it when a late acknowledgement is rejected', async () => {
+    let handler!: (event: { payload: { request_id: number; reason?: 'update' } }) => Promise<void>
+    listenMock.mockImplementation(async (_event: string, callback: typeof handler) => { handler = callback; return vi.fn() })
+    unregister.push(registerPreferenceFlush(async () => { expect(document.body.inert).toBe(false) }))
+    const stop = await installNativeClosePreferenceListener(true)
+    invokeMock.mockImplementationOnce(async () => { expect(document.body.inert).toBe(true); return true })
+    await handler({ payload: { request_id: 46, reason: 'update' } })
+    expect(document.body.inert).toBe(true)
+    releaseUpdateInputLock()
+    invokeMock.mockResolvedValueOnce(false)
+    await handler({ payload: { request_id: 47, reason: 'update' } })
+    expect(document.body.inert).toBe(false)
+    stop()
+  })
   it('does not register a native event listener outside the desktop host', async () => {
     const stop = await installNativeClosePreferenceListener(false)
     stop()

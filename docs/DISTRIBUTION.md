@@ -1,5 +1,13 @@
 # Swarm distribution readiness
 
+2026-10-24: the repository is privately staged at VolcaneGD/swarm. Real update
+checking and signed native installation are implemented; see [UPDATES](UPDATES.md)
+for the fixed GitHub feed, version-bound signing and asset preparation command.
+The current notice bundle adds11MIT/Apache texts for6updated/new dependencies;
+the five existing MPL source archives are unchanged. Source updates do not
+authorize public visibility, release uploads or portfolio deployment. Historical
+candidate counts and hashes below apply to their dated builds.
+
 This English maintainer guide records preparation and scoped local installer evidence, not a published release or full installer acceptance. The project declares MIT and now includes [LICENSE](../LICENSE). Contributor attribution does not establish rights to third-party dependencies/assets; review those separately.
 
 Public release/distribution is explicitly held until the user says「公開してください」. Local source preparation and isolated verification do not authorize publication.

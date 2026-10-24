@@ -40,6 +40,8 @@ def classify(relative):
         return "hidden-or-agent-local"
     if len(parts) == 1 and relative.name in ROOT_FILES:
         return None
+    if relative.as_posix() in {"docs/screenshots/swarm-ja-light.png", "docs/screenshots/swarm-en-dark.png"}:
+        return None
     if parts[0] == "docs" and len(parts) == 2 and relative.suffix == ".md":
         return "session-history" if relative.name in PRIVATE_DOCS else None
     if parts[0] in SOURCE_ROOTS and relative.suffix in SOURCE_SUFFIXES:

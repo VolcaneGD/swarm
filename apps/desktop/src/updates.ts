@@ -5,17 +5,29 @@ export type AvailableUpdate = { version: string }
 export type UpdateNotes = { version: string; notes: string }
 let startupCheck: Promise<AvailableUpdate | null> | undefined
 let startupNotes: Promise<UpdateNotes | null> | undefined
+let latestUpdate: AvailableUpdate | null = null
+let checkSequence = 0
+const updateListeners = new Set<(update: AvailableUpdate | null) => void>()
+
+export async function checkForUpdates(): Promise<AvailableUpdate | null> {
+  const sequence = ++checkSequence
+  const value = await invoke<AvailableUpdate | null>('gui_check_update')
+  if (value !== null && (!value || typeof value.version !== 'string')) throw new Error('Invalid update response')
+  if (sequence === checkSequence) {
+    latestUpdate = value
+    for (const listener of updateListeners) listener(value)
+  }
+  return value
+}
 
 export function useStartupUpdate() {
-  const [update, setUpdate] = useState<AvailableUpdate | null>(null)
+  const [update, setUpdate] = useState<AvailableUpdate | null>(latestUpdate)
   useEffect(() => {
-    let active = true
-    // One check per window lifetime, including StrictMode and account changes.
-    startupCheck ??= invoke<AvailableUpdate | null>('gui_check_update').catch(() => null)
-    void startupCheck.then(value => {
-      if (active && value && typeof value.version === 'string') setUpdate(value)
-    })
-    return () => { active = false }
+    updateListeners.add(setUpdate)
+    setUpdate(latestUpdate)
+    // One automatic check per window; human-requested checks are independent.
+    startupCheck ??= checkForUpdates().catch(() => null)
+    return () => { updateListeners.delete(setUpdate) }
   }, [])
   return update
 }
@@ -38,8 +50,4 @@ export function useUpdateNotes() {
     return () => { active = false }
   }, [])
   return notes
-}
-
-export function restartAfterUpdate(): Promise<void> {
-  return invoke('gui_restart_after_update')
 }

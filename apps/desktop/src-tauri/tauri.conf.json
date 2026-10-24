@@ -24,6 +24,14 @@
       "csp": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost ws://127.0.0.1:5173"
     }
   },
+  "plugins": {
+    "updater": {
+      "endpoints": ["https://github.com/VolcaneGD/swarm/releases/latest/download/latest.json"],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDA5QUM4Q0YxMDZCQkM0NzIKUldSeXhMc0c4WXlzQ1Ntbnkxc2w3eXdIL24vM29adVFXZU9zTVYvL1NsTjFjaTVPaldjY3RLR2EK",
+      "requireSignedVersion": true,
+      "windows": { "installMode": "passive" }
+    }
+  },
   "bundle": {
     "active": false,
     "icon": [

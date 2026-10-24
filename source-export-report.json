@@ -34,18 +34,18 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 178,
-      "sha256": "8367ced913953e06b3f67b32b0de0eb34a1c4aa6a4cf253900b4421812dd2afe"
+      "bytes": 281,
+      "sha256": "ebf768d46930a84d4c92dc5bc25eedca88920cc936662c9f31fba043240f54e0"
     },
     {
       "path": "AGENT.md",
-      "bytes": 21355,
-      "sha256": "643c79e9303627caedd3a99b42da4a25257f6a530e5d01b3d3bb82ea5c12909c"
+      "bytes": 22718,
+      "sha256": "9c147ccd82f58697227413ba1958b527da0f13b054b4bb4e649cff4c84062d6f"
     },
     {
       "path": "Cargo.lock",
-      "bytes": 137103,
-      "sha256": "be694767028dd8382e192b22c2bd5eec2373cd2bf3167d1f12ad6a95c0fa276c"
+      "bytes": 142439,
+      "sha256": "0448ec157d873e35e0e874bd477574a267d1e74ae5da3bae0e7a3650b6cbe8c5"
     },
     {
       "path": "Cargo.toml",
@@ -64,13 +64,13 @@
     },
     {
       "path": "README.en.md",
-      "bytes": 4209,
-      "sha256": "08c8a388dc80faa2fcde7290044c661ed8ce46bd3a3f88f3ec83fdf3208c8169"
+      "bytes": 4511,
+      "sha256": "9798c0a79dfb4b9a50a56af1f72ce960cad15da418e3b5b78e9e845710adcbe9"
     },
     {
       "path": "README.md",
-      "bytes": 4561,
-      "sha256": "7e6d1036c1162076914b5058056f1264e8fe516d181593fa7c9977b066052e59"
+      "bytes": 4930,
+      "sha256": "d104d96bbae7730e55cdbd175d8290d055a1f002fafa2e53a1669938b79161e4"
     },
     {
       "path": "apps/desktop/index.html",
@@ -99,8 +99,8 @@
     },
     {
       "path": "apps/desktop/src-tauri/Cargo.toml",
-      "bytes": 514,
-      "sha256": "1d44ba0f780e6c4f6322aa631dbe7655031699dc1f9effa0817800f6a0b0b640"
+      "bytes": 707,
+      "sha256": "e2006b776e64253bef196233b155225e4c65fa471e0e0e7c36ec089826b9863a"
     },
     {
       "path": "apps/desktop/src-tauri/build.rs",
@@ -359,8 +359,8 @@
     },
     {
       "path": "apps/desktop/src-tauri/installer_hooks.nsh",
-      "bytes": 4359,
-      "sha256": "8047d4b355ab6e2a54f5f24abddf0e02b041a173c6e3da119b098416726e43c9"
+      "bytes": 4619,
+      "sha256": "b0f3ecf83bbb208cdc3f15eb862641cd8250247e3b4f0bdff81b431d9f0c0d8e"
     },
     {
       "path": "apps/desktop/src-tauri/src/launch.rs",
@@ -374,13 +374,13 @@
     },
     {
       "path": "apps/desktop/src-tauri/src/main.rs",
-      "bytes": 33784,
-      "sha256": "3c733efe0238a1baa47e4567f4e259a3d79b92bb257c41c0cbef63198398a6f8"
+      "bytes": 38010,
+      "sha256": "bc54ede9407e957b0b342738484affff0a072fc7c2414b17161490af26711876"
     },
     {
       "path": "apps/desktop/src-tauri/src/updates.rs",
-      "bytes": 2630,
-      "sha256": "65fa2d19bac5a174d9a41088594f5e955e89f275aa321b422ce6c13a73796746"
+      "bytes": 8905,
+      "sha256": "db433b88c8b3dbf589e82ae30dbd9723bc206714dc6fcdd564e6a6f3b98f1099"
     },
     {
       "path": "apps/desktop/src-tauri/src/window_state.rs",
@@ -389,13 +389,13 @@
     },
     {
       "path": "apps/desktop/src-tauri/tauri.conf.json",
-      "bytes": 812,
-      "sha256": "1fec4c4eae1dc85aa145f51d27ae220e39de2addeb6f10914884c4bcd857a47a"
+      "bytes": 1205,
+      "sha256": "9656c1d8080a5ef530d3f374bb99a0bb634e9a426e028ae170975e519516e67f"
     },
     {
       "path": "apps/desktop/src-tauri/tauri.distribution.conf.json",
-      "bytes": 3127,
-      "sha256": "a1027921baf80d5a9ff4bd63fb3e6a45919f569ff356ca750d7f863b3ec4dfd9"
+      "bytes": 3364,
+      "sha256": "ed82af2513d5d2831026519d33a1b8865e8fd8de541951c5140cc95ab6c80b20"
     },
     {
       "path": "apps/desktop/src/AccountAccess.test.tsx",
@@ -434,8 +434,8 @@
     },
     {
       "path": "apps/desktop/src/App.tsx",
-      "bytes": 59877,
-      "sha256": "ff2b0bf9f80f0a35848c980a310e7543c22adb90902dffd64ff4f8b3db6dc4e4"
+      "bytes": 59972,
+      "sha256": "6acaf18e747851cbd60c0d15fb0c93b0fa0fb0b287e96137482a37841c6306b9"
     },
     {
       "path": "apps/desktop/src/AuthorizationManagement.test.tsx",
@@ -604,13 +604,13 @@
     },
     {
       "path": "apps/desktop/src/UpdateNotice.test.tsx",
-      "bytes": 2965,
-      "sha256": "3cd9ee5d1813588a4bc3aa4d4d02d7e07b601b06944072bb046d3961c571daae"
+      "bytes": 3958,
+      "sha256": "eece066c6cc7fa9bcaf5bc78ac546c6372d39e740695f74f785e1fc12cee9c6a"
     },
     {
       "path": "apps/desktop/src/UpdateNotice.tsx",
-      "bytes": 3301,
-      "sha256": "8c6a380eb064dfb00817e3dbb2e501ccbc477f2d6eb7090a1362364f609a92d3"
+      "bytes": 5050,
+      "sha256": "5c51f1574874396e48083e92daf272f7d73d6408c9ae496ee10f5f344874cf55"
     },
     {
       "path": "apps/desktop/src/UpdateReleaseNotes.test.tsx",
@@ -623,14 +623,24 @@
       "sha256": "520da3bc81454e32c6ceb9a614cf634bbd96af52c3dc6545ab8a71c4a6b9b3dc"
     },
     {
+      "path": "apps/desktop/src/UpdateSettings.test.tsx",
+      "bytes": 1827,
+      "sha256": "38a83f6c8a44ba742f182cc23712bc905368612cb96226351c27f2c43bfb19c4"
+    },
+    {
+      "path": "apps/desktop/src/UpdateSettings.tsx",
+      "bytes": 2036,
+      "sha256": "7700c1631218024de5130b5852cd5fc366b93e9c900a926d20549fb87b2487b4"
+    },
+    {
       "path": "apps/desktop/src/Workspace.test.tsx",
       "bytes": 215775,
       "sha256": "8cbe53c867dc614f5755b062100bc2740ab0ef92c85d69ecc9d75e5275a450af"
     },
     {
       "path": "apps/desktop/src/Workspace.tsx",
-      "bytes": 218092,
-      "sha256": "6c37ef2721c9b17f5dff8c8b09d5bce7e451b686652a3ae6d57e3927221c83c2"
+      "bytes": 218375,
+      "sha256": "822f25b2e771d71d8eb0ef13e33e510ff64dc55040459231d6d128ebb360b226"
     },
     {
       "path": "apps/desktop/src/backupSettings.test.tsx",
@@ -699,13 +709,13 @@
     },
     {
       "path": "apps/desktop/src/nativeClosePreferences.test.ts",
-      "bytes": 2579,
-      "sha256": "c6789df7de042ae896682de0ea59911b56990faa42844bb7b7399755cc8abbe8"
+      "bytes": 4297,
+      "sha256": "1b202da3a7f821079e7fc9274e780b23c01b10a605c19ad42d021457e6b99b3c"
     },
     {
       "path": "apps/desktop/src/nativeClosePreferences.ts",
-      "bytes": 1246,
-      "sha256": "9ed6e451d77adf7f7b880808f20cc88b924d28d3e1f3b1c51694551ebf2cddb1"
+      "bytes": 2124,
+      "sha256": "8c1369a04d3279d0d22ebeb962aa14941af5169d794584412e36793038a7c7df"
     },
     {
       "path": "apps/desktop/src/nativeWindowTheme.test.ts",
@@ -739,8 +749,8 @@
     },
     {
       "path": "apps/desktop/src/preview.tsx",
-      "bytes": 56826,
-      "sha256": "9735c4f4b62bf8aa29b5b42a9c19a82a51f36b82265d1d54eb23ac20440b3138"
+      "bytes": 56906,
+      "sha256": "eee90bbd11db1236155c5b9165844481af6da872655598e3ca8543445ca785c6"
     },
     {
       "path": "apps/desktop/src/previewBackupPicker.test.ts",
@@ -799,8 +809,8 @@
     },
     {
       "path": "apps/desktop/src/styles.css",
-      "bytes": 90478,
-      "sha256": "8f363bd736e7d66be953fd1db5e8a0dcf6cf01160f2f82b49ff046aa3781b4c9"
+      "bytes": 90823,
+      "sha256": "6725ad9954dac57589a5f97d0b12040be0205d5065de4085c509a39f123f9a60"
     },
     {
       "path": "apps/desktop/src/textLimits.ts",
@@ -834,8 +844,8 @@
     },
     {
       "path": "apps/desktop/src/updates.ts",
-      "bytes": 1751,
-      "sha256": "6cc3b8c9d1cd59e70b59e77337beac6676b2f196eca923a857706a7433ca7e57"
+      "bytes": 2144,
+      "sha256": "7638f372ab89f82b430e71b116b66fc1c08418313b771354455595ab92b62eca"
     },
     {
       "path": "apps/desktop/src/useConversationNotifications.ts",
@@ -1479,8 +1489,8 @@
     },
     {
       "path": "crates/swarm-gui-host/src/updates.rs",
-      "bytes": 1683,
-      "sha256": "302a6ee54b1af04ef4dca1ec6d91b0064745f411bb889314a47b098de997aa13"
+      "bytes": 4013,
+      "sha256": "8c1fe02abf4bd29dc8b9ce784e49452b2c96ecad00fae1605f51b8897e736a32"
     },
     {
       "path": "crates/swarm-gui-host/tests/account_access.rs",
@@ -1571,6 +1581,11 @@
       "path": "crates/swarm-gui-host/tests/trash.rs",
       "bytes": 6181,
       "sha256": "1ca2e9ffd2a58d66f640449367859535e4f70410582a1cbbe5b9de6ef0190c59"
+    },
+    {
+      "path": "crates/swarm-gui-host/tests/updates.rs",
+      "bytes": 1155,
+      "sha256": "baa8f51d4387563a2c6ab333bd73ec8179e36c6a664594a11ce1189505368789"
     },
     {
       "path": "crates/swarm-gui-host/tests/window_settings.rs",
@@ -1819,13 +1834,13 @@
     },
     {
       "path": "distribution/third-party/THIRD_PARTY_NOTICES.txt",
-      "bytes": 3560656,
-      "sha256": "c61da7084590f36db047b213374d8e6d78862d3429328e1929f48febe2375051"
+      "bytes": 3613008,
+      "sha256": "2531784b74e2d55e320ba48064b6e9b52d7cd5e6f90ff1b424fc90931386d548"
     },
     {
       "path": "distribution/third-party/bundle-manifest.json",
-      "bytes": 174270,
-      "sha256": "b8b6e6c9af4576e4003544558e94a13fcbb3923611a121b72a6f71ef50494349"
+      "bytes": 178297,
+      "sha256": "05584c1e814696304f81ece0d29adaf8ab2292bf6e3d6f418816cc6c536c6ec1"
     },
     {
       "path": "distribution/third-party/cssparser-0.37.0.crate",
@@ -1899,8 +1914,8 @@
     },
     {
       "path": "docs/DISTRIBUTION.md",
-      "bytes": 12546,
-      "sha256": "21d1fca6e26ba18629c0f92bf923d0d146c3f94902c29e28c704a85696ac7a24"
+      "bytes": 13087,
+      "sha256": "93a02f6941a33fa26c98da49b1874c2a095e582642265acd53bbe850dc2f4825"
     },
     {
       "path": "docs/GOOGLE_RECOVERY_SETUP.md",
@@ -1909,8 +1924,8 @@
     },
     {
       "path": "docs/LICENSE_REVIEW.md",
-      "bytes": 5164,
-      "sha256": "0a968a52ecff8b97c10df7cdd084dc3d6b65e61aa8e0c3b0fab1056b3cfef22c"
+      "bytes": 5709,
+      "sha256": "bfc63a91ed75cc5aa59f7f5f082e84f4f94fc018a94cc6ea79d0945addbca50c"
     },
     {
       "path": "docs/MODEL_PROVENANCE.md",
@@ -1929,13 +1944,13 @@
     },
     {
       "path": "docs/PRIVACY.en.md",
-      "bytes": 3125,
-      "sha256": "c87518b1bfaff2da5757ae9a17016515d2ecd8afe726ee3ee4c4aa89988a5cae"
+      "bytes": 3642,
+      "sha256": "abb312c2fdc55472157d6d706892687341f36e35f2e131fc82a14e83de10c1de"
     },
     {
       "path": "docs/PRIVACY.md",
-      "bytes": 3442,
-      "sha256": "0b0c30356972922f586eab05dc50f9cb43262ae47bfd47a1b6db6210f3e99ec6"
+      "bytes": 4044,
+      "sha256": "98b25343e8222a016be51addb2ec7c6dcac4b57983bb9317d164e8323f5558dc"
     },
     {
       "path": "docs/PUBLICATION_READINESS.md",
@@ -1954,13 +1969,13 @@
     },
     {
       "path": "docs/REMAINING_WORK.md",
-      "bytes": 96426,
-      "sha256": "5d48176eb69a53969fe93ada2d9d74297ecd8971e532e90fb5ecf1c27625e482"
+      "bytes": 96498,
+      "sha256": "4e1faf2e2e5f7ad57bd13102ca8ce58d74908f2741d6ece77c3addde4d62d770"
     },
     {
       "path": "docs/ROADMAP.md",
-      "bytes": 203389,
-      "sha256": "51877746e3fde0136cb084f4192245442defd0243dcc5dc2178e13fc6ff8480c"
+      "bytes": 203565,
+      "sha256": "98096da604bd9b560ad86a26fa287bfec057356e67a48c4400ebb8472699770d"
     },
     {
       "path": "docs/RULES_GUIDE.md",
@@ -1981,6 +1996,11 @@
       "path": "docs/TRASH_IMPLEMENTATION_CONTRACT.md",
       "bytes": 4018,
       "sha256": "3552a08f626c27ee2fcb6cb3831db70bdeb7aab669459bd6abfc3272ae8c5e57"
+    },
+    {
+      "path": "docs/UPDATES.md",
+      "bytes": 6104,
+      "sha256": "50f04814a3336c1daa58c7cdc682b6c61915897fbc71499a9fd8139747e2e201"
     },
     {
       "path": "docs/USER_GUIDE.en.md",
@@ -2534,8 +2554,8 @@
     },
     {
       "path": "scripts/installer_path.ps1",
-      "bytes": 16033,
-      "sha256": "636c744ad4f81257fb7f310232a2ac3377d7fe243b76e0f5e290796b0cc17757"
+      "bytes": 16523,
+      "sha256": "8c48ac5552e19a1ba77aa054ab16fcff43cc8e9322c219ff3e0a475b9eb7692e"
     },
     {
       "path": "scripts/measure_display_memory.ps1",
@@ -2563,9 +2583,19 @@
       "sha256": "b967552d96829b5c87f7132ebda55d9277113bdadf26ae6901f3bca5fdbd6830"
     },
     {
+      "path": "scripts/prepare_update_release.ps1",
+      "bytes": 3739,
+      "sha256": "e2a13c208db4f53a61b0c16539a864b9942b90f131cfe25fcc637ced0f0ea299"
+    },
+    {
+      "path": "scripts/refresh_third_party_resources.py",
+      "bytes": 4926,
+      "sha256": "45bf633e2edb3ad525d87b745c6da768007b26e5cd92e5e82ac87ce236ab2124"
+    },
+    {
       "path": "scripts/source_package_review.py",
-      "bytes": 6915,
-      "sha256": "6968c0cffe33651098c00c7c043bd5c9222ed1c4ae232571d4b720a9b2e4c90b"
+      "bytes": 7044,
+      "sha256": "13ed6ff4ffe8a1c40cd0ef0a8de71eac6d9af56e681f0dc45dd35985ca5e2ee1"
     },
     {
       "path": "scripts/test_acceptance_status.py",
@@ -2614,8 +2644,8 @@
     },
     {
       "path": "scripts/test_source_package_review.py",
-      "bytes": 5832,
-      "sha256": "c1544063735cb518ddae23dc6a6519bb8b2cb0befcb5f974c75774572e319b4e"
+      "bytes": 6314,
+      "sha256": "0f0b37a6ddd22f29e800ac7856061ce9219e6044dbbf9992f5727ea406a7df51"
     },
     {
       "path": "scripts/test_verify_third_party_resources.py",

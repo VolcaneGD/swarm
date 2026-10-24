@@ -5,10 +5,16 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
-from source_package_review import inventory, write_review
+from source_package_review import classify, inventory, write_review
 
 
 class SourceReviewTests(unittest.TestCase):
+    def test_readme_screenshots_are_explicit_but_local_zenn_assets_never_export(self):
+        for name in ("docs/screenshots/swarm-ja-light.png", "docs/screenshots/swarm-en-dark.png"):
+            self.assertIsNone(classify(Path(name)))
+        for name in ("docs/private-zenn/swarm-introduction.md", "docs/private-zenn/assets/swarm-zenn-eyecatch.png", "docs/screenshots/private.png"):
+            self.assertEqual(classify(Path(name)), "outside-explicit-source-scope")
+
     def test_literal_compile_inputs_are_reported_without_promoting_private_files(self):
         with tempfile.TemporaryDirectory() as directory:
             root = self.fixture(directory)

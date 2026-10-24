@@ -12,6 +12,27 @@ Recover the original objective, acceptance gates, scope, approvals and precise n
 
 ## Authorized scope
 
+User decision2026-10-24: implement actual update checking and in-app installation
+for VolcaneGD/swarm and update the existing private source repository. This
+supersedes the earlier metadata-only/after-publication implementation boundary
+for this feature. It does not authorize making the repository public, publishing
+release assets or deploying the portfolio. Keep local Zenn drafts and private
+signing keys out of GitHub. Updates require a version-bound native updater
+signature; no GitHub credentials are embedded in the app.
+
+User decision2026-10-24: the Zenn introduction article and accompanying editorial
+artwork are local-only under docs/private-zenn/. Never include them in GitHub
+uploads, including private repository updates. The folder is ignored locally and
+outside the source-export allowlist. Zenn publication is not authorized by the
+request to write the article/create its cover.
+
+User decision2026-10-24: upload the prepared source privately to GitHub first;
+the user will inspect the repository before deciding on public release.
+Completed at https://github.com/VolcaneGD/swarm (private), main commit
+adfdf0ed4ac31acbe90b112db07dcf962ac86848. This permits private review upload only;
+public visibility, public distribution and portfolio deployment remain held.
+Use the standalone exported Git checkout rather than the unrelated parent origin.
+
 User decision2026-10-24: first beta excludes Google linking and Google recovery.
 Disable their GUI actions and execution paths; preserve normal passwords, recovery
 codes, backup/restore and all existing data. The optional google-recovery build

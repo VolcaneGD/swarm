@@ -334,7 +334,7 @@ Current292checked/28open/320total. Preview chooser correction verified; native p
 - [x] 仮URLで起動時の最新版を確認し、赤字報告・バージョン・更新ボタンを既存Quick Startの下へ表示。確認失敗時は利用継続。ユーザー指定により現在は仮URL／UIの範囲。記録 (maintainer-only record omitted from this review export)。
 - [x] 更新ボタン下のProgress Barと検証／インストール／完了・再起動表示、二重実行抑止／失敗時再試行を実装。プレビューの進捗→ページ再読込を確認。実更新成功と区別。記録 (maintainer-only record omitted from this review export)。
 - [x] 更新直後の起動中だけ右カラムにアップデート内容／更新済みバージョンを表示するUIを実装。既存Empty Stateを隠し上端／90%幅／大きい文字、次回通常起動で元のEmpty Stateへ戻す。プレビューの起動時1回受取／次回再読込で復帰。記録 (maintainer-only record omitted from this review export)。
-- [ ] 公開後に実配信先・署名付き更新・共有runtime停止／再起動・未保存作業保持・更新履歴receipt永続化／起動時1回受取を接続し、実ダウンロード／インストール／更新直後表示・次回起動時復帰を使い捨てWindowsで受入検査する。仮URL／UI成功で完了にしない。
+- [ ] 実GitHub配布→ダウンロード／インストール／再起動→更新内容の起動時1回表示・次回起動時復帰を使い捨てWindowsで受入検査する。2026-10-24の追加指示で固定配信URL・バージョン署名検証・認証済みruntime停止・設定保存・NSIS更新実行／再起動・保護receipt永続化を実装。単体／画面sample／ローカル署名と本配布の受入は区別する。[更新ガイド](UPDATES.md)。公開保留中に旧検査を反復しない。
 
 Current291checked/28open/319total. Placeholder UI is complete; native signed delivery remains a publication-phase residual.
 

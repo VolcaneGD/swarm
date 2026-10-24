@@ -11,6 +11,7 @@ import GoogleRecoverySettings, { GoogleRecoveryForm } from './GoogleRecovery'
 import AccountManagement from './AccountManagement'
 import Workspace from './Workspace'
 import { useStartupUpdate, useUpdateNotes } from './updates'
+import UpdateSettings from './UpdateSettings'
 import RulesEditor from './RulesEditor'
 import NotificationSettingsPanel from './NotificationSettingsPanel'
 import BackupSettingsPanel from './BackupSettingsPanel'
@@ -866,6 +867,7 @@ export default function App() {
             <div className="settings-preference"><span>{t.appearanceLabel}</span><button className="theme-button" type="button" aria-label={t.appearanceLabel} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} disabled={!display.ready || display.saving || busy || runtimeStatus?.state !== 'running'}><span className="theme-dot" aria-hidden="true" />{theme === 'light' ? t.theme : t.themeLight}</button></div>
             {display.saving && <p role="status">{language === 'ja' ? '表示設定を保存中…' : 'Saving display settings…'}</p>}
           </section>
+          <UpdateSettings language={language} />
           {display.failed && <p className="workspace-error" role="alert">{language === 'ja' ? '表示設定を確認できませんでした。現在の設定を確認してから変更してください。' : 'Could not confirm display settings. Check current settings before changing them.'}<button className="text-button" type="button" onClick={() => void display.refresh()} disabled={display.saving}>{language === 'ja' ? '表示設定を確認' : 'Check display settings'}</button></p>}
           {nativeTheme.failed && <p className="workspace-error" role="alert">{language === 'ja' ? 'タイトルバーの表示を変更できませんでした。' : 'Could not update the title bar appearance.'}<button className="text-button" type="button" onClick={nativeTheme.retry}>{language === 'ja' ? '再試行' : 'Retry'}</button></p>}
           </section>

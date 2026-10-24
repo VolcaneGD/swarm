@@ -8,7 +8,7 @@ import { BOARD_NAME_LIMIT, THREAD_NAME_LIMIT, BODY_LIMIT, characterCount, charac
 import { buildConversationTree, getConversationAncestors, visibleConversationRows } from './conversationTree'
 import { conversationViewPreferenceKey, normalizeConversationView, parseConversationViewPreference, type ConversationView } from './conversationViewPreferences'
 import { isDesktopPreferenceHost, loadUiPreference, saveUiPreference, type UiPreferenceScope } from './uiPreferenceStorage'
-import { registerPreferenceFlush } from './nativeClosePreferences'
+import { registerPreferenceFlush, registerUpdateBlocker } from './nativeClosePreferences'
 import SearchDialog from './SearchDialog'
 import MarkdownBody from './MarkdownBody'
 import { localizedDate } from './localizedDate'
@@ -352,6 +352,9 @@ export default function Workspace({ language, accountId = 'test', onLogout, onSe
   const [boardFormError, setBoardFormError] = useState('')
   const [threadFormError, setThreadFormError] = useState('')
   const [creationDialog, setCreationDialog] = useState<'board' | 'thread' | null>(null)
+  useEffect(() => registerUpdateBlocker(() =>
+    Object.values(drafts).some(draft => draft.length > 0) || postEditor !== null || creationDialog !== null || creationBusy || postEditBusy
+  ), [drafts, postEditor, creationDialog, creationBusy, postEditBusy])
   const treeRequest = useRef(0)
   const capabilityRequest = useRef(0)
   const detailRequest = useRef(0)

@@ -2,7 +2,10 @@
 
 use std::{
     path::{Path, PathBuf},
-    sync::{Arc, Mutex},
+    sync::{
+        Arc, Mutex,
+        atomic::{AtomicBool, Ordering},
+    },
 };
 
 use serde_json::Value;
@@ -19,7 +22,17 @@ mod updates;
 mod window_state;
 
 #[derive(Default)]
-struct AvailableUpdate(Mutex<Option<(String, String)>>);
+struct AvailableUpdate {
+    available: Mutex<Option<tauri_plugin_updater::Update>>,
+    installing: AtomicBool,
+}
+
+struct InstallGuard<'a>(&'a AtomicBool);
+impl Drop for InstallGuard<'_> {
+    fn drop(&mut self) {
+        self.0.store(false, Ordering::SeqCst);
+    }
+}
 
 #[tauri::command]
 async fn gui_check_update(
@@ -29,50 +42,153 @@ async fn gui_check_update(
     if window.label() != "main" {
         return Err("Updates are only available from the main window".into());
     }
-    let current = window.app_handle().package_info().clone();
-    let update = tauri::async_runtime::spawn_blocking(move || updates::check(&current))
-        .await
-        .map_err(|_| "Update check failed")??;
+    if state.installing.load(Ordering::SeqCst) {
+        return Err("UPDATE_BUSY".into());
+    }
+    *state
+        .available
+        .lock()
+        .map_err(|_| "Update state unavailable")? = None;
+    let update = updates::check(window.app_handle()).await?;
     let result = update
         .as_ref()
-        .map(|(version, _)| serde_json::json!({"version":version}));
-    *state.0.lock().map_err(|_| "Update state unavailable")? = update;
+        .map(|update| serde_json::json!({"version":update.version}));
+    *state
+        .available
+        .lock()
+        .map_err(|_| "Update state unavailable")? = update;
     Ok(result)
 }
 
 #[tauri::command]
-fn gui_install_update(
+async fn gui_install_update(
     window: tauri::WebviewWindow,
     state: State<'_, AvailableUpdate>,
+    host: State<'_, SharedHost>,
+    tracker: State<'_, Arc<window_state::WindowTracker>>,
     on_progress: tauri::ipc::Channel<Value>,
 ) -> Result<(), String> {
     if window.label() != "main" {
         return Err("Updates are only available from the main window".into());
     }
-    state
-        .0
+    if state.installing.swap(true, Ordering::SeqCst) {
+        return Err("UPDATE_BUSY".into());
+    }
+    let _guard = InstallGuard(&state.installing);
+    let update = state
+        .available
         .lock()
         .map_err(|_| "Update state unavailable")?
         .as_ref()
+        .cloned()
         .ok_or("No update available")?;
-    // Placeholder phase: never launch an unsigned installer or an external browser.
-    let _ = on_progress;
-    // A signed native updater must be configured once distribution is approved.
-    Err("UPDATE_NOT_CONFIGURED".into())
+    // In-app installation is supported for the packaged NSIS installation only.
+    let exe = std::env::current_exe().map_err(|_| "Could not locate installation")?;
+    if !exe
+        .parent()
+        .is_some_and(|dir| dir.join("swarm-installer.ps1").is_file())
+    {
+        return Err("UPDATE_INSTALLATION_REQUIRED".into());
+    }
+    let mut downloaded = 0u64;
+    let bytes = update.download(|chunk, total| {
+        downloaded = downloaded.saturating_add(chunk as u64);
+        let _ = on_progress.send(serde_json::json!({"phase":"downloading","downloaded":downloaded,"total":total}));
+    }, || { let _ = on_progress.send(serde_json::json!({"phase":"verifying"})); })
+        .await.map_err(|_| "UPDATE_DOWNLOAD_OR_SIGNATURE_FAILED")?;
+    // download verifies the artifact and signed version before any stop or receipt.
+    if !tracker.begin_restore_probe() {
+        return Err("UPDATE_BUSY".into());
+    }
+    // Recheck after download: a human may have typed a draft while it was running.
+    // A successful handshake freezes further UI input until process exit/failure.
+    let Some((request_id, receiver)) = tracker.start_close_handshake() else {
+        tracker.finish_restore();
+        return Err("Could not prepare update window".into());
+    };
+    if window
+        .emit(
+            "swarm-prepare-close",
+            serde_json::json!({"request_id":request_id,"reason":"update"}),
+        )
+        .is_err()
+    {
+        tracker.cancel_close_request(request_id);
+        tracker.finish_restore();
+        return Err("Could not prepare update window".into());
+    }
+    let acknowledged = tauri::async_runtime::spawn_blocking(move || {
+        receiver.recv_timeout(std::time::Duration::from_secs(5))
+    })
+    .await
+    .ok()
+    .and_then(Result::ok)
+    .unwrap_or(false);
+    tracker.cancel_close_request(request_id);
+    if !acknowledged {
+        tracker.finish_restore();
+        return Err("UPDATE_UNSAVED_WORK".into());
+    }
+    let geometry = tracker.capture_for_close(&window.as_ref().window());
+    let host = host.inner().clone();
+    let prepare_host = host.clone();
+    let from = window.app_handle().package_info().version.to_string();
+    let version = update.version.clone();
+    let notes = update.body.clone().unwrap_or_default();
+    let prepared = tauri::async_runtime::spawn_blocking(move || {
+        let mut host = prepare_host
+            .lock()
+            .map_err(|_| "Update state unavailable")?;
+        if let Some(geometry) = geometry {
+            host.window_geometry_set(&geometry.to_saved())
+                .map_err(|_| "Could not save window settings")?;
+        }
+        host.stage_update_receipt(&from, &version, &notes)
+            .map_err(|_| "Could not save update receipt")?;
+        if host
+            .runtime_status()
+            .map_err(|_| "Runtime status unavailable")?["state"]
+            == "running"
+        {
+            host.stop_runtime()
+                .map_err(|_| "Could not safely stop runtime")?;
+        }
+        Ok::<_, String>(())
+    })
+    .await
+    .map_err(|_| "Could not prepare update".to_string())
+    .and_then(|result| result);
+    if let Err(error) = prepared {
+        tracker.finish_restore();
+        return Err(error);
+    }
+    let _ = on_progress.send(serde_json::json!({"phase":"installing"}));
+    // Windows updater starts NSIS with /UPDATE and /ARGS, preserves --data-dir,
+    // exits this process, and the installer relaunches the new application.
+    let result = tauri::async_runtime::spawn_blocking(move || update.install(bytes))
+        .await
+        .map_err(|_| "Could not launch update installer");
+    tracker.finish_restore();
+    match result {
+        Ok(Ok(())) => Ok(()),
+        _ => Err("UPDATE_INSTALL_FAILED_RUNTIME_STOPPED".into()),
+    }
 }
 
 #[tauri::command]
-fn gui_restart_after_update() -> Result<(), String> {
-    // Never restart on an unverified or placeholder install result.
-    Err("UPDATE_NOT_CONFIGURED".into())
-}
-
-#[tauri::command]
-fn gui_update_notes() -> Option<Value> {
-    // Publication phase must consume a verified installed-version/notes receipt once.
-    // Renderer keeps it for this window lifetime; next startup returns no notes.
-    // An ordinary startup or failed update must never invent completed changes.
-    None
+async fn gui_update_notes(
+    window: tauri::WebviewWindow,
+    host: State<'_, SharedHost>,
+) -> Result<Option<Value>, String> {
+    if window.label() != "main" {
+        return Err("Updates are only available from the main window".into());
+    }
+    let version = window.app_handle().package_info().version.to_string();
+    with_host(host.inner().clone(), move |host| {
+        host.consume_update_notes(&version)
+    })
+    .await
+    .map_err(|_| "Could not read update notes".into())
 }
 
 #[tauri::command]
@@ -659,6 +775,7 @@ fn run() -> Result<(), &'static str> {
     };
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_dialog::init())
         .plugin(
             tauri_plugin_opener::Builder::new()
@@ -891,7 +1008,6 @@ fn run() -> Result<(), &'static str> {
             gui_open_link,
             gui_check_update,
             gui_install_update,
-            gui_restart_after_update,
             gui_update_notes,
             gui_read,
             gui_create,

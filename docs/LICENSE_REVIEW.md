@@ -1,5 +1,13 @@
 # Locked Windows distribution license review
 
+2026-10-24 updater supplement: the shipping notice bundle retains all813previous
+texts and adds11texts covering minisign-verify0.3.0, reqwest0.13.5,
+rustls-platform-verifier0.7.1, tauri-plugin-updater2.14.0, tempfile3.27.0 and
+tokio-util0.7.19. All newly reviewed declarations are MIT/Apache-2.0; both
+alternatives and upstream notices are retained. Existing five MPL archives are
+unchanged. Current manifest pins current Cargo/npm locks and9verified resources;
+the earlier October13 review below remains historical. No public release implied.
+
 Reviewed2026-10-13 for the Windows11 x64 GUI/CLI/runtime and locally generated candidate. Publication remains held. This review records the actual included material and obligations; it does not turn native acceptance into PASS.
 
 ## Original material

@@ -180,7 +180,7 @@ X1の実行前提は[再開判断資料](X1_RESTART_DECISION.md)へ集約。elap
 | ID | ROADMAP行の一意な先頭文字列 | 主分類 | 共通枠 | 未達を閉じる前提・観測 |
 | --- | --- | --- | --- | --- |
 | R01 | 管理者VMで新規ciphertext | safety | X1 | 完了：2026-10-20実elevated guestで独立10観測・競合／再取得・Data保持／通常Off。既存認証済み正常停止を別version文脈で明記結合。再検査せず正式ACの残条件は保持 |
-| R02 | 公開後に実配信先 | publication | P1 | 明示公開後の実配信先・署名更新・再起動／receiptを使い捨てWindowsで照合 |
+| R02 | 実GitHub配布→ダウンロード | publication | P1 | URL・署名更新・停止／再起動・未保存保護・receipt接続は実装済み。明示公開後の実配信／適用を使い捨てWindowsで照合 |
 | R03 | 初回設定・資格発行と再開・完全停止 | safety | H1 | committed応答drain、cfg(test) Service commit／rollback、固定配布runtime実RPC precommit/native clickのcommit subset完了。後者exact stop admission未instrument・rollbackはhelper失敗／stop由来不明で未受入、notice後fault再実行停止。固定配布候補の待機接続107opcode停止後拒否を2026-10-24追加完了（結果 (maintainer-only record omitted from this review export)）。開始済password／公開session開始・再開3RPCのcommit→停止と資格readbackを追加完了（結果 (maintainer-only record omitted from this review export)）。残る会話更新等の開始済business RPC／host・自動起動・OS結合を保持。通常helper補修に承認gateを追加せず、未知資格だけ人間、OS部分はX1 |
 | R04 | 実Tauriの資格保護・ロール管理 | human | H1 | 完了：2026-10-19通常password変更・誤値拒否・成功・旧拒否／新成功と既存資格／旧画面失効を結合。H1人間回答と新fixture native証拠を区別。再検査しない。全N02／N03・正式ACは別。証拠 (maintainer-only record omitted from this review export) |
 | R05 | 秘密情報の保存とログ非公開 | safety | S1 | 保存領域R01は実VMで完了。未観測公開sinkのR06との結合を残し、済みcanary／file-lock検査を繰り返さない |

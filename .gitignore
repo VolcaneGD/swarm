@@ -8,3 +8,5 @@
 /test-data/
 /playwright-report/
 /test-results/
+# Local-only editorial drafts and artwork; never include in GitHub source uploads.
+/docs/private-zenn/

@@ -328,7 +328,11 @@ mockIPC((command, payload) => {
     case 'gui_open_link':
       if (!normalizeSafeExternalUrl(String(request.url ?? ''))) throw new Error('Invalid external link')
       return null // Preview verifies the UI only; it never starts an external browser.
-    case 'gui_check_update': return new URLSearchParams(window.location.search).get('update') === 'available' ? { version: '0.2.0' } : null
+    case 'gui_check_update': {
+      const mode = new URLSearchParams(window.location.search).get('update')
+      if (mode === 'unpublished') throw new Error('UPDATE_UNPUBLISHED')
+      return mode === 'available' ? { version: '0.2.0' } : null
+    }
     case 'gui_update_notes': {
       if (new URLSearchParams(window.location.search).get('update') !== 'completed' || sessionStorage.getItem('swarm-preview-update-notes-shown')) return null
       // Consume once at boot; React retains the result until this window reloads.
@@ -346,8 +350,7 @@ mockIPC((command, payload) => {
       await new Promise(resolve => setTimeout(resolve, 400))
       channel.onmessage({ phase: 'installing' })
       await new Promise(resolve => setTimeout(resolve, 400))
-    })()
-    case 'gui_restart_after_update': return new Promise<void>(resolve => {
+      await new Promise<void>(resolve => {
       setTimeout(() => {
         const url = new URL(window.location.href)
         url.searchParams.set('update', 'completed')
@@ -355,7 +358,8 @@ mockIPC((command, payload) => {
         window.location.replace(url)
         resolve()
       }, 700)
-    })
+      })
+    })()
     case 'gui_snapshot': return snapshot
     case 'gui_google_link':
     case 'gui_google_unlink': {

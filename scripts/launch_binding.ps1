@@ -40,8 +40,20 @@ function Get-SwarmShortcutRoot {
     if ($Shortcut.Arguments -notmatch '^\s*--data-dir\s+(?:"([^"\r\n]+)"|([^"\s]+))\s*$') {
         throw 'Swarm shortcut arguments need repair before installing. No Data was changed.'
     }
-    $root = if ($Matches[1]) { $Matches[1] } else { $Matches[2] }
+    $quoted = $Matches.ContainsKey(1)
+    $root = if ($quoted) { $Matches[1] } else { $Matches[2] }
+    if ($quoted) {
+        $trailing = [regex]::Match($root, '\\+$').Length
+        if (($trailing % 2) -ne 0) { throw 'Invalid quoted Swarm Data argument.' }
+        if ($trailing -gt 0) { $root = $root.Substring(0, $root.Length - $trailing) + ('\' * ($trailing / 2)) }
+    }
     return Assert-SwarmDataRoot $root
+}
+
+function ConvertTo-SwarmDataArguments {
+    param([string] $Root)
+    # Windows argv parsing treats backslashes before the closing quote as escapes.
+    return '--data-dir "' + [regex]::Replace($Root, '(\\+)$', '$1$1') + '"'
 }
 
 function Save-SwarmBindingJson {
@@ -103,7 +115,7 @@ function Apply-SwarmLaunchBinding {
         if ([IO.Path]::GetFileName($shortcut.TargetPath) -ine 'swarm-desktop.exe') { continue }
         $shortcut.TargetPath = Join-Path $Directory 'swarm-desktop.exe'
         $shortcut.WorkingDirectory = $Directory
-        $shortcut.Arguments = '--data-dir "' + $root + '"'
+        $shortcut.Arguments = ConvertTo-SwarmDataArguments $root
         $shortcut.Save()
     }
 }

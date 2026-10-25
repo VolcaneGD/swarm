@@ -53,4 +53,26 @@ $fresh = Join-Path $fixture 'Fresh Install'
 Capture-SwarmLaunchBinding $fresh (Join-Path $fixture 'fresh.json') @()
 Apply-SwarmLaunchBinding $fresh (Join-Path $fixture 'fresh.json') @()
 Assert-True (-not [IO.File]::Exists((Join-Path $fresh 'swarm-launch.json'))) 'Fresh installation invented a selection'
+# Native Windows argv round-trip, including a drive root and trailing separators.
+Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+public static class SwarmLaunchArgvTest {
+    [DllImport("shell32.dll", CharSet=CharSet.Unicode)] static extern IntPtr CommandLineToArgvW(string command, out int count);
+    [DllImport("kernel32.dll")] static extern IntPtr LocalFree(IntPtr memory);
+    public static string[] Parse(string command) {
+        int count; var memory=CommandLineToArgvW(command,out count);
+        if(memory==IntPtr.Zero) throw new Exception("Native argv parsing failed");
+        try { var values=new string[count]; for(int i=0;i<count;i++) values[i]=Marshal.PtrToStringUni(Marshal.ReadIntPtr(memory,i*IntPtr.Size)); return values; }
+        finally { LocalFree(memory); }
+    }
+}
+'@
+foreach ($root in @(($data + '\'), ([IO.Path]::GetPathRoot($fixture)))) {
+    $arguments = ConvertTo-SwarmDataArguments $root
+    $parsed = [SwarmLaunchArgvTest]::Parse('swarm-desktop.exe ' + $arguments)
+    Assert-True ($parsed.Length -eq 3 -and $parsed[2] -ceq $root) 'Native trailing separator argument corrupted'
+    Write-TestLink $menu (Join-Path $newInstall 'swarm-desktop.exe') $arguments
+    Assert-True ((Get-SwarmShortcutRoot ($shell.CreateShortcut($menu))) -eq ([IO.Path]::GetFullPath($root))) 'Captured native argument corrupted'
+}
 Write-Output ('PASS relocation/shortcut preservation/conflict/invalid/fresh/Data sentinel; fixture retained: ' + $fixture)

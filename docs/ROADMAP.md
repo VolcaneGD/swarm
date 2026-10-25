@@ -1,5 +1,9 @@
 # Swarm — ROADMAP
 
+2026-10-25追加依頼・公開作業中：利用者は配布中のSwarmも不具合修正版へ更新するよう明示依頼。0.1.4のソース／tag・署名付きGitHub Release／latest feed・公開サイト／新着／SHA256を整合し、実匿名downloadと公開画面を確認する。旧公開tag/assetsは保持し、本人の手動導入・導入後Data保持確認とは分離する。
+
+2026-10-25追加依頼・ソース修正／ローカル候補完成：installed0.1.2→0.1.3更新の「更新を準備中…」5分以上停止を、実updater downloadのTLS provider未初期化panicとして再現。restore_update前の明示初期化・download task失敗のIPC返却・開始進捗を修正。native15テスト・Clippy、229004581bytesの実download／署名検証11.93秒、matching static-CRT release／NSIS・43resourcesを確認。ローカル0.1.4 installerと更新署名を準備した。残る条件は利用者の手動導入と、その後のversion表示・既存Board／Threads保持。公開・適用成功とは扱わず、既存363/17/380/PASS0と明示保留を維持する。証拠 (maintainer-only record omitted from this review export)。
+
 <!-- acceptance-status: checked=363 open=17 total=380 -->
 <!-- acceptance-current:start -->
 2026-10-25追加：0.1.1導入時の32bit／64bitプロセス参照差による別installation誤拒否を、exact PIDのCIM参照で修正。同一installationの稼働保護を維持。0.1.2配布・更新feed・公開サイトへ反映し、開発ホストに導入完了（43file一致）。新規Swarm-Development Dataをユーザー選択、実runtime running／新規アカウントWorkspaceを確認。旧データ・検証runtime・fixture保持。global swarm-use Skillを追加し、用途・発火条件・project bindingは各local Skillが所有。正式363/17/380/PASS0、更新適用の通し検査・保留群は別。

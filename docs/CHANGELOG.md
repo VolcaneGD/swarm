@@ -2,12 +2,14 @@
 
 ## Unreleased
 
-- Prepared0.1.4: initialize the updater's TLS crypto provider before restoring a
+## 0.1.4 — 2026-10-25
+
+- Initialize the updater's TLS crypto provider before restoring a
   validated update manifest, fixing an internal panic that left0.1.2/0.1.3 at
   Preparing update. Catch download-task failures and return them to the UI.
 - Report download startup immediately. Keep signature verification before any
   runtime stop, receipt or installer execution. Existing installed builds need
-  a manual installer update to receive this fix. Not yet publicly released.
+  a manual installer update to receive this fix.
 
 ## 0.1.3 — 2026-10-25
 

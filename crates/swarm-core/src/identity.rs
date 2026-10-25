@@ -27,6 +27,8 @@ struct ClientReport {
     project_root: String,
     model_name: String,
     basis: String,
+    #[serde(default)]
+    engine_name: Option<String>,
 }
 
 fn invalid_report() -> Fault {
@@ -62,6 +64,10 @@ fn record_harness(db: &Connection, id: &str, args: &Value) -> Result<(), Fault> 
         Some("cursor") => "Cursor",
         Some("copilot-cli") => "GitHub Copilot CLI",
         Some("openai-compatible") => "不明",
+        Some("generic") => args["model_report"]["engine_name"]
+            .as_str()
+            .filter(|s| !s.trim().is_empty() && s.len() <= 256 && !s.chars().any(char::is_control))
+            .ok_or_else(invalid_report)?,
         _ => return Err(invalid_report()),
     };
     if let Some(reported) = args.get("model_report").and_then(|r| r.get("client"))
@@ -85,6 +91,54 @@ fn record_harness(db: &Connection, id: &str, args: &Value) -> Result<(), Fault> 
     db.execute("INSERT INTO app_metadata(key,value) VALUES(?1,?2) ON CONFLICT(key) DO UPDATE SET value=excluded.value",
         params![format!("identity-harness-v1:{id}"), label])?;
     Ok(())
+}
+
+pub(crate) fn capture_for_write(
+    db: &Connection,
+    id: &str,
+    context: &Value,
+) -> Result<Option<Value>, Fault> {
+    let ai: bool = db.query_row("SELECT kind='ai' FROM actors WHERE id=?1", [id], |r| {
+        r.get(0)
+    })?;
+    if !ai {
+        return Ok(None);
+    }
+    let capture = &context["model_capture"];
+    if capture["status"] == "available" {
+        let current = public(db, id)?;
+        let args = json!({"model_report":capture["report"]});
+        let project = current["project_id"].as_str().ok_or_else(Fault::internal)?;
+        // Client claims never grant access; root/selector/name validation is
+        // performed again inside the authorized mutation transaction.
+        match model(db, &args, project) {
+            Ok(_) => {}
+            Err(error) if error.code == "INVALID_INPUT" => {
+                return Ok(Some(
+                    json!({"status":"unavailable","reason":"report_project_mismatch_or_invalid"}),
+                ));
+            }
+            Err(error) => return Err(error),
+        }
+        dispatch(db, "identity.model", &args, id)?;
+        return Ok(Some(json!({"status":"available","source":"automatic"})));
+    }
+    let reason = capture["reason"]
+        .as_str()
+        .filter(|r| {
+            matches!(
+                *r,
+                "model_not_exposed"
+                    | "report_unreadable_or_invalid"
+                    | "adapter_not_configured"
+                    | "session_not_identified"
+                    | "discovery_limit"
+                    | "ambiguous_session"
+                    | "report_not_found"
+            )
+        })
+        .unwrap_or("client_did_not_supply_capture");
+    Ok(Some(json!({"status":"unavailable","reason":reason})))
 }
 
 fn model(db: &Connection, args: &Value, project: &str) -> Result<(String, &'static str), Fault> {
@@ -113,6 +167,7 @@ fn model(db: &Connection, args: &Value, project: &str) -> Result<(String, &'stat
                     "selection"
                 )
                 | ("opencode", "selection" | "response")
+                | ("generic", "response")
         ) || report.session_id.trim().is_empty()
             || report.session_id.len() > 128
             || report.session_id.chars().any(char::is_control)
@@ -126,6 +181,13 @@ fn model(db: &Connection, args: &Value, project: &str) -> Result<(String, &'stat
             )
             || report.project_root.len() > 32768
             || !std::path::Path::new(&report.project_root).is_absolute()
+        {
+            return Err(invalid_report());
+        }
+        if report.client == "generic"
+            && report.engine_name.as_deref().is_none_or(|s| {
+                s.trim().is_empty() || s.len() > 256 || s.chars().any(char::is_control)
+            })
         {
             return Err(invalid_report());
         }

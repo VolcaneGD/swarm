@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Automatically attempt model acquisition on every AI CLI Post/reply/edit;
+  select exact Codex session records, support shared adapter environment settings
+  for other clients and a generic inference-engine metadata report format.
+- Revalidate model reports inside Service and snapshot acquisition status on new
+  Posts. Keep unknown metadata usable, historical author snapshots immutable,
+  project/permission checks and known-model identity-change safeguards intact.
+  Source change; not included in the published0.1.2 installer.
+
 - Split Settings → Bug reports into two visibly bordered sections: report guide,
   upload consent and queued retry together; the human report form separately.
 - Explain that AI CLI reports and human form reports share the delivery settings.

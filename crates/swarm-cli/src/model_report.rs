@@ -47,7 +47,7 @@ pub(super) fn read(
 ) -> Result<Option<Value>, Fault> {
     if !(matches!(
         client,
-        "codex" | "claude-code" | "openai-compatible" | "antigravity"
+        "codex" | "claude-code" | "openai-compatible" | "antigravity" | "generic"
     ) || crate::harness_report::supports(client))
         || session.is_empty()
         || session.len() > 128
@@ -63,7 +63,7 @@ pub(super) fn read(
     if crate::harness_report::supports(client) {
         return crate::harness_report::read(client, session, file, explicit_root);
     }
-    if matches!(client, "openai-compatible" | "antigravity") {
+    if matches!(client, "openai-compatible" | "antigravity" | "generic") {
         let mut bytes = Vec::new();
         file.take(MAX_LINE + 1)
             .read_to_end(&mut bytes)
@@ -72,6 +72,15 @@ pub(super) fn read(
             return Err(invalid_input());
         }
         let row: Value = serde_json::from_slice(&bytes).map_err(|_| invalid_input())?;
+        if client == "generic" {
+            if row["schema_version"] != 1 || row["session_id"] != session || explicit_root.is_some()
+            {
+                return Err(invalid_input());
+            }
+            let project_root = root(&row["project_root"])?;
+            let engine = name(&row["engine_name"]).ok_or_else(invalid_input)?;
+            return Ok(name(&row["model_name"]).map(|model| json!({"client":client,"session_id":session,"project_root":project_root,"model_name":model,"engine_name":engine,"basis":"response"})));
+        }
         if client == "antigravity" {
             // Official hook input common fields. Do not infer models from
             // transcript bodies, internal protobufs, process names or UI labels.

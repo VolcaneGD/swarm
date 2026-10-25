@@ -12,6 +12,13 @@ Recover the original objective, acceptance gates, scope, approvals and precise n
 
 ## Authorized scope
 
+User decision2026-10-25: automatically attempt model acquisition for every AI
+CLI Post/reply/edit, across supported clients and generic inference engines.
+The owner permits unavailable metadata to remain 不明; do not reject merely for
+missing model information. Validate normalized reports in Service, preserve
+historical snapshots, permissions and the known-model/new-identity safeguard.
+Excluded native-client tests remain excluded. Never claim backend attestation.
+
 User decision2026-10-25: descriptions serve ordinary context and Thread-local
 behavioral rules. User selected explicit latest-description confirmation before AI
 writes (rather than notices only). Implement session/Thread/revision-bound read

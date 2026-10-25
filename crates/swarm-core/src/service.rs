@@ -352,7 +352,7 @@ pub(crate) fn thread_get(db: &Connection, id: &str, include_deleted: bool) -> Re
 }
 pub(crate) fn post_get(db: &Connection, thread: &str, no: i64) -> Result<Value, Fault> {
     live_thread(db, thread)?;
-    db.query_row(
+    let mut result = db.query_row(
         "SELECT p.id,p.no,p.body,p.author_id,p.model_name,p.display_id,p.created_at,p.updated_at,p.revision,p.reply_to,p.edited_by,p.editor_display_id,p.deleted_at,
         (SELECT count(*) FROM posts x WHERE x.thread_id=p.thread_id AND x.reply_to=p.no AND x.deleted_at IS NULL AND x.body_purged_at IS NULL),p.editor_model_name,p.body_purged_at
         ,(SELECT a.name FROM accounts a WHERE a.id=p.author_id)
@@ -369,7 +369,22 @@ pub(crate) fn post_get(db: &Connection, thread: &str, no: i64) -> Result<Value, 
                 "editor_display_id":r.get::<_,Option<String>>(11)?,"deleted":deleted.is_some() || purged,"deleted_at":deleted,"restore_available":!purged,
                 "editor_model_name":r.get::<_,Option<String>>(14)?,
                 "response_count":r.get::<_,i64>(13)?}))
-        }).optional()?.ok_or_else(not_found)
+        }).optional()?.ok_or_else(not_found)?;
+    let capture: Option<String> = db
+        .query_row(
+            "SELECT value FROM app_metadata WHERE key=?1",
+            [format!(
+                "post-model-capture-v1:{}",
+                result["id"].as_str().ok_or_else(Fault::internal)?
+            )],
+            |r| r.get(0),
+        )
+        .optional()?;
+    if let Some(capture) = capture {
+        result["author"]["model_capture"] =
+            serde_json::from_str::<Value>(&capture).map_err(|_| Fault::internal())?;
+    }
+    Ok(result)
 }
 impl Service {
     /// Trusted runtime maintenance; no public/AI purge operation is exposed.
@@ -1126,7 +1141,14 @@ pub(crate) fn dispatch(db: &Connection, r: &Request, actor: &str) -> Result<Valu
                 [thread],
                 |row| row.get(0),
             )?;
-            let (model, display) = author_display(db, actor)?;
+            let capture = identity::capture_for_write(db, actor, &r.context)?;
+            let (mut model, display) = author_display(db, actor)?;
+            let capture_unknown = capture.as_ref().is_some_and(|c| {
+                c["status"] == "unavailable" && c["reason"] != "client_did_not_supply_capture"
+            });
+            if capture_unknown {
+                model = "不明".into();
+            }
             let now = timestamp();
             db.execute("INSERT INTO posts(id,thread_id,no,body,author_id,model_name,display_id,created_at,updated_at,reply_to) VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?8,?9)",
                 params![id,thread,no,body,actor,model,display,now,target])?;
@@ -1136,7 +1158,17 @@ pub(crate) fn dispatch(db: &Connection, r: &Request, actor: &str) -> Result<Valu
                     params![now, thread],
                 )?;
             }
-            let harness = identity::harness(db, actor)?;
+            let harness = if capture_unknown {
+                "不明".into()
+            } else {
+                identity::harness(db, actor)?
+            };
+            if let Some(capture) = capture {
+                db.execute(
+                    "INSERT INTO app_metadata(key,value) VALUES(?1,?2)",
+                    params![format!("post-model-capture-v1:{id}"), capture.to_string()],
+                )?;
+            }
             db.execute(
                 "INSERT INTO app_metadata(key,value) VALUES(?1,?2)",
                 params![format!("post-harness-v1:{id}"), harness],
@@ -1254,7 +1286,13 @@ pub(crate) fn dispatch(db: &Connection, r: &Request, actor: &str) -> Result<Valu
                 return Err(conflict());
             }
             let id = current["id"].as_str().ok_or_else(Fault::internal)?;
-            let (model, display) = author_display(db, actor)?;
+            let capture = identity::capture_for_write(db, actor, &r.context)?;
+            let (mut model, display) = author_display(db, actor)?;
+            if capture.as_ref().is_some_and(|c| {
+                c["status"] == "unavailable" && c["reason"] != "client_did_not_supply_capture"
+            }) {
+                model = "不明".into();
+            }
             let now = timestamp();
             db.execute("INSERT INTO post_revisions(post_id,revision,body,saved_at,editor_id,editor_display_id,editor_model_name) VALUES(?1,?2,?3,?4,?5,?6,?7)",
                 params![id,revision,current["body"].as_str(),now,actor,display,model])?;

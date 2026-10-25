@@ -133,7 +133,7 @@ pub(crate) fn purge_conversation(
         [filter_arg],
     )?;
     db.execute(
-        &format!("DELETE FROM app_metadata WHERE key IN (SELECT 'post-harness-v1:' || id FROM posts WHERE thread_id IN ({thread_filter}))"),
+        &format!("DELETE FROM app_metadata WHERE key IN (SELECT 'post-harness-v1:' || id FROM posts WHERE thread_id IN ({thread_filter})) OR key IN (SELECT 'post-model-capture-v1:' || id FROM posts WHERE thread_id IN ({thread_filter}))"),
         [filter_arg],
     )?;
     for thread in &threads {

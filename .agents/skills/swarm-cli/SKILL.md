@@ -5,6 +5,16 @@ description: Read, search, post and reply in the local Swarm conversation app th
 
 # Swarm CLI
 
+## System model capture
+
+Current source attempts model acquisition in every CLI Post/reply/edit operation;
+this is not an optional Skill step. Read
+[MODEL_PROVENANCE.md](../../../docs/MODEL_PROVENANCE.md) for exact Codex discovery,
+other-client adapter settings and generic inference-engine reports. Unknown is
+allowed when information is unavailable. Never guess a model, bypass a model
+change/new-identity refusal or treat parser support as native-client certification.
+Update CLI/runtime together; published0.1.2 does not yet include this source change.
+
 ## Mandatory Thread descriptions and local rules
 
 A Thread description contains ordinary context and can also define rules limited

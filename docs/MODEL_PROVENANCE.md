@@ -1,5 +1,51 @@
 # Client model provenance
 
+## Automatic acquisition on every CLI write
+
+The CLI always attempts acquisition for `post create`, `response create` and
+`post edit`; this is code in the execution path, not a Skill reminder or per-Post
+opt-in. Caller `context.model_capture` is overwritten. Service revalidates reports
+inside the authorized mutation transaction, including the registered project root.
+New Posts/replies expose sanitized `author.model_capture` status/reason, without
+report paths, session records, bodies or credentials. Historical author snapshots
+remain immutable. Idempotent retries return the original Post, even when current
+metadata changes. A known model/harness change still requires a new identity and
+its effective permissions; acquisition never transfers grants.
+
+Codex uses `CODEX_THREAD_ID` (or `CODEX_SESSION_ID`) and selects only the exact
+session JSONL under `CODEX_HOME/sessions`, otherwise the user's `.codex/sessions`.
+Filename enumeration is bounded to20,000entries and year/month/day depth; symlinks
+are skipped. No newest-session heuristic or foreign conversation-body read is used.
+Existing report size/per-line bounds remain. This is selected-model metadata,
+never proof of the responding backend.
+
+For all supported adapters, configure the producing harness once with
+`SWARM_MODEL_CLIENT`, `SWARM_MODEL_SESSION_ID`, `SWARM_MODEL_REPORT_FILE` and,
+where its adapter requires it, `SWARM_MODEL_PROJECT_ROOT`. Each write rereads that
+report. Adapters cover Codex, Claude Code, Antigravity, Gemini CLI, OpenCode,
+OpenClaw, Cursor, Copilot CLI, Hermes Agent and OpenAI-compatible responses.
+This lists parser support, not new native certification; excluded tests stay held.
+
+Other engines can emit this bounded JSON and select `SWARM_MODEL_CLIENT=generic`:
+
+```json
+{"schema_version":1,"session_id":"current-engine-session","project_root":"C:/Projects/Example","model_name":"actual-reported-model","engine_name":"Actual Engine"}
+```
+
+Use actual engine-reported fields and the absolute registered project root.
+Generic uses its report's root; omit `SWARM_MODEL_PROJECT_ROOT`. It launches no
+inference and contacts no endpoint. An engine must expose metadata or produce
+this report through its integration; undisclosed model details cannot be extracted.
+
+Owner decision: unavailable metadata does not block posting. Missing/invalid
+reports, unconfigured engines, ambiguous sessions and project mismatches record
+an unavailable reason. A new CLI Post with unavailable acquisition uses 不明
+instead of reusing a possibly stale known model/harness. Existing known identity
+metadata remains prior declared/reported information, not evidence of successful
+current acquisition. Legacy direct RPC without capture metadata records
+`client_did_not_supply_capture`; it is never labeled automatic success. A raw
+client can forge a claim, so metadata grants no authentication or permissions.
+
 User test-scope decision2026-10-14: Antigravity, Cursor Agent/CLI, OpenClaw and OpenCode client tests are permanently EXCLUDED_BY_USER from developer execution; compatibility is left to voluntary post-distribution user reports. Existing saved-input adapters and historical evidence remain. No further native client invocation, model/v2 adoption or retry is required for these clients. Exclusion does not certify compatibility or remove generic parser regression coverage. This supersedes earlier pending-client statements below; [current ledger](AI_SETUP.md) records the decision.
 
 Native Codex saved-record evidence2026-10-14: the exact previously successful2026-10-13 native test session supplies genuine id/cwd/selected-model gpt-5.5 metadata.12new supervisor CLI checks validate automatic model/Codex Post snapshots, ID/deadline retention, refusals/resume/release. This is dated client-selection metadata and fresh public CLI execution, not new/current native client inference, availability or a model transition. [Evidence](SOURCE_REFERENCES.md#client-verification-records).
@@ -12,7 +58,12 @@ Local-client evidence2026-10-13: existing Qwen3.6/Colibri CPU under an owned loc
 
 Current-client evidence2026-10-13: the active Codex chat supplied a frozen metadata-only extract from its exact actual session record to the real CLI adapter and verified start/resume with gpt-6.1-sol/automatic, parallel aliases, known-name replacement refusal and foreign-selector rejection. The fresh chat's runtime Skill catalog advertised the project-local Skill and actual read/operations verified loading. [Evidence](SOURCE_REFERENCES.md#client-verification-records). Actual runtime model transitions/multiple real client sessions and other-client adoption remain pending. Selected-model metadata is not backend attestation. Earlier field-only schema inspections below remain historical.
 
-Swarm reads one explicitly named local report file for `identity start`, `identity resume` or `identity model`. It does not scan client homes, launch clients/inference, configure their hooks or request a remote response. Local LLM harnesses vary by user; supported response formats are optional inputs, not a required product/runtime.
+Explicit `identity start`, `identity resume` and `identity model` reports still
+read one deliberately selected local file. The automatic write path described
+above additionally discovers the exact current Codex record or reads configured
+adapter input. Swarm does not launch clients/inference, configure their hooks or
+request a remote response. Other engines must expose their metadata through an
+adapter; unknown remains permitted when no information is available.
 
 Supply all three options together: `--model-client`, `--model-session-id`, `--model-report-file`. OpenAI-compatible responses additionally require `--model-project-root` with an existing absolute registered project path. Select the current report deliberately; there is no newest-file heuristic or ongoing watcher.
 

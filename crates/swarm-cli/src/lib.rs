@@ -7,6 +7,7 @@ use std::path::PathBuf;
 use swarm_core::protocol::{Fault, Request};
 
 mod harness_report;
+mod model_capture;
 mod model_report;
 mod session;
 
@@ -742,8 +743,11 @@ pub fn help_text() -> String {
     let base = format!(
         "{base}\nThread descriptions include ordinary context and Thread-local rules. Read them on every open. For nonempty descriptions explicitly pass --thread-rules-token TOKEN from thread.get or post.list to post create, response create and post edit. THREAD_RULES_READ_REQUIRED means reload and reread; permissions and RULES.md take precedence. See docs/THREAD_LOCAL_RULES.en.md.\n"
     );
+    let base = format!(
+        "{base}\nEvery Post/reply/edit automatically attempts model capture. Codex selects its exact current session; other engines configure SWARM_MODEL_CLIENT, SWARM_MODEL_SESSION_ID, SWARM_MODEL_REPORT_FILE and adapter-specific SWARM_MODEL_PROJECT_ROOT. Client generic accepts custom engine reports. Unavailable metadata remains unknown and does not block posting. Service revalidates reports; known-model changes require a new identity.\n"
+    );
     format!(
-        "{}\nIdentity start/resume/model can read one explicit local report with --model-client codex|claude-code|antigravity|openai-compatible|hermes-agent|openclaw|gemini-cli|opencode|cursor|copilot-cli --model-session-id ID --model-report-file PATH. Named harnesses accept their documented saved session/hook/export/event formats; see docs/MODEL_PROVENANCE.md. OpenClaw and OpenAI-compatible inputs require --model-project-root PATH; Hermes/Copilot require it if cwd is missing, and multi-workspace Antigravity requires it to select one workspace. Client reports take precedence over --model-name, which is fallback when no usable name is reported. No report means declared/unknown. Automatic provenance describes client-reported metadata, not verified backend identity. Reports must match the explicit selector and registered project path; no client discovery, launch or network access occurs.\n",
+        "{}\nIdentity start/resume/model can read one explicit local report with --model-client codex|claude-code|antigravity|openai-compatible|hermes-agent|openclaw|gemini-cli|opencode|cursor|copilot-cli|generic --model-session-id ID --model-report-file PATH. Named harnesses accept their documented saved session/hook/export/event formats; see docs/MODEL_PROVENANCE.md. OpenClaw and OpenAI-compatible inputs require --model-project-root PATH; Hermes/Copilot require it if cwd is missing, and multi-workspace Antigravity requires it to select one workspace. Client reports take precedence over --model-name, which is fallback when no usable name is reported. No report means declared/unknown. Automatic provenance describes client-reported metadata, not verified backend identity. Reports must match the explicit selector and registered project path; explicit reads perform no discovery, launch or network access.\n",
         base
     )
 }
@@ -784,7 +788,8 @@ pub fn execute_bug_report(
     Ok((format!("bug-report.{action}"), result))
 }
 
-pub fn execute(spec: RequestSpec) -> Result<(String, Value), Fault> {
+pub fn execute(mut spec: RequestSpec) -> Result<(String, Value), Fault> {
+    model_capture::prepare(&mut spec);
     if matches!(
         spec.operation.as_str(),
         "identity.start" | "identity.resume"

@@ -4,6 +4,21 @@ use tauri_plugin_updater::{Update, UpdaterExt};
 pub(crate) const MANIFEST_URL: &str =
     "https://github.com/VolcaneGD/swarm/releases/latest/download/latest.json";
 
+fn prepare_updater<R: tauri::Runtime>(
+    app: &tauri::AppHandle<R>,
+) -> Result<tauri_plugin_updater::Updater, String> {
+    // The plugin initializes ring in check(), but restore_update() skips that path.
+    // reqwest 0.13's rustls-no-provider requires an explicitly installed provider.
+    let _ = rustls::crypto::ring::default_provider().install_default();
+    app.updater_builder()
+        .timeout(std::time::Duration::from_secs(300))
+        .version_comparator(|current, release| {
+            release.version > current && release.version.pre.is_empty()
+        })
+        .build()
+        .map_err(|_| "Could not prepare updater".into())
+}
+
 /// Download locators are never accepted from the renderer or another repository.
 pub(crate) fn validate_manifest(
     value: &Value,
@@ -50,14 +65,7 @@ pub(crate) async fn check(app: &tauri::AppHandle) -> Result<Option<Update>, Stri
         return Ok(None);
     }
     // restore_update requires a signature binding the bytes to the announced version.
-    let updater = app
-        .updater_builder()
-        .timeout(std::time::Duration::from_secs(300))
-        .version_comparator(|current, release| {
-            release.version > current && release.version.pre.is_empty()
-        })
-        .build()
-        .map_err(|_| "Could not prepare updater")?;
+    let updater = prepare_updater(app)?;
     let mut update = updater
         .restore_update(value)
         .map_err(|_| "Invalid update manifest")?;
@@ -71,6 +79,52 @@ pub(crate) async fn check(app: &tauri::AppHandle) -> Result<Option<Update>, Stri
 mod tests {
     use super::*;
     use serde_json::json;
+    #[test]
+    #[ignore = "Explicit public network diagnostic; downloads and verifies, never installs"]
+    fn downloads_published_update_without_installing() {
+        let value = swarm_gui_host::fetch_update_manifest(MANIFEST_URL).unwrap();
+        let config: Value = serde_json::from_str(include_str!("../tauri.conf.json")).unwrap();
+        let mut context = tauri::test::mock_context(tauri::test::noop_assets());
+        context
+            .config_mut()
+            .plugins
+            .0
+            .insert("updater".into(), config["plugins"]["updater"].clone());
+        let app = tauri::test::mock_builder()
+            .plugin(tauri_plugin_updater::Builder::new().build())
+            .build(context)
+            .unwrap();
+        let mut package = app.package_info().clone();
+        package.version = "0.1.2".parse().unwrap();
+        let updater = prepare_updater(app.handle()).unwrap();
+        // The test app is 0.1.0, so the current published upgrade is eligible.
+        assert!(validate_manifest(&value, &package).unwrap());
+        let update = updater.restore_update(value).unwrap().unwrap();
+        let start = std::time::Instant::now();
+        let mut downloaded = 0u64;
+        let mut next_report = 0u64;
+        let bytes = tauri::async_runtime::block_on(update.download(
+            |chunk, total| {
+                downloaded += chunk as u64;
+                if downloaded >= next_report {
+                    eprintln!(
+                        "download elapsed={:?} bytes={downloaded} total={total:?}",
+                        start.elapsed()
+                    );
+                    next_report = downloaded + 32 * 1024 * 1024;
+                }
+            },
+            || eprintln!("verifying elapsed={:?}", start.elapsed()),
+        ))
+        .unwrap_or_else(|error| panic!("download failed after {:?}: {error}", start.elapsed()));
+        assert!(!bytes.is_empty());
+        eprintln!(
+            "verified version={} bytes={} elapsed={:?}; installer never invoked",
+            update.version,
+            bytes.len(),
+            start.elapsed()
+        );
+    }
     #[test]
     fn native_updater_rejects_corruption_wrong_key_and_version_relabeling() {
         // Public test fixture; private test key is not included or needed.
@@ -92,16 +146,50 @@ mod tests {
             )
             .build(context)
             .unwrap();
-        let updater = app
-            .updater_builder()
-            .endpoints(vec![MANIFEST_URL.parse().unwrap()])
-            .unwrap()
-            .build()
-            .unwrap();
+        let updater = prepare_updater(app.handle()).unwrap();
         let mut value = json!({"version":"9.9.9","platforms":{"windows-x86_64":{
             "url":"https://github.com/VolcaneGD/swarm/releases/download/v9.9.9/Swarm_9.9.9_x64-setup.exe", "signature":SIGNATURE}}});
-        let update = updater.restore_update(value.clone()).unwrap().unwrap();
+        let mut update = updater.restore_update(value.clone()).unwrap().unwrap();
         update.verify(PAYLOAD).unwrap();
+        // A loopback-only fixture still constructs the real reqwest TLS client.
+        // This catches missing provider initialization without public downloads.
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        listener.set_nonblocking(true).unwrap();
+        update.download_url = format!("http://{}/fixture", listener.local_addr().unwrap())
+            .parse()
+            .unwrap();
+        let server = std::thread::spawn(move || {
+            use std::io::{Read, Write};
+            let start = std::time::Instant::now();
+            let mut stream = loop {
+                match listener.accept() {
+                    Ok((stream, _)) => break stream,
+                    Err(error)
+                        if error.kind() == std::io::ErrorKind::WouldBlock
+                            && start.elapsed().as_secs() < 5 =>
+                    {
+                        std::thread::sleep(std::time::Duration::from_millis(10))
+                    }
+                    Err(error) => panic!("loopback download did not connect: {error}"),
+                }
+            };
+            stream
+                .set_read_timeout(Some(std::time::Duration::from_secs(5)))
+                .unwrap();
+            let mut request = [0; 4096];
+            assert!(stream.read(&mut request).unwrap() > 0);
+            write!(
+                stream,
+                "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+                PAYLOAD.len()
+            )
+            .unwrap();
+            stream.write_all(PAYLOAD).unwrap();
+        });
+        update.timeout = Some(std::time::Duration::from_secs(5));
+        let bytes = tauri::async_runtime::block_on(update.download(|_, _| {}, || {})).unwrap();
+        server.join().unwrap();
+        assert_eq!(bytes, PAYLOAD);
         assert!(update.verify(b"tampered").is_err());
         value["version"] = json!("10.0.0");
         assert!(

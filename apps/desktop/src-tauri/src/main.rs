@@ -157,12 +157,20 @@ async fn gui_install_update(
     {
         return Err("UPDATE_INSTALLATION_REQUIRED".into());
     }
-    let mut downloaded = 0u64;
-    let bytes = update.download(|chunk, total| {
-        downloaded = downloaded.saturating_add(chunk as u64);
-        let _ = on_progress.send(serde_json::json!({"phase":"downloading","downloaded":downloaded,"total":total}));
-    }, || { let _ = on_progress.send(serde_json::json!({"phase":"verifying"})); })
-        .await.map_err(|_| "UPDATE_DOWNLOAD_OR_SIGNATURE_FAILED")?;
+    let download_update = update.clone();
+    let download_progress = on_progress.clone();
+    // A panicking dependency must reject the IPC request instead of leaving the
+    // renderer waiting forever. Keep all stop/install side effects after success.
+    let bytes = tauri::async_runtime::spawn(async move {
+        let mut downloaded = 0u64;
+        let _ = download_progress.send(serde_json::json!({"phase":"downloading","downloaded":0}));
+        download_update.download(|chunk, total| {
+            downloaded = downloaded.saturating_add(chunk as u64);
+            let _ = download_progress.send(serde_json::json!({"phase":"downloading","downloaded":downloaded,"total":total}));
+        }, || { let _ = download_progress.send(serde_json::json!({"phase":"verifying"})); })
+            .await.map_err(|_| "UPDATE_DOWNLOAD_OR_SIGNATURE_FAILED")
+    })
+    .await.map_err(|_| "UPDATE_DOWNLOAD_OR_SIGNATURE_FAILED")??;
     // download verifies the artifact and signed version before any stop or receipt.
     if !tracker.begin_restore_probe() {
         return Err("UPDATE_BUSY".into());

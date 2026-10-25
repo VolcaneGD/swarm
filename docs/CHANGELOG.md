@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Split Settings → Bug reports into two visibly bordered sections: report guide,
+  upload consent and queued retry together; the human report form separately.
+- Explain that AI CLI reports and human form reports share the delivery settings.
+- Preserve theme-aware borders and spacing with stacked classification controls
+  at narrow widths. Source change; not included in the published0.1.2 installer.
+
 ## 0.1.2 — 2026-10-25
 
 - Fix Windows installer falsely reporting a different installation's64-bit runtime

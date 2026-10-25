@@ -459,8 +459,8 @@
     },
     {
       "path": "apps/desktop/src/BugReportsPanel.tsx",
-      "bytes": 7619,
-      "sha256": "b7b86989616b7306d31b713b11815a74471754a77a6f15f62bd361cd5de82fd4"
+      "bytes": 8492,
+      "sha256": "4a25ffca0b0fb8a5eeadd9e9f47e535c0bad3408712a25465b8f84c30ca5651f"
     },
     {
       "path": "apps/desktop/src/ChangeSavedToast.test.tsx",
@@ -819,8 +819,8 @@
     },
     {
       "path": "apps/desktop/src/styles.css",
-      "bytes": 91689,
-      "sha256": "7658f30b9ff7454921e16fee8aaf9e8a0747c773be74481ea79f430893196f1a"
+      "bytes": 92212,
+      "sha256": "cceb838b66ab5620859c989a64baf905bb160bd6f4edfd6a153aaaba9426de8d"
     },
     {
       "path": "apps/desktop/src/textLimits.ts",
@@ -1964,8 +1964,8 @@
     },
     {
       "path": "docs/CHANGELOG.md",
-      "bytes": 2123,
-      "sha256": "53de60f7ffedb0468eb3e13e16aa93a0832c15e887c5e0b42a9c4e9cddc6aa26"
+      "bytes": 2543,
+      "sha256": "a3834a6dbd1c5ede311797b910301a9fb237bc5b843ae00d2ba358557221ffb6"
     },
     {
       "path": "docs/CLI_REFERENCE.md",

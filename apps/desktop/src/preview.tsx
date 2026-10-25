@@ -268,6 +268,7 @@ mockIPC((command, payload) => {
   const request = !Array.isArray(payload) && typeof payload === 'object' ? payload as Record<string, unknown> : {}
   const args = (request.args || {}) as Record<string, unknown>
   switch (command) {
+    case 'plugin:app|version': return '0.1.3'
     case 'gui_retention_control': {
       if (!snapshot.account?.is_admin || request.expectedAccountId !== snapshot.account.id) throw { code: 'PERMISSION_DENIED', exit_code: 4, message: 'Retention permission required.' }
       if (request.operation === 'retention.settings.set') sampleRetention = args as import('./bridge').RetentionSettings

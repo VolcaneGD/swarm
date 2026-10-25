@@ -24,8 +24,8 @@
   "files": [
     {
       "path": ".agents/skills/swarm-cli/SKILL.md",
-      "bytes": 5774,
-      "sha256": "11dd924993fcce128d7a928df5cce35e658544f9348652f6634cb6f847c0929b"
+      "bytes": 5778,
+      "sha256": "ce1cd7e7376b4bbe5b9efa029217fd939078a31de9efbe4c91f105538bb8726f"
     },
     {
       "path": ".agents/skills/swarm-cli/agents/openai.yaml",
@@ -45,12 +45,12 @@
     {
       "path": "Cargo.lock",
       "bytes": 142679,
-      "sha256": "b0ef9648d10c3b442a5b555403ef4300ccce0689fa164b3e9ab8ab9862faea3a"
+      "sha256": "196c64180c98a9af751f09e972fff4fd1711b10b66cc59a7c562462dce2f1727"
     },
     {
       "path": "Cargo.toml",
       "bytes": 830,
-      "sha256": "9d6c1efb9dc32be1649b5f70cd08b911034062fc558ac6326d78f28f2ee0a680"
+      "sha256": "7bb494da9363172d326cb9685014e96fe5f824f2657705e1cd22ca81bb55c73a"
     },
     {
       "path": "LICENSE",
@@ -65,12 +65,12 @@
     {
       "path": "README.en.md",
       "bytes": 5393,
-      "sha256": "a4a0971751ecbe36d630da2a34ef78ecc4560cd2baee8f833f6f05fe0bd30284"
+      "sha256": "765e52566e7a21f513bf14337a101b38cddb673a856cc53a295b9aad7e66d96e"
     },
     {
       "path": "README.md",
       "bytes": 6034,
-      "sha256": "453114eac5ae1b16c1c784ed79bca287d9f14e9e6cb45f57dfcda3e52ff4ad80"
+      "sha256": "3fe62aad27e4b7a21f10ce3ef43c6d273f27d4307849bd1c187d6676d1d93907"
     },
     {
       "path": "apps/desktop/index.html",
@@ -80,12 +80,12 @@
     {
       "path": "apps/desktop/package-lock.json",
       "bytes": 153367,
-      "sha256": "43d6495e46881cc93ff9e7ffff3486054ebae452881945b8648e9089fe00bc11"
+      "sha256": "ab497bd6c4ca5180208afa58e0316126c89788f8471e7da6e2cd0af21a43c491"
     },
     {
       "path": "apps/desktop/package.json",
       "bytes": 705,
-      "sha256": "5935f6e42be7ce50ed5533c4a8e6e33896940fdb9adb02ece7d669e2684d9524"
+      "sha256": "75b5a570f66711eacb87c15f4b67b4cac67605a05ed882b59264477f333d92dc"
     },
     {
       "path": "apps/desktop/preview.html",
@@ -390,7 +390,7 @@
     {
       "path": "apps/desktop/src-tauri/tauri.conf.json",
       "bytes": 1205,
-      "sha256": "86dcd34d9ad6cab9e3de485add16ca42a73fb40796603bf66fa31885d4f78eb6"
+      "sha256": "2fc7a23c318558936ccb9be381ce7252d0c67325cd755d60817b7098092a1c3f"
     },
     {
       "path": "apps/desktop/src-tauri/tauri.distribution.conf.json",
@@ -634,13 +634,13 @@
     },
     {
       "path": "apps/desktop/src/UpdateSettings.test.tsx",
-      "bytes": 1827,
-      "sha256": "38a83f6c8a44ba742f182cc23712bc905368612cb96226351c27f2c43bfb19c4"
+      "bytes": 2577,
+      "sha256": "768437b0b67d20e960b5f1ebbdf7d128c6880772ade97897273204674b07b4ec"
     },
     {
       "path": "apps/desktop/src/UpdateSettings.tsx",
-      "bytes": 2036,
-      "sha256": "7700c1631218024de5130b5852cd5fc366b93e9c900a926d20549fb87b2487b4"
+      "bytes": 2571,
+      "sha256": "73ef16e5ee9026f13f1412c46aadfa92c5c62569bd237e9a7856b812bd0edcf2"
     },
     {
       "path": "apps/desktop/src/Workspace.test.tsx",
@@ -759,8 +759,8 @@
     },
     {
       "path": "apps/desktop/src/preview.tsx",
-      "bytes": 57746,
-      "sha256": "5c30db9a88134c5c46d5f8422493145bb18b9a0167934066d14b06f166a7797f"
+      "bytes": 57792,
+      "sha256": "ccc73f05c41af859a0603cecac198c3ec1698184d78e1ac4f7f1da7e6a9b123b"
     },
     {
       "path": "apps/desktop/src/previewBackupPicker.test.ts",
@@ -999,13 +999,13 @@
     },
     {
       "path": "crates/swarm-cli/tests/command_matrix.rs",
-      "bytes": 10849,
-      "sha256": "b9f93c29f418c2fa71b066251eba47a3e3ee5b5a7f8025e6f66789ce356ca9b8"
+      "bytes": 11612,
+      "sha256": "932f270cf783d43f41a25a30d945c33aebac9671bc4d73a734c9cf5a7da86847"
     },
     {
       "path": "crates/swarm-cli/tests/concurrency.rs",
-      "bytes": 12118,
-      "sha256": "b9d18e205351d2bec9fc968b761b32da3e11899014a3814152908737804a658c"
+      "bytes": 12359,
+      "sha256": "e2833b966d8d99afca2a0cf40ed281aa00f7d92f9afd2a9fce4b14e41977d8d0"
     },
     {
       "path": "crates/swarm-cli/tests/documentation.rs",
@@ -1904,8 +1904,8 @@
     },
     {
       "path": "distribution/third-party/bundle-manifest.json",
-      "bytes": 178708,
-      "sha256": "7505a27b3a8f10217465165f4965e533277e4dff58b79adc46c1821d03ea36c2"
+      "bytes": 178845,
+      "sha256": "62e58cc7547e6c13568cdf519e514da0b4c38f0878c51816b0014f97a99825c4"
     },
     {
       "path": "distribution/third-party/cssparser-0.37.0.crate",
@@ -1979,13 +1979,13 @@
     },
     {
       "path": "docs/CHANGELOG.md",
-      "bytes": 3077,
-      "sha256": "ac687b45f211b94df7a8126944c85d0b85349aa5e8722e65546d438fc4da456d"
+      "bytes": 3217,
+      "sha256": "6338bf7f05493365ac3814f48b789ed7d778369a966092e86264de20c0f5e94b"
     },
     {
       "path": "docs/CLI_REFERENCE.md",
       "bytes": 22372,
-      "sha256": "4f54bf6fbf265f51416d19ffc142942f0be1d3d166e61e7278c9772916f7a3d5"
+      "sha256": "a14824d89cf265fcabb15fc3a05d434d768354c4049d3d4959f6712cfce44235"
     },
     {
       "path": "docs/DESIGN.md",
@@ -2094,8 +2094,8 @@
     },
     {
       "path": "docs/UPDATES.md",
-      "bytes": 6104,
-      "sha256": "50f04814a3336c1daa58c7cdc682b6c61915897fbc71499a9fd8139747e2e201"
+      "bytes": 6358,
+      "sha256": "c2760fcf0a407d3651995a332d585ad5aaafc16ae4a1ab24fae5d8ed05ad3a5e"
     },
     {
       "path": "docs/USER_GUIDE.en.md",

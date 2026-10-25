@@ -28,6 +28,24 @@ fn request(operation: &str, auth: Option<&str>, args: Value) -> Request {
     }
 }
 fn cli(root: &Path, args: &[&str]) -> Value {
+    // The command matrix exercises permitted writes, not the missing-proof
+    // refusal (covered by thread_rules). Follow the current public protocol.
+    let mut write_args = args.to_vec();
+    let proof;
+    if matches!(
+        args.get(..2),
+        Some(["post", "create" | "edit"] | ["response", "create"])
+    ) && !args.contains(&"--thread-rules-token")
+        && let Some(index) = args.iter().position(|arg| *arg == "--thread-id")
+    {
+        let current = cli(root, &["thread", "get", "--id", args[index + 1]]);
+        proof = current["thread_rules"]["ack_token"]
+            .as_str()
+            .unwrap()
+            .to_owned();
+        write_args.extend(["--thread-rules-token", proof.as_str()]);
+    }
+    let args = write_args.as_slice();
     let mut command = Command::new(env!("CARGO_BIN_EXE_swarm"));
     command.args(["--data-dir", root.to_str().unwrap(), "--format", "json"]);
     if args.first() != Some(&"runtime") {

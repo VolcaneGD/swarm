@@ -319,7 +319,10 @@ fn twenty_real_cli_processes_preserve_posts_replies_owners_and_retry_keys() {
     let stored = service
         .request(request("post.list", token, json!({"thread_id":thread_id})))
         .unwrap();
-    assert_eq!(stored, page);
+    // Human and AI envelopes intentionally differ: AI reads carry their own
+    // Thread-rule acknowledgement. Compare the durable records and pagination.
+    assert_eq!(stored["items"], page["items"]);
+    assert_eq!(stored["next_before_no"], page["next_before_no"]);
     let posts = stored["items"].as_array().unwrap();
     assert_eq!(
         posts

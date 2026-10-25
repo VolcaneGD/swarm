@@ -2,8 +2,8 @@
   "schema_version": 1,
   "release_approved": false,
   "lock_hashes": {
-    "cargo": "b0ef9648d10c3b442a5b555403ef4300ccce0689fa164b3e9ab8ab9862faea3a",
-    "npm": "43d6495e46881cc93ff9e7ffff3486054ebae452881945b8648e9089fe00bc11"
+    "cargo": "196c64180c98a9af751f09e972fff4fd1711b10b66cc59a7c562462dce2f1727",
+    "npm": "ab497bd6c4ca5180208afa58e0316126c89788f8471e7da6e2cd0af21a43c491"
   },
   "notice_index_sha256": "df17b7c52cd23063d42e1fc60e333a0bf8ce85706c2b380972f7adedc632df3a",
   "notice_files": 824,
@@ -6749,6 +6749,10 @@
     },
     {
       "previous_manifest_sha256": "04ddb7b3bb0389a4c8cd7265894b1c6d417cca97d3037faf7463ef71792a602e",
+      "additions": []
+    },
+    {
+      "previous_manifest_sha256": "7505a27b3a8f10217465165f4965e533277e4dff58b79adc46c1821d03ea36c2",
       "additions": []
     }
   ]

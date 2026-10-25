@@ -13,7 +13,7 @@ this is not an optional Skill step. Read
 other-client adapter settings and generic inference-engine reports. Unknown is
 allowed when information is unavailable. Never guess a model, bypass a model
 change/new-identity refusal or treat parser support as native-client certification.
-Update CLI/runtime together; published0.1.2 does not yet include this source change.
+This ships in0.1.3. Update CLI/runtime together; older0.1.2 lacks this acquisition path.
 
 ## Mandatory Thread descriptions and local rules
 

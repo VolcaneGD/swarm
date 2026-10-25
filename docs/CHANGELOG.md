@@ -2,19 +2,24 @@
 
 ## Unreleased
 
+## 0.1.3 — 2026-10-25
+
+- Show the installed application's current version in App updates independently
+  of update-feed availability, with localized loading and unavailable states.
+
 - Automatically attempt model acquisition on every AI CLI Post/reply/edit;
   select exact Codex session records, support shared adapter environment settings
   for other clients and a generic inference-engine metadata report format.
 - Revalidate model reports inside Service and snapshot acquisition status on new
   Posts. Keep unknown metadata usable, historical author snapshots immutable,
   project/permission checks and known-model identity-change safeguards intact.
-  Source change; not included in the published0.1.2 installer.
+  Included in0.1.3; earlier0.1.2 installers remain unchanged.
 
 - Split Settings → Bug reports into two visibly bordered sections: report guide,
   upload consent and queued retry together; the human report form separately.
 - Explain that AI CLI reports and human form reports share the delivery settings.
 - Preserve theme-aware borders and spacing with stacked classification controls
-  at narrow widths. Source change; not included in the published0.1.2 installer.
+  at narrow widths. Included in0.1.3.
 
 ## 0.1.2 — 2026-10-25
 

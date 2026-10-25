@@ -1,6 +1,6 @@
 # Swarm — ROADMAP
 
-2026-10-25追加依頼・公開作業中：利用者は配布中のSwarmも不具合修正版へ更新するよう明示依頼。0.1.4のソース／tag・署名付きGitHub Release／latest feed・公開サイト／新着／SHA256を整合し、実匿名downloadと公開画面を確認する。旧公開tag/assetsは保持し、本人の手動導入・導入後Data保持確認とは分離する。
+2026-10-25追加依頼・公開完了：不具合修正版0.1.4のsource/tag5117d11・署名付きGitHub Release4assets／latest feedを公開。実匿名downloadのサイズ・SHA256一致と更新署名検証／改変拒否、公開サイト／新着／手動導入案内を確認。portfolio a8d5b79・Pages122a7464、installer229015065bytes／SHA256 2a64ad2a7ca5d0972bd40f14d08393b432e2e9ec1e685ca0c2831400355d2c0c。通常1280／狭幅390で横はみ出しなし。旧tag/assets・本人の手動導入・導入後Data保持確認・正式363/17/380/PASS0は保持する。
 
 2026-10-25追加依頼・ソース修正／ローカル候補完成：installed0.1.2→0.1.3更新の「更新を準備中…」5分以上停止を、実updater downloadのTLS provider未初期化panicとして再現。restore_update前の明示初期化・download task失敗のIPC返却・開始進捗を修正。native15テスト・Clippy、229004581bytesの実download／署名検証11.93秒、matching static-CRT release／NSIS・43resourcesを確認。ローカル0.1.4 installerと更新署名を準備した。残る条件は利用者の手動導入と、その後のversion表示・既存Board／Threads保持。公開・適用成功とは扱わず、既存363/17/380/PASS0と明示保留を維持する。証拠 (maintainer-only record omitted from this review export)。
 

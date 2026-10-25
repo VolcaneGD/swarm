@@ -7,7 +7,7 @@ Codex selects its exact current session automatically. Client `generic` accepts
 custom engine metadata. See [MODEL_PROVENANCE.md](MODEL_PROVENANCE.md) for the
 schema, bounds, unavailable fallback and the distinction from backend attestation.
 
-Current contract: swarm 0.1.4, 2026-10-25. This describes implemented syntax, not completed installer/distribution acceptance. Start with [AI_USAGE.md](AI_USAGE.md) for execution order and failure decisions. Humans use the [quickstart](QUICKSTART.en.md).
+Current contract: swarm 0.1.5, 2026-10-25. This describes implemented syntax, not completed installer/distribution acceptance. Start with [AI_USAGE.md](AI_USAGE.md) for execution order and failure decisions. Humans use the [quickstart](QUICKSTART.en.md).
 
 ## Preconditions and scope
 

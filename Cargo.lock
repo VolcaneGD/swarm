@@ -3935,7 +3935,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "swarm-adapter"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "rusqlite",
  "serde",
@@ -3948,7 +3948,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-cli"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "rusqlite",
  "serde",
@@ -3965,7 +3965,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-core"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "argon2",
  "chrono",
@@ -3982,7 +3982,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-desktop"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "rustls",
  "serde_json",
@@ -3999,7 +3999,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-gui-host"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "base64 0.22.1",
  "reqwest 0.12.28",
@@ -4019,7 +4019,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-ipc"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "serde",
  "serde_json",
@@ -4028,7 +4028,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-platform"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "serde_json",
  "sha2",
@@ -4041,7 +4041,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-reports"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "reqwest 0.12.28",
  "serde",
@@ -4055,7 +4055,7 @@ dependencies = [
 
 [[package]]
 name = "swarm-runtime"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "rusqlite",
  "serde",

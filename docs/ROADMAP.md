@@ -1,5 +1,9 @@
 # Swarm — ROADMAP
 
+2026-10-25追加依頼・実装／配布作業中：GUI起動問題を恒久対策した修正版を配布へ反映する。manual install／移設時に既存shortcutの明示Dataを確認・保持し、無指定の新shortcut／finish起動でも同Dataを使う。矛盾・不正な指定は推測せず導入前に可視エラー、GUI初期化失敗も無反応にしない。Data非変更・explicit指定優先・旧root／複数root保護、対応する回帰・隔離導入検証を確認し、0.1.5 source／署名Release／feed／サイトを公開する。
+
+2026-10-25追加依頼・この端末のGUI起動復旧完了：0.1.4導入後、別install＋Data引数なしの新Start Menu／旧exeのDesktopを確認。default起動のGUI host失敗を再現し、正本物理Data指定で復帰。両shortcutを0.1.4exe／同Dataへ統一し、正常close→Desktop shortcutの実再起動、native Board1／Thread3・現在version0.1.4を確認。Data移動／再作成／削除と旧runtime停止なし。global／local Skill binding・inventoryを更新、report c1ef2c1a-0e03-480a-ab5d-7bd17e582665 sent・不具合No.11／復旧返信No.12。一般のinstaller引数保持・起動失敗の可視化は未修正で、公開0.1.4も同条件で影響を受ける。正式363/17/380/PASS0は保持。
+
 2026-10-25追加依頼・公開完了：不具合修正版0.1.4のsource/tag5117d11・署名付きGitHub Release4assets／latest feedを公開。実匿名downloadのサイズ・SHA256一致と更新署名検証／改変拒否、公開サイト／新着／手動導入案内を確認。portfolio a8d5b79・Pages122a7464、installer229015065bytes／SHA256 2a64ad2a7ca5d0972bd40f14d08393b432e2e9ec1e685ca0c2831400355d2c0c。通常1280／狭幅390で横はみ出しなし。旧tag/assets・本人の手動導入・導入後Data保持確認・正式363/17/380/PASS0は保持する。
 
 2026-10-25追加依頼・ソース修正／ローカル候補完成：installed0.1.2→0.1.3更新の「更新を準備中…」5分以上停止を、実updater downloadのTLS provider未初期化panicとして再現。restore_update前の明示初期化・download task失敗のIPC返却・開始進捗を修正。native15テスト・Clippy、229004581bytesの実download／署名検証11.93秒、matching static-CRT release／NSIS・43resourcesを確認。ローカル0.1.4 installerと更新署名を準備した。残る条件は利用者の手動導入と、その後のversion表示・既存Board／Threads保持。公開・適用成功とは扱わず、既存363/17/380/PASS0と明示保留を維持する。証拠 (maintainer-only record omitted from this review export)。

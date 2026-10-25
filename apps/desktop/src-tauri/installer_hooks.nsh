@@ -1,6 +1,22 @@
 Var SwarmUninstallHelperTemp
 Var SwarmUninstallHelperDirectory
 !define SWARM_INSTALLER_HELPER "${__FILEDIR__}\..\..\..\scripts\installer_path.ps1"
+!define SWARM_LAUNCH_HELPER "${__FILEDIR__}\..\..\..\scripts\launch_binding.ps1"
+; Capture before the reinstall page can run the old uninstaller. Silent installs
+; skip that page; PREINSTALL also calls this after the final path is selected.
+!define MUI_CUSTOMFUNCTION_GUIINIT SwarmCaptureLaunchBinding
+Function SwarmCaptureLaunchBinding
+  Push $0
+  InitPluginsDir
+  SetOutPath "$PLUGINSDIR"
+  File /oname=swarm-launch-binding.ps1 "${SWARM_LAUNCH_HELPER}"
+  ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\swarm-launch-binding.ps1" -Action Capture -InstallDirectory "$INSTDIR" -StateFile "$PLUGINSDIR\swarm-launch-capture.json" -DesktopShortcut "$DESKTOP\Swarm.lnk" -StartMenuShortcut "$SMPROGRAMS\Swarm.lnk"' $0
+  ${If} $0 != 0
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Could not preserve the existing Swarm Data selection. Check shortcut arguments and conflicting Data directories before retrying. No Data was changed.$\r$\n$\r$\n既存のData保存先を確認できません。ショートカットの引数と保存先の不一致を確認してください。Dataは変更していません。"
+    Abort
+  ${EndIf}
+  Pop $0
+FunctionEnd
 !macro SWARM_RUN_GUARD helperPath
   ${If} $UpdateMode = 1
     ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${helperPath}" -Action GuardRunning -InstallDirectory "$INSTDIR" -WaitSeconds 30' $0
@@ -17,9 +33,15 @@ Var SwarmUninstallHelperDirectory
   SetOutPath "$PLUGINSDIR"
   File /oname=swarm-installer.ps1 "${SWARM_INSTALLER_HELPER}"
   !insertmacro SWARM_RUN_GUARD "$PLUGINSDIR\swarm-installer.ps1"
+  Call SwarmCaptureLaunchBinding
   SetOutPath "$INSTDIR"
 !macroend
 !macro NSIS_HOOK_POSTINSTALL
+  ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INSTDIR\swarm-launch-binding.ps1" -Action Apply -InstallDirectory "$INSTDIR" -StateFile "$PLUGINSDIR\swarm-launch-capture.json" -DesktopShortcut "$DESKTOP\${PRODUCTNAME}.lnk" -StartMenuShortcut "$SMPROGRAMS\$AppStartMenuFolder\${PRODUCTNAME}.lnk" -FlatStartMenuShortcut "$SMPROGRAMS\${PRODUCTNAME}.lnk"' $0
+  ${If} $0 != 0
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Swarm was installed, but its Data selection could not be restored. Do not delete Data; repair the shortcut's --data-dir before launching.$\r$\n$\r$\nData保存先を引き継げませんでした。Dataを削除せず、起動前にショートカットの --data-dir を確認してください。"
+    Abort
+  ${EndIf}
   ExecWait '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INSTDIR\swarm-installer.ps1" -Action AddPath -InstallDirectory "$INSTDIR"' $0
   ${If} $0 != 0
     MessageBox MB_ICONEXCLAMATION|MB_OK "Swarm was installed, but its CLI directory could not be registered in your user PATH. Check your Windows user environment and run the installer again. $\r$\n$\r$\nSwarmはインストールされましたが、CLIのフォルダーをユーザーPATHへ登録できませんでした。Windowsユーザー環境を確認し、インストーラーを再実行してください。"

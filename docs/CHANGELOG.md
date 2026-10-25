@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.1.5 — 2026-10-25
+
+- Preserve an existing explicit Data selection before the old uninstaller can
+  remove shortcuts. Retain it across manual installation into another directory.
+- Restore shortcut targets and save a bounded per-install launch binding so new
+  no-argument shortcuts and the installer's finish-page launch use the same Data.
+- Reject conflicting/unavailable selections before installation without changing
+  Data. Explicit command-line Data selection takes precedence over saved settings.
+- Show a bilingual native startup error if GUI initialization fails before WebView
+  exists, instead of exiting without visible feedback. Never reset Data to recover.
+
 ## 0.1.4 — 2026-10-25
 
 - Initialize the updater's TLS crypto provider before restoring a

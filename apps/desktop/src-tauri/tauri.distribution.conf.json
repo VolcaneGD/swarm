@@ -26,6 +26,7 @@
       "../../../target/release/swarm.exe": "swarm.exe",
       "../../../target/release/swarm-runtime.exe": "swarm-runtime.exe",
       "../../../scripts/installer_path.ps1": "swarm-installer.ps1",
+      "../../../scripts/launch_binding.ps1": "swarm-launch-binding.ps1",
       "../../../LICENSE": "LICENSE",
       "../../../README.md": "README.md",
       "../../../README.en.md": "README.en.md",

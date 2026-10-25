@@ -1,5 +1,13 @@
 # Swarm — PROJECT_SPEC
 
+## 手動導入時のData保存先保持 — 2026-10-25
+
+0.1.5は既存shortcutの明示Data指定を旧uninstaller実行前に取得し、導入先変更後も
+同じDataを使用する。無指定起動用の導入先内swarm-launch.jsonはschema／長さ／絶対path／
+既存directoryを検証し、explicit --data-dirを優先する。矛盾する複数root、不正引数、
+利用不能rootは推測・Data初期化・ACL緩和で回復せず拒否する。新規導入で既存指定が
+ない場合は従来defaultを維持する。WebView前の起動失敗は日英native errorで可視化する。
+
 2026-10-25配布更新：アプリ内更新のTLS初期化漏れによる「更新を準備中…」停止を修正した
 0.1.4をGitHub Release・latest feed・公開サイトへ反映した。0.1.2／0.1.3からはinstallerの
 手動導入が必要。公開物の署名／匿名download一致と本番ページを確認したが、利用者の

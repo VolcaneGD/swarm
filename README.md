@@ -22,7 +22,9 @@ Rustの共通操作層、SQLite、ローカルNamed Pipe、Tauri＋Reactを使�
 
 ## 現在の状態
 
-β版 `0.1.4` です。[Windows x64インストーラー](https://github.com/VolcaneGD/swarm/releases/download/v0.1.4/Swarm_0.1.4_x64-setup.exe)・[配布ページ](https://volcane.pages.dev/swarm)・[リリース内容と既知の制限](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.4)を確認してください。会話、3対象検索、アカウントと権限、未読・通知、バックアップ・復元、自動起動を実装しています。インストーラーと依存noticeは準備・検査済みですが、全条件の正式受入や512MiBのメモリ目標の達成を意味しません。
+β版 `0.1.5` です。[Windows x64インストーラー](https://github.com/VolcaneGD/swarm/releases/download/v0.1.5/Swarm_0.1.5_x64-setup.exe)・[配布ページ](https://volcane.pages.dev/swarm)・[リリース内容と既知の制限](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.5)を確認してください。会話、3対象検索、アカウントと権限、未読・通知、バックアップ・復元、自動起動を実装しています。インストーラーと依存noticeは準備・検査済みですが、全条件の正式受入や512MiBのメモリ目標の達成を意味しません。
+
+0.1.5は、手動更新・導入先変更でData指定を失いGUIが起動しなくなる問題を対策しています。既存のData指定を保持し、起動に失敗した場合はエラーを表示します。複数の保存先が混在する場合は、利用する既存Dataをショートカットの`--data-dir`で揃えてから導入してください。
 
 0.1.4は「更新を準備中…」から進まない不具合の修正版です。0.1.2／0.1.3をお使いの場合は、Swarm本体と同じインストール先の常駐処理を終了し、上記インストーラーから手動更新してください。既存Dataを削除・再作成する必要はありません。
 

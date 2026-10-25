@@ -821,7 +821,11 @@ fn default_data_root() -> Result<PathBuf, &'static str> {
 }
 
 fn run() -> Result<(), &'static str> {
-    let launch = launch::parse(std::env::args_os().skip(1), default_data_root()?)?;
+    let binding = std::env::current_exe()
+        .map_err(|_| "Swarm could not locate its installation")?
+        .with_file_name("swarm-launch.json");
+    let launch =
+        launch::parse_with_binding(std::env::args_os().skip(1), default_data_root()?, &binding)?;
     let state_root = launch.root;
     let report_root = state_root.clone();
     std::thread::spawn(move || {
@@ -850,7 +854,7 @@ fn run() -> Result<(), &'static str> {
     }
     let host = match GuiHost::open(&state_root) {
         Ok(host) => host,
-        Err(error) if launch.activation.is_some() && error.code == "GUI_ALREADY_RUNNING" => {
+        Err(error) if error.code == "GUI_ALREADY_RUNNING" => {
             return Ok(());
         }
         Err(_) => return Err("Swarm could not initialize its GUI host"),
@@ -1179,6 +1183,7 @@ fn schedule_native_geometry_error(
 fn main() {
     if let Err(message) = run() {
         eprintln!("{message}");
+        launch::show_startup_error(message);
         std::process::exit(1);
     }
 }

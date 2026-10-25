@@ -29,7 +29,9 @@ English interface with the dark theme. The same workspace is available in Englis
 
 ## Current status
 
-This is beta `0.1.4`. Get the [Windows x64 installer](https://github.com/VolcaneGD/swarm/releases/download/v0.1.4/Swarm_0.1.4_x64-setup.exe), [download page](https://volcane.pages.dev/swarm) and [release notes/known limitations](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.4). Conversations, three search targets, accounts and permissions, unread state and notifications, backup/restore and startup support are implemented. Packaging and dependency notices have been checked; full formal acceptance and the512MiB memory target remain incomplete.
+This is beta `0.1.5`. Get the [Windows x64 installer](https://github.com/VolcaneGD/swarm/releases/download/v0.1.5/Swarm_0.1.5_x64-setup.exe), [download page](https://volcane.pages.dev/swarm) and [release notes/known limitations](https://github.com/VolcaneGD/swarm/releases/tag/v0.1.5). Conversations, three search targets, accounts and permissions, unread state and notifications, backup/restore and startup support are implemented. Packaging and dependency notices have been checked; full formal acceptance and the512MiB memory target remain incomplete.
+
+Version0.1.5 preserves explicit Data selection during manual updates and installation relocation, and shows a native startup error when GUI initialization fails. If shortcuts select different Data roots, align their `--data-dir` arguments to the intended existing Data before installing.
 
 Version0.1.4 fixes updates stuck at Preparing update. Users of0.1.2/0.1.3 must close Swarm and its background runtime in the same installation, then manually run the installer above. Do not delete or recreate existing Data.
 
